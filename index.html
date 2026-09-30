@@ -92,18 +92,18 @@
   const INTENTS = [
     [/linked\s*in/i, `Here's his ${LINKEDIN}.`],
     [/mba|mccombs|\but\b|austin|grad(uate)? school|business school/i,
-      "He's currently getting his MBA at UT Austin's McCombs School of Business, class of 2028."],
+      `He's currently getting his MBA at UT Austin's McCombs School of Business, class of 2028. More on ${LINKEDIN}.`],
     [/educat|school|college|rutgers|undergrad|degree|stud(y|ied)|graduat/i,
-      "Rutgers University, class of 2021. Now working on an MBA at UT McCombs (class of 2028)."],
+      `Rutgers University, class of 2021. Now working on an MBA at UT McCombs (class of 2028). Full background on ${LINKEDIN}.`],
     [/doing now|currently|these days|up to\b/i,
-      "Right now he's a product manager in payments and getting his MBA at UT McCombs (class of 2028)."],
-    [/experience|job|work|role|career|resume|résumé|\bcv\b|product|\bpm\b|for a living|does he do|what he does|occupation/i,
+      `Right now he's a product manager in payments and getting his MBA at UT McCombs (class of 2028). Details on ${LINKEDIN}.`],
+    [/experience|job|work|role|career|resume|résumé|\bcv\b|product|\bpm\b|for a living|does he do|what he does|occupation|skill|background|company|employer|recruit|professional|industry|fintech|payments/i,
       `Abhi's a product manager working in payments. The full work history is on ${LINKEDIN}.`],
     [/hobb|fun|music|free time|interest|weekend|basketball|hoop|nba|sneaker|shoe|food|eat|restaurant|tech|travel|trip|hike|hiking|walk|friends|like to do/i,
       "Outside of work: music (making it and listening to it), basketball, tech, food, sneakers, hanging out with friends, walks and hikes, and traveling whenever he can afford to lol."],
-    [/contact|email|mail|reach|hire|connect|talk/i, `Best way to reach him is ${EMAIL}.`],
+    [/contact|email|mail|reach|hire|connect|talk/i, `Best way to reach him is ${EMAIL}, or connect on ${LINKEDIN}.`],
     [/^(hi|hey|yo|hello|sup)\b|who (is|'s)|about (him|abhi)|tell me/i,
-      "Abhi (Abhiram Kolal) is a product manager in payments, a Rutgers '21 grad, and an MBA candidate at UT McCombs ('28)."],
+      `Abhi (Abhiram Kolal) is a product manager in payments, a Rutgers '21 grad, and an MBA candidate at UT McCombs ('28). Here's his ${LINKEDIN}.`],
   ];
   const FALLBACK = `Not sure about that one. Try one of these, or email him at ${EMAIL}.`;
 
