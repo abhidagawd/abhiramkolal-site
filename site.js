@@ -131,7 +131,7 @@
     ], true],
     // 3. AI opinions / AI at work. placed above the "did ai make this site" intent but never matches "did you use ai to build this".
     [/(think|thoughts|take|opinion|feel|feelings|views?) (about|on|of) (\bai\b|a\.i\.|artificial intelligence|llms?|gen(erative)? ?ai|ai agents|agentic ai)|\bai\b (take|opinions?|thoughts|hype|bubble)|(do|did) you (use|leverage) (\bai\b|llms?|chat ?gpt|claude|copilot|ai tools) (at|for|in|on) (work|the job|your job|your work|product|pm work|your day)|how do you use (\bai\b|llms?|ai tools)|will (\bai\b|llms?) (replace|take|kill|change)|(\bai\b|llms?) (replac\w*|tak\w*|kill\w*|chang\w*) (pms?|product( managers?| management)?|jobs|payments|fintech|your job)|\bai\b (in|for|and) (payments|fintech|product|banking|finance)/i, [
-      "AI's a real tool, not magic. I used AI tools as a teammate to build this site with no real coding background, so I'm a believer. what it doesn't replace is judgment: knowing which problem matters. (fun irony: AI_NAME is fully scripted. no actual AI in here, just confidence.)",
+      "AI's a real tool, not magic. I'm a believer. what it doesn't replace is judgment: knowing which problem matters. (fun irony: AI_NAME is fully scripted. no actual AI in here, just confidence.)",
       "in payments, AI is great at what humans are slow at, like spotting fraud patterns and cleaning messy data. but money runs on trust, so 'the model said so' isn't good enough. bullish, with guardrails.",
       "will AI replace PMs? it'll replace the busywork. talking to customers, making the call and getting a room aligned is getting more valuable, not less. always down to nerd out on this: EMAIL",
     ], true],
@@ -294,8 +294,8 @@
       "totally fair reaction. short version: I'm a payments product manager, and this is my personal site, built by me, written how I actually talk. the buttons below are a good place to start 👇",
     ], true],
     [/did (ai|chat ?gpt|claude|an ai|a bot) (make|build|write|design|code) (this|the site|this site|you|it)|is (this|the site|this site|it) (made by |built by |written by )?ai\b|ai[- ]generated|(did|do) you (use|have) ai (to )?(make|build|write|code|for)|did you (actually )?(make|build|code|design) (this|it) yourself|you made this\?*$/i, [
-      "I built it myself, with AI tools as a teammate, the same way I'd use any good tool at work. the ideas, the design calls, the taste and every word in this chat are mine. learning to direct the tools well is kind of the point.",
-      "yes, I made it. I had no real coding background, so I leaned on every resource I had, AI included, and figured it out. that's how I work in general: pick up whatever gets the job done and learn it fast.",
+      "I made it. when I want to get something done, I make sure it happens.",
+      "all me. I don't really do 'someday.' when I want something done, it gets done.",
     ], true],
 
     // --- the o's and compliments on the site ---
@@ -313,14 +313,14 @@
     ], true],
     // TECH_STACK: "how did you code this", "what language is this written in", cost/time/difficulty
     [/how did (you|he) (code|program|host|deploy|make the (o'?s|chat|animation)|build the (o'?s|chat|animation))|what (programming )?(language|languages|tech ?stack|stack|tech|tools|frameworks?)( is| was| are)? (this|it|the site|the chat) (written|built|made|coded|running)|what (programming )?(language|tech ?stack|stack|tech|tools|frameworks?) did (you|he) (use|build|code)(?! (at|for) (work|your job))|programming language|(written|built|coded|made) (in|with) (what|which)|what('s| is) (the |your )?(tech ?)?stack|is (this|it|a site like this) (hard|difficult|easy|tough) to (build|make|code)|how (hard|long|difficult) (is it|was it|did it take|would it take|does it take)( you)? to (build|make|code)|how (much|long) (does|did|would) (it|this|the site) (cost|take)( you)?( to)? ?(host|build|make|run|keep)?|(cost|price) to (host|run)|hosting|where (is|do you) (this|it|the site)? ?(host|hosted)|(are|r) you using (react|wordpress|squarespace|wix|a template|a framework)|(is|was) (this|it) (made|built) (with|on|in) (react|wordpress|squarespace|wix|a template)/i, [
-      "plain HTML, CSS and JavaScript. no frameworks, no database. it lives on AWS (S3 + CloudFront), so it's fast and costs about a couple bucks a month. I built it with AI tools as a teammate and learned as I went.",
-      "one HTML page, some CSS, one JavaScript file. the o's are a tiny physics loop, and this chat isn't real AI, just patterns and my answers running in your browser. hosting costs about as much as a coffee a month.",
-      "plain HTML, CSS and JavaScript. harder than it looks, easier than you'd think. the o's took the most tuning. happy to nerd out about it: EMAIL",
+      "when I want to get something done, I make sure it happens. that's the whole secret 😌",
+      "trade secret. let's just say I'm a very skilled person lol",
+      "a magician never reveals his tricks. what I can tell you: when I decide something's happening, it happens.",
     ], true],
     // BUILD_YOUR_OWN: students/kids who want to make one too
     [/how (do|can|would|could|should) (i|someone|people|you|one) (make|build|create|code|start|get) (a |an |my own |my |their own |your own )?(personal )?(website|site|web ?page|page|portfolio|chat ?bot)|(website|site|page|chat ?bot) like (this|yours|this one)|teach me (how )?(to )?(code|program|make (a )?(website|site)|build (a )?(website|site))|(learn|start) (to |how to |learning )?(code|coding|program|programming|web ?dev)|where (do|should) i (start|learn)( to code| coding)?|can (i|you) (make|build) (one|a site) (like this|too)/i, [
-      "do it! learn basic HTML, CSS and JavaScript (MDN and freeCodeCamp are free), pick one small idea that's yours, use AI tools to explain things as you go, and ship something ugly first. I had no real coding background either.",
-      "start tiny: one page that says who you are, plus one fun thing. mine was the bouncing o's. finishing one small site teaches more than ten tutorials.",
+      "step one: decide you're actually going to do it. step two: don't stop until it's done. that's how this one happened.",
+      "pick one idea that feels like you and refuse to quit on it. that's the whole playbook 🙂",
     ], true],
     // LANGUAGES: "do you speak X", "translate", "say something in my language". English only, no claims.
     [/(do|can) (you|he|abhi) (speak|talk|understand|reply|answer|chat|write)( in)? (spanish|hindi|kannada|tamil|telugu|french|german|chinese|mandarin|japanese|korean|arabic|urdu|portuguese|russian|italian|english|other languages|any (other )?languages?|my language)|what languages? (do|does|can) (you|he) (speak|know|understand)|how many languages|(in|use|speak) my (language|native language)|other languages?|^i (only |mostly )?speak \w+[\s!.]*$|^(please )?translate( (this|that|it|the (page|site|greeting|yo)|please|to \w+))?[\s?!.]*$|translat(e|ion) (the |this )?(yo|greeting|page|site)|(english|it'?s) (is )?not my (first|native) language|en espa[nñ]ol|\bhabla(s)? |parlez|sprechen/i, [
@@ -337,7 +337,7 @@
       "a little tribute to the DVD logo. they bounce for 15 seconds, rest for 15, and each one finds its own way back. I may have spent too long tuning the physics. no regrets.",
     ], true],
     [/(nice|cool|sick|fire|clean|dope|great|awesome|amazing|beautiful|fun|creative|hard|slick|sleek|neat|fresh|unique) (site|website|page|chat|design|idea|concept|vibe)|(site|website|page|chat|design) (is|looks) (so )?(fire|sick|cool|dope|clean|nice|hard|great|amazing|awesome|fun|creative|good)|(love|like|dig|loving) (the|this|your) (site|website|page|o'?s|chat|vibe|design|idea)|this is (actually |so |really |lowkey )?(cool|sick|fire|dope|hard|clean|awesome|amazing|creative|genius|fun|great)|(i'?m|im) (impressed|obsessed)|10\/10/i, [
-      "appreciate that a lot 🙏 I built it myself, no real coding background, just figured it out as I went. glad it landed.",
+      "appreciate that a lot 🙏 I built it myself. when I want something done, I make it happen. glad it landed.",
       "thank you! that's exactly the reaction I was going for: fun to look at, real info underneath.",
       "that means a lot. tell a friend, the o's love an audience.",
     ], true],
@@ -788,8 +788,8 @@
     [/fun fact|did you know|teach me|something (smart|interesting|cool)|interesting/i, FUN_FACTS],
     [/joke|make me laugh|something funny|tell me something fun/i, JOKES],
     [/why (should (i|we) )?hire|why hire|reasons to|convince me|sell me|pitch (him|me|yourself)|top (5|five) reasons|why (you|him)\b/i, [
-      "why I'm worth the call:<ol><li><b>I learn fast. really fast.</b> I had no real coding background, then taught myself enough web dev to build this whole site (the bouncing o's, this chat, all of it) with the resources around me</li><li><b>I adapt.</b> new team, new domain, new tools: I get up to speed quickly and start contributing</li><li><b>payments product manager</b>, so I can talk engineering and business in the same meeting</li><li><b>Rutgers '21, UT McCombs MBA '28</b> in progress, always sharpening the business side</li><li><b>friendly and outgoing.</b> I genuinely like people, and it shows on a team</li></ol>I'm based between NJ/NYC and Austin, TX. reach me at EMAIL or on LINKEDIN.",
-      "short version: give me something I've never done before and watch what happens. I'd never really coded, and I still built this site, animations and chat included, by figuring it out with what I had. add payments product experience, an MBA in progress at UT McCombs, and a genuinely friendly, outgoing personality, and you get someone who ramps up fast and makes the team better. EMAIL · LINKEDIN",
+      "why I'm worth the call:<ol><li><b>I learn fast. really fast.</b> I had no real coding background, and I still built this whole site (the bouncing o's, this chat, all of it)</li><li><b>I adapt.</b> new team, new domain, new tools: I get up to speed quickly and start contributing</li><li><b>payments product manager</b>, so I can talk engineering and business in the same meeting</li><li><b>Rutgers '21, UT McCombs MBA '28</b> in progress, always sharpening the business side</li><li><b>friendly and outgoing.</b> I genuinely like people, and it shows on a team</li></ol>I'm based between NJ/NYC and Austin, TX. reach me at EMAIL or on LINKEDIN.",
+      "short version: give me something I've never done before and watch what happens. I'd never really coded, and I still built this site, animations and chat included, because I decided it was happening. add payments product experience, an MBA in progress at UT McCombs, and a genuinely friendly, outgoing personality, and you get someone who ramps up fast and makes the team better. EMAIL · LINKEDIN",
     ]],
     [/what (does|do) (a |an )?(pm|product manager)s? (do|actually do)|what is (a )?product manag|what('s| is) product management/i, [
       "a product manager figures out what to build and why. the job, roughly:<ul><li>find the real customer problem</li><li>decide what matters most (and what waits)</li><li>get engineering, design and business pointed the same way</li><li>ship, measure, learn, repeat</li></ul>I do this in payments. more on LINKEDIN.",
@@ -821,8 +821,8 @@
       "easy to work with, friendly, outgoing, and quick to adapt. I like making the work more fun for everyone around me.",
     ]],
     [/who (built|made|coded|designed|wrote) (this|the site|you|it)|how did (he|you) (build|make)|how (was|is) (this|the site) (built|made)|can (he|you) code|do(es)? (he|you) code|(is he|are you) (technical|a developer|an engineer|a coder)|quick learner|learn(s)? fast|adapt/i, [
-      "I built this whole site myself, and I had no real coding background going in. I picked up the web dev as I went, leaned on the resources around me, and shipped it: the bouncing o's, this chat, all of it.",
-      "fun story: I'm a product manager, not an engineer, and I'd never really coded before this. figured it out anyway. that's kind of my thing: drop me into something new and I pick it up fast.",
+      "I built this whole site myself. when I want to get something done, I make sure it happens.",
+      "me, myself and a lot of determination. I'm a product manager, not an engineer, and it still got built. when I want something done, it happens.",
     ]],
 
     // --- interview-style questions: lists + a little humor ---
