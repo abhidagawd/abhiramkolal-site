@@ -214,13 +214,11 @@
     ], true],
     // people calling out the vibe: "why is this professional site saying yooooo"
     [/(why|how come)\b.*\b(yo|casual|unprofessional|informal|slang|lowercase|chill)\b|supposed to be (a )?professional|(not|isn'?t|un|very un)( very| that| really| super| exactly)? ?professional|so (casual|informal|chill)|professional\b.*\byo\b|\byo\b.*\bprofessional/i, [
-      "real answer: I grew up right as the internet and smartphones took off. my generation learned tech by living in it, and that's part of who I am. so this site celebrates it instead of hiding it. but look around: it's clean, the answers are real, and the work is serious. fun and professional aren't opposites.",
+      "FIRST:real answer: I grew up right as the internet and smartphones took off. my generation learned tech by living in it, and that's part of who I am. so this site celebrates it instead of hiding it. but look around: it's clean, the answers are real, and the work is serious. fun and professional aren't opposites.",
       "fair question. the résumé is professional. the website is me. both are true. the 'yooooo' stays.",
       "professional doesn't have to mean boring. the experience, the MBA and the payments stuff are all real. the 'yooooo' is just the cover letter.",
       "you caught me. LinkedIn is where I wear the suit, this is where I wear the sneakers. both are below 👇 LINKEDIN",
-      "the 'yooooo' is a culture-fit test. you're still here, so you passed.",
       "I'm professional where it counts: shipping, communicating, delivering. greetings are where I let loose.",
-      "would 'Greetings, valued visitor' have been better? exactly. yooooo it is.",
     ], true],
 
     // --- "wait, is this a joke?": people who find a casual professional site confusing or rude ---
@@ -1084,7 +1082,11 @@
       "I'm Abhi (Abhiram Kolal): product manager in payments, Rutgers '21, and an MBA candidate at UT McCombs ('28). here's my LINKEDIN.",
       "yooooo, it's Abhi. payments product manager, Rutgers '21, McCombs MBA '28. ask me anything, or peep my LINKEDIN.",
     ]],
-  ].map(([re, answers, chips, tag]) => [re, answers.map(a => typeof a === "function" ? () => fill(a()) : fill(a)), !!chips, tag]);
+  ].map(([re, answers, chips, tag]) => {
+    const out = answers.map(a => typeof a === "function" ? () => fill(a()) : fill(a.replace(/^FIRST:/, "")));
+    out.leadFirst = typeof answers[0] === "string" && answers[0].startsWith("FIRST:");   // first ask always gets answers[0]
+    return [re, out, !!chips, tag];
+  });
   // short follow-ups ("really?", "why?", "wdym") are about whatever was just said, so they get handled
   // against the last topic: another take on the same answer, with a lead-in that fits the follow-up.
   const DOUBT_LEADS = ["really really.", "100%.", "swear 🤞", "no cap.", "dead serious."];
@@ -1114,7 +1116,8 @@
   const lastPick = new Map();
   const pick = (key, list) => { const a = choose(key, list); return typeof a === "function" ? a() : a; };
   function choose(key, list) {          // random answer, never the same one twice in a row
-    let i; do i = Math.random() * list.length | 0; while (list.length > 1 && i === lastPick.get(key));
+    let i; if (list.leadFirst && !lastPick.has(key)) i = 0;
+    else do i = Math.random() * list.length | 0; while (list.length > 1 && i === lastPick.get(key));
     lastPick.set(key, i); return list[i];
   }
 
