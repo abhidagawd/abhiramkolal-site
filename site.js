@@ -53,6 +53,27 @@
       "we love to hear it. ask me anything 👇",
     ], true],
 
+    // random visitors, testers, and people mashing the keyboard
+    [/just (looking|browsing|checking|vibing|curious|scrolling|passing through|here)|checking (out )?(the |this |your )?(site|website|page)|(found|stumbled on|landed on) (this|your|the) (site|page)|how did i (get|end up) here|who sent me|random(ly)? (person|visitor|stranger|here)|i'?m (just )?(random|lost)|no reason|idk why i'?m here|window shopping/i, [
+      "just browsing? respect. take your time. the o's put on a show every 15 seconds if you wanna wait for it.",
+      "welcome, random internet stranger 👋 no pressure. tap 'surprise me' if you want something fun.",
+      "window shopping is free here. the hire pitch is the only thing for sale 😌",
+      "cool cool. I'll just be over here pretending I don't care that you showed up. (I care. ask me something.)",
+      "you found my corner of the internet by accident? honestly that's the best way to find anything.",
+    ], true],
+    [/^(test|testing|test test|testing 1,? ?2,? ?3|is this (thing )?(on|working)|does this work|hello\?+)[\s!?.]*$/i, [
+      "testing, testing… yep, it works. I promise. try 'surprise me'.",
+      "it's on. it's always been on. ask me something real 👇",
+    ], true],
+    [/^(?!.*[aeiouy].*[aeiouy])[a-z]{5,}$|^(asdf|qwer|zxcv|hjkl|jkl;|sdfg|dfgh)/i, [
+      "that looks like a cat walked across your keyboard. tell the cat I said hi 🐈",
+      "AI_NAME tried to translate that and gave up. try a button instead 👇",
+    ], true],
+    [/what (is|'s) this (site|website|page|place)|why (does|did) this (site|website) exist|what am i looking at|what is this\??$/i, [
+      "this is my little corner of the internet: a page with escaping o's and a chat that answers as me. ask me anything.",
+      "you're looking at abhiramkolal.com. part résumé, part playground. the o's are the playground part.",
+    ], true],
+
     // --- questions about the chat itself: Abhi Intelligence (AI) answers ---
     [/(save|store|record|log|track|keep|see)(s|d|ing)? (my|this|these|what i|our|me)|privacy|is this (private|saved|recorded)|data/i, [
       "nope. nothing you type here is saved or sent anywhere. AI_NAME runs entirely in your browser, and it all disappears when you refresh.",
