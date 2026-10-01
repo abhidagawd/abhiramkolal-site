@@ -64,7 +64,7 @@
       "I don't do addresses 🙂 NJ/NYC and Austin, TX is as specific as it gets.",
       "nice try. I'm somewhere between NJ/NYC and Austin. for anything more, EMAIL",
     ]],
-    [/where (does he|do you) live|where (is he|are you) (from|based|located)|hometown|location|where('s he| is he| are you) at|which city|what city|based (in|out of)/i, [
+    [/where (does he|do you) live|where (is he|are you) (from|based|located)|hometown|location|where('s he| is he| are you) at|which city|what city|based (in|out of)|where (are you|you|is he|he) (based|from|located|stay|at)/i, [
       "I'm based between NJ/NYC and Austin, TX, and I like them both.",
       "split between NJ/NYC and Austin, TX. big fan of both.",
     ]],
@@ -181,7 +181,7 @@
       "Rutgers University, class of 2021. now working on my MBA at UT McCombs (class of 2028). full background on LINKEDIN.",
       "Rutgers '21 for undergrad, UT McCombs MBA '28 in progress. the rest is on LINKEDIN.",
     ]],
-    [/doing now|currently|these days|up to\b/i, [
+    [/doing now|currently|these days|up to\b|(are you|is he) doing/i, [
       "right now I'm a product manager in payments and getting my MBA at UT McCombs (class of 2028). details on LINKEDIN.",
       "building payments products, working through my MBA at UT McCombs, and making the o's on this website bounce in between. more on LINKEDIN.",
     ]],
@@ -229,12 +229,27 @@
     }
     log.scrollTop = log.scrollHeight;
   }
+  // texting shorthand -> plain english before matching, so "where r u from" works like "where are you from".
+  // "ur" is ambiguous (your / you're), so we try both readings.
+  const SLANG = {
+    u: "you", ya: "you", yu: "you", r: "are", y: "why", yr: "your", urs: "yours",
+    wat: "what", wut: "what", wht: "what", whats: "what's", wats: "what's", hows: "how's", wheres: "where's", whos: "who's",
+    im: "i'm", hes: "he's", youre: "you're", ure: "you're", dont: "don't", cant: "can't", doesnt: "doesn't",
+    abt: "about", bc: "because", cuz: "because", pls: "please", plz: "please", rn: "right now", tysm: "thank you",
+    wyd: "what are you doing", wya: "where are you at", hbu: "how about you", wbu: "how about you", n: "and",
+  };
+  function readings(text) {
+    const base = text.toLowerCase().replace(/[’‘]/g, "'").replace(/([a-z])\1{2,}/g, "$1")   // "heyyy" -> "hey"
+      .replace(/\b[a-z]+\b/g, w => SLANG[w] ?? w);
+    return [base.replace(/\bur\b/g, "your"), base.replace(/\bur\b/g, "you're")];
+  }
   function send(text) {
     text = text.trim(); if (!text) return;
     const m = document.createElement("div"); m.className = "msg me"; m.textContent = text; log.appendChild(m);
     const t = document.createElement("div"); t.className = "msg bot typing"; t.textContent = "typing…"; log.appendChild(t);
     log.scrollTop = log.scrollHeight;
-    const hit = INTENTS.find(([re]) => re.test(text));
+    const asked = readings(text);
+    const hit = INTENTS.find(([re]) => asked.some(t => re.test(t)));
     setTimeout(() => { t.remove(); bot(hit ? choose(hit[0].source, hit[1]) : choose("fallback", FALLBACKS), !hit); }, 420);
   }
   function open() {
