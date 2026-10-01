@@ -28,7 +28,22 @@
   // "Abhi Intelligence (AI)" when the question is really about the chat itself.
   // the playful ones up top catch the weird stuff before the normal intents can grab a keyword.
   const AI = "Abhi Intelligence (AI)";
+  // recruiter mode: once someone says they're hiring, skip the bits and lead with the pitch + contact
+  const RECRUITER = /\b(i'?m|i am|we'?re|we are) (a |an )?(recruiter|recruiting|hiring|in talent|from talent)|\brecruiter here\b|hiring manager|talent (acquisition|partner)|(open|available) (role|position)|job (opening|opportunity)|reach(ing)? out about (a |an )?(role|position|job|opportunity)|interested in (you|him|hiring)|are you open to|(you|he) (be )?interested in a (role|job|position)/i;
+  const RECRUITER_CHIPS = ["why hire me", "experience", "education", "location", "contact", "LinkedIn"];
+  let recruiterMode = false;
   const INTENTS = [
+    // hiring logistics: always answered straight, never with a joke
+    [/salary (expectation|range|requirement)s?|compensation|\bcomp\b|pay (range|expectations?)|desired (salary|pay)|rate expectations?/i, [
+      "happy to talk compensation in a real conversation. email me at EMAIL and we can get into it.",
+    ], true],
+    [/notice period|start date|when (can|could) (you|he) start|availability|available to start|relocat|remote|hybrid|in[- ]office|work authori[sz]ation|sponsorship|visa\b/i, [
+      "good question. logistics like timing, location and work setup are best covered directly: EMAIL. for context, I'm based between NJ/NYC and Austin, TX.",
+    ], true],
+    [RECRUITER, [
+      "oh hey, thanks for reaching out 🙏 here's the quick version:<ul><li><b>role:</b> product manager in payments</li><li><b>superpower:</b> I learn fast and adapt fast. no real coding background, and I still built this whole site myself</li><li><b>education:</b> Rutgers '21, UT McCombs MBA '28 (in progress)</li><li><b>based:</b> NJ/NYC and Austin, TX</li><li><b>vibe:</b> friendly, outgoing, easy to work with</li></ul>best next step: email me at EMAIL or connect on LINKEDIN. happy to chat.",
+      "appreciate you stopping by. I'll keep it straight: I'm a payments product manager who ramps up fast on anything new (case in point: I built this site with no real coding background). Rutgers '21, McCombs MBA '28 in progress, based between NJ/NYC and Austin. let's talk: EMAIL · LINKEDIN",
+    ], true],
     // --- small talk: greetings, how are you, wyd. these show the topic buttons after, to keep things moving ---
     [/^(hey |hi |yo |hello )?(what are you doing|what you doing|what are you up to|what you up to)( right now| today| tonight)?( abhi| bro| man| dude| fam)?[\s!?.]*$/i, [
       "chillin. probably answering emails or watching the o's bounce on my own website for way too long. you?",
@@ -187,7 +202,7 @@
     [/surprise me|random|bored|entertain me/i, [...JOKES, ...FUN_FACTS]],
     [/fun fact|did you know|teach me|something (smart|interesting|cool)|interesting/i, FUN_FACTS],
     [/joke|make me laugh|something funny|tell me something fun/i, JOKES],
-    [/why (should (i|we) )?hire|reasons to|convince me|sell me|pitch (him|me|yourself)|top (5|five) reasons|why (you|him)\b/i, [
+    [/why (should (i|we) )?hire|why hire|reasons to|convince me|sell me|pitch (him|me|yourself)|top (5|five) reasons|why (you|him)\b/i, [
       "why I'm worth the call:<ol><li><b>I learn fast. really fast.</b> I had no real coding background, then taught myself enough web dev to build this whole site (the bouncing o's, this chat, all of it) with the resources around me</li><li><b>I adapt.</b> new team, new domain, new tools: I get up to speed quickly and start contributing</li><li><b>payments product manager</b>, so I can talk engineering and business in the same meeting</li><li><b>Rutgers '21, UT McCombs MBA '28</b> in progress, always sharpening the business side</li><li><b>friendly and outgoing.</b> I genuinely like people, and it shows on a team</li></ol>I'm based between NJ/NYC and Austin, TX. reach me at EMAIL or on LINKEDIN.",
       "short version: give me something I've never done before and watch what happens. I'd never really coded, and I still built this site, animations and chat included, by figuring it out with what I had. add payments product experience, an MBA in progress at UT McCombs, and a genuinely friendly, outgoing personality, and you get someone who ramps up fast and makes the team better. EMAIL · LINKEDIN",
     ]],
@@ -261,6 +276,10 @@
       "yooooo, it's Abhi. payments product manager, Rutgers '21, McCombs MBA '28. ask me anything, or peep my LINKEDIN.",
     ]],
   ].map(([re, answers, chips]) => [re, answers.map(a => a.replaceAll("LINKEDIN", LINKEDIN).replaceAll("EMAIL", EMAIL).replaceAll("AI_NAME", AI)), !!chips]);
+  const RECRUITER_FALLBACKS = [
+    `good question, and probably one better answered live. email me at ${EMAIL} or reach me on ${LINKEDIN}.`,
+    `I don't have that one loaded here, but I'm happy to cover it directly: ${EMAIL}`,
+  ];
   const FALLBACKS = [
     `not sure about that one. try one of these, or email me at ${EMAIL}.`,
     `that one's outside what ${AI} knows. try a button below, or ask me directly: ${EMAIL}`,
@@ -281,7 +300,7 @@
     const m = document.createElement("div"); m.className = "msg bot"; m.innerHTML = html; log.appendChild(m);
     if (withChips) {
       const c = document.createElement("div"); c.className = "chips";
-      CHIPS.forEach(t => { const b = document.createElement("button"); b.type = "button"; b.textContent = t; b.onclick = () => send(t); c.appendChild(b); });
+      (recruiterMode ? RECRUITER_CHIPS : CHIPS).forEach(t => { const b = document.createElement("button"); b.type = "button"; b.textContent = t; b.onclick = () => send(t); c.appendChild(b); });
       log.appendChild(c);
     }
     log.scrollTop = log.scrollHeight;
@@ -307,7 +326,8 @@
     log.scrollTop = log.scrollHeight;
     const asked = readings(text);
     const hit = INTENTS.find(([re]) => asked.some(t => re.test(t)));
-    setTimeout(() => { t.remove(); bot(hit ? choose(hit[0].source, hit[1]) : choose("fallback", FALLBACKS), !hit || hit[2]); }, 420);
+    if (hit && hit[0] === RECRUITER) recruiterMode = true;
+    setTimeout(() => { t.remove(); bot(hit ? choose(hit[0].source, hit[1]) : choose("fallback", recruiterMode ? RECRUITER_FALLBACKS : FALLBACKS), !hit || hit[2]); }, 420);
   }
   function open() {
     chat.classList.add("open"); ask.style.display = "none";
