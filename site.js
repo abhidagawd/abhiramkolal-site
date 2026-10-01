@@ -61,7 +61,7 @@
   const colors = ["#ff5c38", "#ffd23f", "#3bceac", "#5b8cff", "#ee4dff", "#7cff4d", "#ff3d7f"];
   const pick = not => { let c; do c = colors[Math.random() * colors.length | 0]; while (c === not); return c; };
   const BOUNCE = 15000, REST = 15000;
-  let os = [], bouncing = false, last = 0;
+  let os = [], last = 0;
 
   // each o breaks out of "yooooo" and bounces around like the DVD logo
   function breakLoose() {
@@ -79,33 +79,54 @@
       os.push({ el, span, x: r.left, y: r.top, w: r.width, h: r.height,
                 vx: Math.cos(ang) * speed * (i % 2 ? 1 : -1), vy: -Math.abs(Math.sin(ang) * speed), color: colors[0] });
     });
-    bouncing = true; last = performance.now();
+    for (const o of os) o.state = "bounce";
+    running = true; last = performance.now();
     requestAnimationFrame(tick);
     setTimeout(goHome, BOUNCE);
   }
 
-  // every o flies back into "yooooo" and the page is back to normal until the next round
+  // each o, one at a time and in random order, stops bouncing and swoops back into its own slot.
+  // it's pulled home by a soft spring, so it curves in from wherever it was and settles with a little wobble
   function goHome() {
-    bouncing = false;
-    for (const o of os) {
-      const r = o.span.getBoundingClientRect();
+    const order = os.slice().sort(() => Math.random() - 0.5);
+    order.forEach((o, i) => setTimeout(() => {
+      o.state = "homing";
       o.el.classList.remove("corner");
-      o.el.style.transition = "transform .9s cubic-bezier(.5,-0.3,.3,1.3), color .9s";
+      o.el.style.transition = "color .6s";
       o.el.style.color = colors[0];
-      o.el.style.transform = `translate(${r.left}px, ${r.top}px)`;
-    }
-    setTimeout(() => {
-      for (const o of os) { o.span.style.opacity = ""; o.span.style.animation = ""; o.el.remove(); }
-      os = [];
-      setTimeout(breakLoose, REST - 950);
-    }, 950);
+    }, i * 450 + Math.random() * 250));
   }
 
+  function land(o) {
+    o.state = "home";
+    o.el.remove();
+    o.span.style.opacity = ""; o.span.style.animation = "";   // the real o fades back in and rejoins the wave
+    if (os.every(x => x.state === "home")) {
+      os = []; running = false;
+      setTimeout(breakLoose, REST);
+    }
+  }
+
+  const PULL = 0.006, DRAG = 0.09, MAX_SPEED = 14;   // spring toward the slot, with a bit of overshoot
+  let running = false;
   function tick(now) {
-    if (!bouncing) return;
+    if (!running) return;
     const dt = Math.min((now - last) / 16.67, 3); last = now;
     const W = innerWidth, H = innerHeight;
     for (const o of os) {
+      if (o.state === "home") continue;
+      if (o.state === "homing") {
+        const r = o.span.getBoundingClientRect();
+        const dx = r.left - o.x, dy = r.top - o.y;
+        o.vx += (dx * PULL - o.vx * DRAG) * dt;
+        o.vy += (dy * PULL - o.vy * DRAG) * dt;
+        const sp = Math.hypot(o.vx, o.vy);
+        if (sp > MAX_SPEED) { o.vx *= MAX_SPEED / sp; o.vy *= MAX_SPEED / sp; }
+        o.x += o.vx * dt; o.y += o.vy * dt;
+        if (Math.hypot(dx, dy) < 0.6 && sp < 0.15) { land(o); continue; }
+        o.el.style.transform = `translate(${o.x}px, ${o.y}px)`;
+        continue;
+      }
       o.x += o.vx * dt; o.y += o.vy * dt;
       let hitX = false, hitY = false;
       if (o.x <= 0) { o.x = 0; o.vx = Math.abs(o.vx); hitX = true; }
@@ -121,5 +142,5 @@
     requestAnimationFrame(tick);
   }
 
-  setTimeout(breakLoose, 2200);  // short wave first, then 15s bounce / 15s rest on repeat
+  setTimeout(breakLoose, 2200);  // short wave first, then ~15s bounce / 15s rest on repeat
 })();
