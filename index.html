@@ -80,6 +80,12 @@
                  background: var(--fg); color: var(--bg); box-shadow: 0 6px 20px rgba(0,0,0,.3);
                  opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity .15s, transform .15s; }
   .lock:hover::after, .lock:focus::after { opacity: 1; visibility: visible; transform: none; }
+  .chat .field { flex: 1; min-width: 0; position: relative; display: flex; }
+  .chat .hint { display: none; position: absolute; right: .55rem; top: 50%; transform: translateY(-50%); pointer-events: none;
+                font: 600 .68rem/1 ui-monospace, Menlo, monospace; letter-spacing: .02em; padding: .25rem .4rem; border-radius: 6px;
+                color: color-mix(in srgb, var(--fg) 55%, transparent); border: 1px solid color-mix(in srgb, var(--fg) 22%, transparent); }
+  @media (hover: hover) and (pointer: fine) { .chat .field:has(input:placeholder-shown) .hint { display: block; }
+    .chat .field:has(input:placeholder-shown) input { padding-right: 3.2rem; } }
   .chat form button { font: inherit; font-weight: 700; background: var(--accent); color: #0e0e10; border: 0; border-radius: 999px; padding: 0 1rem; cursor: pointer; }
 </style>
 </head>
@@ -92,7 +98,7 @@
   <section class="chat" id="chat" role="dialog" aria-label="ask about abhi">
     <header><span>ask about abhi<span class="lock" tabindex="0" role="note" aria-label="nothing you type here is saved. it all disappears when you refresh." data-tip="nothing you type here is saved. it all disappears when you refresh.">🔒</span></span> <button id="close" aria-label="close">✕</button></header>
     <div class="log" id="log" aria-live="polite"></div>
-    <form id="form"><input id="q" placeholder="what should I know?" autocomplete="off" aria-label="your question"><button>send</button></form>
+    <form id="form"><span class="field"><input id="q" placeholder="what should I know?" autocomplete="off" aria-label="your question"><kbd class="hint" aria-hidden="true">tab</kbd></span><button>send</button></form>
   </section>
 <script src="/site.js"></script>
 </body>
