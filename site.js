@@ -1126,9 +1126,9 @@
     const m = document.createElement("div"); m.className = "msg bot"; m.innerHTML = html; log.appendChild(m);
     if (withChips) {
       const c = document.createElement("div"); c.className = "chips";
-      shownChips = recruiterMode ? RECRUITER_CHIPS
-        : shownChips.length ? sample(SUGGESTIONS.filter(s => s !== q.placeholder), 5)
-        : [SUGGESTIONS[0], ...sample(SUGGESTIONS.slice(1), 4)];   // greeting always leads with "what should I know?"
+      shownChips = recruiterMode ? [RECRUITER_CHIPS[0], ...sample(RECRUITER_CHIPS.slice(1), 2)]   // 3 buttons max, keeps it easy
+        : shownChips.length ? sample(SUGGESTIONS.filter(s => s !== q.placeholder), 3)
+        : [SUGGESTIONS[0], ...sample(SUGGESTIONS.slice(1), 2)];   // greeting always leads with "what should I know?"
       shownChips.forEach(t => { const b = document.createElement("button"); b.type = "button"; b.textContent = t; b.onclick = () => send(t); c.appendChild(b); });
       log.appendChild(c);
     }
