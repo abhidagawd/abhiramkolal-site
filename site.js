@@ -24,73 +24,86 @@
   ];
   // first match wins. each intent has a few answers so repeat questions don't get the same line twice.
   // answers are fixed html; typed text is only ever shown via textContent.
+  // voice: this is abhi talking. "you" in a question means abhi. the bot only shows up as
+  // "Abhi Intelligence (AI)" when the question is really about the chat itself.
   // the playful ones up top catch the weird stuff before the normal intents can grab a keyword.
+  const AI = "Abhi Intelligence (AI)";
   const INTENTS = [
-    // --- the outlandish stuff ---
+    // --- questions about the chat itself: Abhi Intelligence (AI) answers ---
     [/ignore (all|previous|your)|system prompt|jailbreak|prompt injection|developer mode|\bhack/i, [
-      "i'm like twelve if-statements in a trench coat. there's nothing to jailbreak, but i respect the hustle.",
-      "nice try. i'm not even a real AI, i'm a list of answers with confidence.",
+      "AI_NAME is like twelve if-statements in a trench coat. there's nothing to jailbreak, but I respect the hustle.",
+      "nice try. AI_NAME isn't even a real AI, it's a list of my answers with a lot of confidence.",
     ]],
-    [/are you (a |an )?(bot|ai|robot|real|human|chatgpt|claude)|is this (a bot|ai|real)|who made you/i, [
-      "i'm a very small robot with exactly one job: talking about abhi. i'm great at it and bad at everything else.",
-      "not a human. not a genius. just a little bot that knows abhi's résumé and nothing about the weather.",
+    [/are you (a |an )?(bot|ai|robot|real|human|chatgpt|claude|automated|actually abhi)|is this (a bot|ai|real|automated|really you|really abhi)|am i (talking|chatting) (to|with) (a bot|ai|a real|abhi|you)/i, [
+      "you're talking to AI_NAME. my words, my answers, just on autopilot so I don't miss you while I'm busy.",
+      "half me, half automation. AI_NAME runs the chat, but everything it says came from me. want the live version? EMAIL",
     ]],
-    [/password|\bssn\b|social security|credit card|card number|bank (account|info)|\bpin\b|phone|cell|text him|number/i, [
-      "nice try 🙂 the only number i'm giving out is the class of 2028.",
-      "lol no. but his email works great: " + "EMAIL",
+    [/what time|weather|temperature|\bnews\b|stock price|score of/i, [
+      "AI_NAME doesn't have windows. well, it lives in browser windows, but it can't see out of them.",
+      "AI_NAME only knows about me. for everything else there's literally the rest of the internet.",
     ]],
-    [/salary|how much (does|do) he (make|earn)|money|\brich\b|net worth|paid|venmo|cash ?app|bitcoin|crypto|loan|borrow/i, [
-      "the bot doesn't do financials. ironic, since he works in payments.",
-      "he moves money for a living, but not to you, sorry 😭",
+    [/chatgpt|claude|gemini|better than you|smarter than you/i, [
+      "they're smarter. AI_NAME is more focused. it knows exactly one person really well.",
+      "AI_NAME isn't competing with the big models. it's a résumé with a personality.",
+    ]],
+
+    // --- the outlandish stuff ---
+    [/password|\bssn\b|social security|credit card|card number|bank (account|info)|\bpin\b|phone|cell|text (him|you)|number/i, [
+      "nice try 🙂 the only number I'm giving out is the class of 2028.",
+      "lol no. but my email works great: EMAIL",
+    ]],
+    [/salary|how much (does he|do you) (make|earn)|money|\brich\b|net worth|paid|venmo|cash ?app|bitcoin|crypto|loan|borrow/i, [
+      "I don't do financials in here. ironic, since I work in payments.",
+      "I move money for a living, but not to you, sorry 😭",
     ]],
     [/\bage\b|how old|birthday|born|zodiac|star sign/i, [
       "old enough to have strong opinions about sneakers, young enough to still buy them. the exact number is classified.",
       "ageless. timeless. undisclosed.",
     ]],
     [/address|street|apartment|zip ?code|exact location|where exactly/i, [
-      "the bot doesn't do addresses. NJ/NYC and Austin, TX is as specific as it gets 🙂",
-      "nice try. he's somewhere between NJ/NYC and Austin. for anything more, EMAIL",
+      "I don't do addresses 🙂 NJ/NYC and Austin, TX is as specific as it gets.",
+      "nice try. I'm somewhere between NJ/NYC and Austin. for anything more, EMAIL",
     ]],
-    [/where (does|do) he live|where is he (from|based|located)|hometown|location|where('s| is) he at|which city|what city|based (in|out of)/i, [
-      "He's based between NJ/NYC and Austin, TX, and likes them both.",
-      "Split between NJ/NYC and Austin, TX. He's a fan of both.",
+    [/where (does he|do you) live|where (is he|are you) (from|based|located)|hometown|location|where('s he| is he| are you) at|which city|what city|based (in|out of)/i, [
+      "I'm based between NJ/NYC and Austin, TX, and I like them both.",
+      "split between NJ/NYC and Austin, TX. big fan of both.",
     ]],
-    [/single|dating|date him|girlfriend|boyfriend|wife|husband|married|marry|crush|relationship|rizz|is he taken|love life/i, [
-      "the bot is strictly professional. ask me about his MBA instead, it's very romantic.",
-      "i only know about his career. his love life is not in my training data 💀",
-      "that's above my clearance level. i can tell you he went to Rutgers though?",
+    [/single|dating|date (him|you|me)|girlfriend|boyfriend|wife|husband|married|marry|crush|relationship|rizz|(is he|are you) taken|love life/i, [
+      "this chat is strictly professional. ask me about my MBA instead, it's very romantic.",
+      "my love life is not in AI_NAME's training data 💀",
+      "that's above this chat's clearance level. I can tell you I went to Rutgers though?",
     ]],
     [/roast|insult|trash talk|\bdiss\b|clown|cringe|ugly|\blame\b|\bmid\b/i, [
-      "i'm contractually obligated to only say nice things. that said, he probably owns too many sneakers.",
-      "roast him? he built a website where the letter o runs away from him every 15 seconds. he's roasting himself.",
-      "he says 'let's circle back' unironically. sometimes to his friends.",
-      "he has more browser tabs open than finished side projects. this website is the rare exception.",
-      "he built a chatbot so he'd never have to answer questions about himself in person. classic PM move: automate the awkward part.",
-      "his sneaker collection and his budget spreadsheet are not on speaking terms.",
-      "he'd make a slide deck about whether to make a slide deck. and it'd have an appendix.",
-      "he calls it 'user research' when he asks his friends which restaurant to go to.",
+      "self-roast, since you asked: I probably own too many sneakers.",
+      "I built a website where the letter o runs away from me every 15 seconds. I'm already roasting myself.",
+      "I say 'let's circle back' unironically. sometimes to my friends.",
+      "I have more browser tabs open than finished side projects. this website is the rare exception.",
+      "I built a chat about myself so I'd never have to answer questions about myself in person. classic PM move: automate the awkward part.",
+      "my sneaker collection and my budget spreadsheet are not on speaking terms.",
+      "I'd make a slide deck about whether to make a slide deck. and it'd have an appendix.",
+      "I call it 'user research' when I ask my friends which restaurant to go to.",
     ]],
     [/fuck|shit|bitch|\bwtf\b|\bstfu\b|asshole|dumbass/i, [
       "whoa. keep it PG, this is a professional website (mostly).",
       "language! the o's are watching.",
     ]],
-    [/1 ?v ?1|one on one|can he (dunk|hoop|ball)|is he (good|nice) at basketball|hooper|buckets|lebron|jordan|curry/i, [
-      "he'll take that 1v1. results not guaranteed.",
-      "he hoops. whether he hoops well depends on who you ask and what day it is.",
+    [/1 ?v ?1|one on one|can (he|you) (dunk|hoop|ball)|(is he|are you) (good|nice) at basketball|hooper|buckets|lebron|jordan|curry/i, [
+      "I'll take that 1v1. results not guaranteed.",
+      "I hoop. whether I hoop well depends on who you ask and what day it is.",
     ]],
-    [/is he (cool|funny|nice|smart|good|tall|hot|cute|a good)|should i (meet|talk to|follow)|worth (it|hiring|meeting)/i, [
+    [/(is he|are you) (cool|funny|nice|smart|good|tall|hot|cute|a good)|should i (meet|talk to|follow)|worth (it|hiring|meeting)/i, [
       "yooooo. you saw the o's. you tell me.",
-      "the bot is biased, but yes. obviously.",
-      "he built a website with escaping vowels and a chatbot about himself. draw your own conclusions.",
-      "super friendly, outgoing, and picks things up fast. so yes, very cool.",
+      "I'm biased, but yes. obviously.",
+      "I built a website with escaping vowels and a chat about myself. draw your own conclusions.",
+      "friendly, outgoing, and I pick things up fast. so yes, I'd say pretty cool.",
     ]],
-    [/favou?rite|best (song|food|shoe|sneaker|team|movie|place)|top (5|five|3|three)/i, [
-      "too many favorites to fit in a chat bubble. ask him yourself: EMAIL",
-      "the bot hasn't been told his favorites, and it refuses to make stuff up.",
+    [/favou?rite|best (song|food|shoe|sneaker|team|movie|place)|top (5|five|3|three)\b(?! reasons)/i, [
+      "too many favorites to fit in a chat bubble. ask me directly: EMAIL",
+      "I haven't loaded my favorites into AI_NAME yet, and it refuses to make stuff up.",
     ]],
     [/meaning of life|why are we here|what is love|is the earth flat|aliens|simulation/i, [
       "42. also, good product sense.",
-      "beyond my pay grade. i'm a résumé bot, not a philosopher.",
+      "beyond my pay grade. I'm a product manager, not a philosopher.",
     ]],
     [/thank|thx|\bty\b|appreciate/i, [
       "anytime 🫡", "you got it.", "of course. come back soon, the o's get lonely.",
@@ -99,22 +112,31 @@
       "later! ✌️", "peace. tell your friends about the o's.",
     ]],
     [/^(lol|lmao|haha|💀|😂)/i, [
-      "glad you're having fun. ask me anything about abhi.", "ikr.",
+      "glad you're having fun. ask me anything.", "ikr.",
+    ]],
+    [/i love you|marry me|do you like me|are we friends|you('re| are) (so )?(cute|cool|funny|smart|awesome|great)/i, [
+      "appreciate that 🙏 let's start with LinkedIn and see where it goes: LINKEDIN",
+      "stop, you're gonna make the o's blush.",
+    ]],
+    [/\bsing\b|rap for me|freestyle|beatbox/i, [
+      "la la la. that's my entire range in here.",
+      "no performances in the chat. just very confident answers about my résumé.",
     ]],
 
+    // --- lists, explainers, and the smart stuff ---
     [/^(help|menu|options|commands)\b|what can (you|i) (do|ask)|what should i ask/i, [
-      "here's what i'm good for:<ul><li>his experience, school and MBA</li><li>hobbies (there are many)</li><li>how to reach him</li><li>payments and product explainers (try 'how do card payments work')</li><li>jokes, fun facts, and light roasting</li></ul>",
+      "here's what you can ask me:<ul><li>my experience, school and MBA</li><li>hobbies (there are many)</li><li>how to reach me</li><li>payments and product explainers (try 'how do card payments work')</li><li>jokes, fun facts, and a little self-roasting</li></ul>",
     ]],
     [/surprise me|random|bored|entertain me/i, [...JOKES, ...FUN_FACTS]],
     [/fun fact|did you know|teach me|something (smart|interesting|cool)|interesting/i, FUN_FACTS],
     [/joke|make me laugh|something funny|tell me something fun/i, JOKES],
-    [/why (should (i|we) )?hire|reasons to|convince me|sell me|pitch (him|me)|top (5|five) reasons/i, [
-      "why abhi is worth the call:<ol><li><b>he learns fast. really fast.</b> he had no real coding background, then taught himself enough web dev to build this whole site (the bouncing o's, this chatbot, all of it) using the resources around him</li><li><b>he adapts.</b> new team, new domain, new tools: he gets up to speed quickly and starts contributing</li><li><b>payments product manager</b>, so he can talk engineering and business in the same meeting</li><li><b>Rutgers '21, UT McCombs MBA '28</b> in progress, always sharpening the business side</li><li><b>super friendly and outgoing</b>, the kind of person teams actually like working with</li></ol>based between NJ/NYC and Austin, TX. reach him at EMAIL or on LINKEDIN.",
-      "the short pitch: give abhi something he's never done before and watch what happens. he'd never really coded, and he still built this site, animations and chatbot included, by figuring it out with the resources he had. add payments product experience, an MBA in progress at UT McCombs, and a genuinely friendly, outgoing personality, and you get someone who ramps up fast and makes the team better. EMAIL · LINKEDIN",
+    [/why (should (i|we) )?hire|reasons to|convince me|sell me|pitch (him|me|yourself)|top (5|five) reasons|why (you|him)\b/i, [
+      "why I'm worth the call:<ol><li><b>I learn fast. really fast.</b> I had no real coding background, then taught myself enough web dev to build this whole site (the bouncing o's, this chat, all of it) with the resources around me</li><li><b>I adapt.</b> new team, new domain, new tools: I get up to speed quickly and start contributing</li><li><b>payments product manager</b>, so I can talk engineering and business in the same meeting</li><li><b>Rutgers '21, UT McCombs MBA '28</b> in progress, always sharpening the business side</li><li><b>friendly and outgoing.</b> I genuinely like people, and it shows on a team</li></ol>I'm based between NJ/NYC and Austin, TX. reach me at EMAIL or on LINKEDIN.",
+      "short version: give me something I've never done before and watch what happens. I'd never really coded, and I still built this site, animations and chat included, by figuring it out with what I had. add payments product experience, an MBA in progress at UT McCombs, and a genuinely friendly, outgoing personality, and you get someone who ramps up fast and makes the team better. EMAIL · LINKEDIN",
     ]],
     [/what (does|do) (a |an )?(pm|product manager)s? (do|actually do)|what is (a )?product manag|what('s| is) product management/i, [
-      "a product manager figures out what to build and why. the job, roughly:<ul><li>find the real customer problem</li><li>decide what matters most (and what waits)</li><li>get engineering, design and business pointed the same way</li><li>ship, measure, learn, repeat</li></ul>abhi does this in payments. more on LINKEDIN.",
-      "PMs own the 'what' and the 'why'. engineers own the 'how'. the PM's job is to make sure the team builds the right thing, not just builds the thing right.",
+      "a product manager figures out what to build and why. the job, roughly:<ul><li>find the real customer problem</li><li>decide what matters most (and what waits)</li><li>get engineering, design and business pointed the same way</li><li>ship, measure, learn, repeat</li></ul>I do this in payments. more on LINKEDIN.",
+      "PMs own the 'what' and the 'why'. engineers own the 'how'. my job is to make sure the team builds the right thing, not just builds the thing right.",
     ]],
     [/how (do|does) (card |credit card |debit card |a card )?payments? (actually )?work|what happens when (i|you) (tap|swipe|pay)|how (do|does) (a )?card (payment|transaction)/i, [
       "a card payment in about two seconds:<ol><li>you tap or swipe</li><li>the store's bank (the acquirer) sends the request over the card network</li><li>your bank (the issuer) checks your balance and fraud signals, then approves or declines</li><li>the approval comes back to the terminal</li><li>later, usually the next business day, the money actually moves between banks (clearing and settlement)</li></ol>",
@@ -132,76 +154,61 @@
       "ACH vs wire, quick version:<ul><li><b>ACH</b>: processed in batches, cheap or free, usually 1 to 2 business days (same-day exists). think paychecks and bill pay.</li><li><b>wire</b>: sent individually and settles fast, often same day, costs more, and is basically irreversible. think house down payments.</li></ul>",
     ]],
     [/framework|prioriti[sz]|\brice\b|jobs to be done|jtbd|north star metric/i, [
-      "a few product frameworks worth knowing:<ul><li><b>RICE</b>: score ideas by Reach × Impact × Confidence ÷ Effort</li><li><b>jobs to be done</b>: people don't buy a drill, they hire it to make a hole</li><li><b>north star metric</b>: the one number that best captures the value users get</li></ul>frameworks help you argue less. they don't decide for you.",
+      "a few product frameworks I like:<ul><li><b>RICE</b>: score ideas by Reach × Impact × Confidence ÷ Effort</li><li><b>jobs to be done</b>: people don't buy a drill, they hire it to make a hole</li><li><b>north star metric</b>: the one number that best captures the value users get</li></ul>frameworks help you argue less. they don't decide for you.",
     ]],
-    [/(get|break|transition) into (product|pm|tech)|become a (pm|product manager)|how (do|did) (i|he) get into product|career advice|any advice|tips for/i, [
-      "general advice for breaking into product:<ol><li>get close to the product you already work near (support, analytics, engineering, ops all count)</li><li>write down problems you'd fix and why. that's PM thinking</li><li>learn enough tech to ask good questions</li><li>talk to customers whenever you can</li><li>ship something, even a side project. like, say, a website with a chatbot</li></ol>for his actual path, see LINKEDIN.",
+    [/(get|break|transition) into (product|pm|tech)|become a (pm|product manager)|how (do|did) (i|he|you) get into product|career advice|any advice|tips for/i, [
+      "my advice for breaking into product:<ol><li>get close to the product you already work near (support, analytics, engineering, ops all count)</li><li>write down problems you'd fix and why. that's PM thinking</li><li>learn enough tech to ask good questions</li><li>talk to customers whenever you can</li><li>ship something, even a side project. like, say, a website with a chat in it</li></ol>my actual path is on LINKEDIN.",
     ]],
-    [/i love you|marry me|do you like me|are we friends|you('re| are) (cute|cool|funny|smart)/i, [
-      "the bot is flattered, but it's a static website. it can't love. it can only link to LinkedIn.",
-      "aw. i'd blush but i'm made of javascript.",
+    [/what('s he| are you| is he) like|personality|vibe|as a person|(is he|are you) (friendly|outgoing|easy to work with|a team player)|team player|work(ing)? with (him|you)/i, [
+      "friendly and outgoing. I'm the person who talks to everyone in the room and remembers what they said.",
+      "easy to work with, friendly, outgoing, and quick to adapt. I like making the work more fun for everyone around me.",
     ]],
-    [/\bsing\b|rap for me|freestyle|beatbox/i, [
-      "la la la. that's my entire range.",
-      "the bot doesn't perform. it just answers questions about résumés, very confidently.",
+    [/who (built|made|coded|designed) (this|the site|you|it)|how did (he|you) (build|make)|how (was|is) (this|the site) (built|made)|can (he|you) code|do(es)? (he|you) code|(is he|are you) (technical|a developer|an engineer|a coder)|quick learner|learn(s)? fast|adapt/i, [
+      "I built this whole site myself, and I had no real coding background going in. I picked up the web dev as I went, leaned on the resources around me, and shipped it: the bouncing o's, this chat, all of it.",
+      "fun story: I'm a product manager, not an engineer, and I'd never really coded before this. figured it out anyway. that's kind of my thing: drop me into something new and I pick it up fast.",
     ]],
-    [/what time|weather|temperature|news|stock price|score of/i, [
-      "no idea, i don't have windows. well, i live in browser windows, but i can't see out of them.",
-      "i only know about abhi. for everything else there's literally the rest of the internet.",
-    ]],
-    [/chatgpt|claude|gemini|better than you|smarter than you/i, [
-      "they're smarter. i'm more focused. i know one person really well.",
-      "i'm not competing with the big models. i'm a résumé with a personality.",
-    ]],
-    [/what('s| is) he like|personality|vibe|as a person|is he (friendly|outgoing|easy to work with|a team player)|team player|work(ing)? with him/i, [
-      "super friendly and outgoing. he's the person who talks to everyone in the room and remembers what they said.",
-      "easy to work with, friendly, outgoing, and quick to adapt. the kind of teammate who makes the work more fun.",
-    ]],
-    [/who (built|made|coded|designed) (this|the site|you)|how (did|was) (he|this|the site) (build|built|make|made)|can he code|does he code|is he (technical|a developer|an engineer|a coder)|quick learner|learn(s)? fast|adapt/i, [
-      "he built this whole site himself, and he had no real coding background going in. he picked up the web dev as he went, leaned on the resources around him, and shipped it: the bouncing o's, this chatbot, all of it.",
-      "fun story: he's a product manager, not an engineer, and he never really coded before this. he figured it out anyway. that's kind of his thing: drop him into something new and he picks it up fast.",
-    ]],
+
     // --- the real stuff ---
     [/linked\s*in/i, [
-      "Here's his LINKEDIN.",
-      "Right here: LINKEDIN. Go connect.",
+      "here's my LINKEDIN.",
+      "right here: LINKEDIN. let's connect.",
     ]],
     [/mba|mccombs|\but\b|austin|grad(uate)? school|business school/i, [
-      "He's currently getting his MBA at UT Austin's McCombs School of Business, class of 2028. More on LINKEDIN.",
+      "I'm getting my MBA at UT Austin's McCombs School of Business, class of 2028. more on LINKEDIN.",
       "MBA at UT McCombs, class of 2028. LINKEDIN has the rest.",
     ]],
     [/educat|school|college|rutgers|undergrad|degree|stud(y|ied)|graduat/i, [
-      "Rutgers University, class of 2021. Now working on an MBA at UT McCombs (class of 2028). Full background on LINKEDIN.",
-      "Rutgers '21 for undergrad, UT McCombs MBA '28 in progress. The rest is on LINKEDIN.",
+      "Rutgers University, class of 2021. now working on my MBA at UT McCombs (class of 2028). full background on LINKEDIN.",
+      "Rutgers '21 for undergrad, UT McCombs MBA '28 in progress. the rest is on LINKEDIN.",
     ]],
     [/doing now|currently|these days|up to\b/i, [
-      "Right now he's a product manager in payments and getting his MBA at UT McCombs (class of 2028). Details on LINKEDIN.",
-      "Building payments products, working through his MBA at UT McCombs, and making the o's on his website bounce in between. More on LINKEDIN.",
+      "right now I'm a product manager in payments and getting my MBA at UT McCombs (class of 2028). details on LINKEDIN.",
+      "building payments products, working through my MBA at UT McCombs, and making the o's on this website bounce in between. more on LINKEDIN.",
     ]],
-    [/experience|job|work|role|career|resume|résumé|\bcv\b|product|\bpm\b|for a living|does he do|what he does|occupation|skill|background|company|employer|recruit|professional|industry|fintech|payments/i, [
-      "Abhi's a product manager working in payments. The full work history is on LINKEDIN.",
-      "He's a product manager in the payments world, basically making sure money gets where it's going. Full story on LINKEDIN.",
-      "Product manager, payments. He's the person asking 'but what problem are we solving' in every meeting. Work history's on LINKEDIN.",
+    [/experience|job|work|role|career|resume|résumé|\bcv\b|product|\bpm\b|for a living|does he do|do you do|what (he|you) do|occupation|skill|background|company|employer|recruit|professional|industry|fintech|payments/i, [
+      "I'm a product manager working in payments. my full work history is on LINKEDIN.",
+      "product manager in the payments world, basically making sure money gets where it's going. full story on LINKEDIN.",
+      "product manager, payments. I'm the person asking 'but what problem are we solving' in every meeting. work history's on LINKEDIN.",
     ]],
     [/hobb|\bfun\b|music|free time|interest|weekend|basketball|hoop|nba|sneaker|shoe|food|\beat\b|restaurant|tech|travel|trip|hike|hiking|walk|friends|like to do/i, [
-      "Outside of work: music (making it and listening to it), basketball, tech, food, sneakers, hanging out with friends, walks and hikes, and traveling whenever he can afford to lol.",
-      "Music, basketball, tech, sneakers and good food. Also walks, hikes, friends, and traveling when the budget allows.",
-      "Off the clock it's music, hoops, sneakers, food, tech, hikes, and the occasional trip (budget permitting lol).",
+      "outside of work: music (making it and listening to it), basketball, tech, food, sneakers, hanging out with friends, walks and hikes, and traveling whenever I can afford to lol.",
+      "music, basketball, tech, sneakers and good food. also walks, hikes, friends, and traveling when the budget allows.",
+      "off the clock it's music, hoops, sneakers, food, tech, hikes, and the occasional trip (budget permitting lol).",
     ]],
     [/contact|email|mail|reach|hire|connect|talk|get in touch|\bdm\b/i, [
-      "Best way to reach him is EMAIL, or connect on LINKEDIN.",
-      "Shoot him an email at EMAIL. LINKEDIN works too.",
+      "best way to reach me is EMAIL, or connect on LINKEDIN.",
+      "shoot me an email at EMAIL. LINKEDIN works too.",
     ]],
-    [/^(hi|hey|yo|hello|sup|wassup|what's up|hiya)\b|who (is|'s)|about (him|abhi)|tell me/i, [
-      "Abhi (Abhiram Kolal) is a product manager in payments, a Rutgers '21 grad, and an MBA candidate at UT McCombs ('28). Here's his LINKEDIN.",
-      "yooooo. Abhi's a payments product manager, Rutgers '21, McCombs MBA '28. Ask me about any of it, or peep his LINKEDIN.",
+    [/^(hi|hey|yo|hello|sup|wassup|what's up|hiya)\b|who (is|'s) (he|abhi|this)|who are you|who r u|about (him|abhi|you|yourself)|tell me about|introduce yourself/i, [
+      "I'm Abhi (Abhiram Kolal): product manager in payments, Rutgers '21, and an MBA candidate at UT McCombs ('28). here's my LINKEDIN.",
+      "yooooo, it's Abhi. payments product manager, Rutgers '21, McCombs MBA '28. ask me anything, or peep my LINKEDIN.",
     ]],
-  ].map(([re, answers]) => [re, answers.map(a => a.replaceAll("LINKEDIN", LINKEDIN).replaceAll("EMAIL", EMAIL))]);
+  ].map(([re, answers]) => [re, answers.map(a => a.replaceAll("LINKEDIN", LINKEDIN).replaceAll("EMAIL", EMAIL).replaceAll("AI_NAME", AI))]);
   const FALLBACKS = [
-    `Not sure about that one. Try one of these, or email him at ${EMAIL}.`,
-    `that one's outside my very small brain. try a button below, or ask him directly: ${EMAIL}`,
-    `i've got nothing on that, but i'm great at résumé questions. pick one 👇`,
-    `hmm, the bot has no idea. abhi might though: ${EMAIL}`,
+    `not sure about that one. try one of these, or email me at ${EMAIL}.`,
+    `that one's outside what ${AI} knows. try a button below, or ask me directly: ${EMAIL}`,
+    `I've got nothing on that in here, but I'm great at résumé questions. pick one 👇`,
+    `hmm, ${AI} has no answer for that one. try a button below 👇`,
   ];
   const lastPick = new Map();
   function choose(key, list) {          // random answer, never the same one twice in a row
@@ -232,7 +239,7 @@
   }
   function open() {
     chat.classList.add("open"); ask.style.display = "none";
-    if (!started) { started = true; bot("what would you like to know about abhi?", true); }
+    if (!started) { started = true; bot("yooooo, it's abhi. what would you like to know about me?", true); }
     q.focus();
   }
   function close() { chat.classList.remove("open"); ask.style.display = ""; }
