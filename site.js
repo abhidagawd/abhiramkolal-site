@@ -53,6 +53,10 @@
     ], true],
 
     // --- questions about the chat itself: Abhi Intelligence (AI) answers ---
+    [/(save|store|record|log|track|keep|see)(s|d|ing)? (my|this|these|what i|our|me)|privacy|is this (private|saved|recorded)|data/i, [
+      "nope. nothing you type here is saved or sent anywhere. AI_NAME runs entirely in your browser, and it all disappears when you refresh.",
+      "this chat is private. no logs, no tracking, no cookies. refresh and it's gone.",
+    ]],
     [/ignore (all|previous|your)|system prompt|jailbreak|prompt injection|developer mode|\bhack/i, [
       "AI_NAME is like twelve if-statements in a trench coat. there's nothing to jailbreak, but I respect the hustle.",
       "nice try. AI_NAME isn't even a real AI, it's a list of my answers with a lot of confidence.",
