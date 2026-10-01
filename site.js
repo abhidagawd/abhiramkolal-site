@@ -100,6 +100,8 @@
   // recruiter mode: once someone says they're hiring, skip the bits and lead with the pitch + contact
   const RECRUITER = /\b(i'?m|i am|we'?re|we are) (a |an )?(recruiter|recruiting|hiring|in talent|from talent)|\brecruiter here\b|hiring manager|talent (acquisition|partner)|(open|available) (role|position)|job (opening|opportunity)|reach(ing)? out about (a |an )?(role|position|job|opportunity)|interested in (you|him|hiring)|are you open to|(you|he) (be )?interested in a (role|job|position)/i;
   const RECRUITER_CHIPS = ["why hire me", "experience", "education", "location", "contact", "LinkedIn"];
+  const SERIOUS = /\b(be|get|act|talk|go|switch to|turn on) (serious|professional|formal|normal)\b|serious mode|professional mode|formal mode|(ok|okay|alright|but)?,? ?(seriously|for real|real talk|no jokes?|no cap)( though| tho| now)?[\s?!.]*$|can you be (serious|professional|normal)|drop the (jokes|bit|act)|give it to me straight|straight answers?|less (jokes|casual|playful)/i;
+  const PLAYFUL = /\b(fun|casual|playful|chill|silly) mode|be (fun|casual|playful|silly) again|back to (fun|normal|casual)|bring back the (fun|jokes|yo)|un-?serious/i;
   let recruiterMode = false;
   const INTENTS = [
     // hiring logistics: always answered straight, never with a joke
@@ -127,6 +129,131 @@
       "the 'yooooo' is a culture-fit test. you're still here, so you passed.",
       "I'm professional where it counts: shipping, communicating, delivering. greetings are where I let loose.",
       "would 'Greetings, valued visitor' have been better? exactly. yooooo it is.",
+    ], true],
+
+    // --- "wait, is this a joke?": people who find a casual professional site confusing or rude ---
+    [SERIOUS, [
+      "you got it. straight version, no bits:<ul><li><b>who:</b> Abhiram Kolal, product manager in payments</li><li><b>education:</b> Rutgers '21, UT McCombs MBA '28 (in progress)</li><li><b>strengths:</b> I learn fast, adapt fast, and I'm easy to work with</li><li><b>based:</b> NJ/NYC and Austin, TX</li><li><b>contact:</b> EMAIL · LINKEDIN</li></ul>I'll keep it professional from here. say 'fun mode' anytime to bring the jokes back.",
+      "serious mode on. I'm a payments product manager (Rutgers '21, McCombs MBA '28 in progress) who ramps up quickly on anything new. the best ways to reach me are EMAIL and LINKEDIN. ask me anything and I'll answer it straight. 'fun mode' switches it back.",
+    ], true],
+    [PLAYFUL, [
+      "yooooo, we're back 🎉 ask me anything.",
+      "fun mode restored. the o's are relieved.",
+    ], true],
+    [/is (this|that|it|the yo|this site|this website|this page|this chat|abhi|he|you) (a |an |some )?(joke|prank|satire|parody|bit|troll|meme|gag|real\b|serious|for real|actually serious)|(are|r) you (joking|trolling|kidding|serious|for real|being serious|pranking)|is this (supposed to be )?(a )?(real|actual) (website|site|person|thing)|this (can'?t|cannot) be (real|serious)|(is|was) this (made )?as a joke/i, [
+      "not a joke, I promise. I'm a real payments product manager, Rutgers '21, McCombs MBA '28. the site is just written in my actual voice instead of résumé-speak. ask me anything serious and you'll get a serious answer. or say 'serious mode' and I'll drop the bits entirely.",
+      "totally real. the 'yooooo' is just how I talk. the experience, the degrees and the work behind it are all legit, and LINKEDIN backs it up.",
+      "real person, real résumé, real website I built myself. the playful part is a choice, not a prank. want the buttoned-up version? type 'serious mode'.",
+    ], true],
+    [/(is|was) (that|this|the yo|yo|it|this site|the greeting) (rude|disrespectful|an insult|insulting|offensive|mocking|condescending|unprofessional)|(are|r) you (mocking|insulting|making fun of|disrespecting|being rude)|(making|make) fun of me|(i'?m|i am|i feel|feeling|kinda|kind of|a bit|little) (offended|insulted|disrespected)|that'?s (rude|disrespectful|insulting|offensive)|don'?t (call me|say) yo|did you just (yo|say yo|call me)|why (did|would) you (say|call me) yo|who says yo/i, [
+      "no disrespect at all, genuinely. 'yo' is how I say hi to people I'm happy to see, and you made it here, so 🙏 if you'd rather keep it formal, just say 'serious mode' and I will.",
+      "sorry if it landed wrong. it's meant as a warm hello, not a joke at anyone's expense. I grew up in NJ, where 'yo' is basically a handshake. happy to keep it professional from here: say 'serious mode'.",
+      "never trying to offend. I just wanted my site to sound like me instead of a cover letter. everything here is sincere, and I'm happy to switch to straight answers: type 'serious mode'.",
+    ], true],
+    [/is (this|it|the site|this site|this link|the link) (safe|legit|a scam|scam|phishing|a virus|malware|sketchy|spam|secure)|(are you|is this) (selling|trying to sell|scamming)|what'?s the catch|is there a catch|what do you want (from me)?|what are you selling|why (am i|was i sent) here|did you (send|give) me a virus/i, [
+      "100% safe. it's a personal website: no logins, no forms, no downloads, no tracking, and nothing for sale. the only thing I'm 'selling' is a good conversation. EMAIL if you want one.",
+      "no catch. this is just my corner of the internet: who I am, what I do, and some bouncing o's. nothing you type is saved, and nothing is being sold to you.",
+    ], true],
+    [/this (site |website |page |chat )?is (so )?(weird|strange|odd|confusing|random|a lot|chaotic|bizarre|wild)|(what|wtf) (is|did i just) (going on|happening|walk into|see)|i'?m (so )?confused|(don'?t|do not) (get|understand) (it|this|the site)|i don'?t get it|what am i supposed to do( here)?/i, [
+      "fair, let me orient you:<ul><li><b>who:</b> I'm Abhi, a product manager in payments</li><li><b>the o's:</b> a nod to the old DVD screensaver. they bounce, then come home</li><li><b>this chat:</b> me, answering in my own voice. ask anything, or tap a button</li></ul>that's the whole thing. no tricks.",
+      "totally fair reaction. short version: I'm a payments product manager, and this is my personal site, built by me, written how I actually talk. the buttons below are a good place to start 👇",
+    ], true],
+    [/did (ai|chat ?gpt|claude|an ai|a bot) (make|build|write|design|code) (this|the site|this site|you|it)|is (this|the site|this site|it) (made by |built by |written by )?ai\b|ai[- ]generated|(did|do) you (use|have) ai (make|build|write|for)|did you (actually )?(make|build|code|design) (this|it) yourself|you made this\?*$/i, [
+      "I built it myself, with AI tools as a teammate, the same way I'd use any good tool at work. the ideas, the design calls, the taste and every word in this chat are mine. learning to direct the tools well is kind of the point.",
+      "yes, I made it. I had no real coding background, so I leaned on every resource I had, AI included, and figured it out. that's how I work in general: pick up whatever gets the job done and learn it fast.",
+    ], true],
+
+    // --- the o's and compliments on the site ---
+    [/the o'?s|(bouncing|moving|flying) (letters|o'?s)|dvd( logo| screensaver| thing)?|hit the corner|why (do|are|did) (the )?(letters|o'?s) (bounce|bouncing|move|moving|run|leave)|screensaver/i, [
+      "it's the DVD screensaver. if you grew up when I did, you've definitely stared at one waiting for it to hit the corner. here, each o breaks out of my 'yooooo', changes color when it hits a wall, glows when it nails a corner, and then finds its way home.",
+      "a little tribute to the DVD logo. they bounce for 15 seconds, rest for 15, and each one finds its own way back. I may have spent too long tuning the physics. no regrets.",
+    ], true],
+    [/(nice|cool|sick|fire|clean|dope|great|awesome|amazing|beautiful|fun|creative|hard|slick|sleek|neat|fresh|unique) (site|website|page|chat|design|idea|concept|vibe)|(site|website|page|chat|design) (is|looks) (so )?(fire|sick|cool|dope|clean|nice|hard|great|amazing|awesome|fun|creative|good)|(love|like|dig|loving) (the|this|your) (site|website|page|o'?s|chat|vibe|design|idea)|this is (actually |so |really |lowkey )?(cool|sick|fire|dope|hard|clean|awesome|amazing|creative|genius|fun|great)|(i'?m|im) (impressed|obsessed)|10\/10/i, [
+      "appreciate that a lot 🙏 I built it myself, no real coding background, just figured it out as I went. glad it landed.",
+      "thank you! that's exactly the reaction I was going for: fun to look at, real info underneath.",
+      "that means a lot. tell a friend, the o's love an audience.",
+    ], true],
+    [/this (site |website |page |chat )?(sucks|is bad|is trash|is ugly|is annoying|is dumb|is stupid|is boring)|(hate|don'?t like|dislike) (this|the site|it|the o'?s)|(make|stop) the o'?s (stop|bouncing)|annoying/i, [
+      "fair, it's not for everyone. if the o's are too much, give it 15 seconds, they go home on their own. and if you want straight answers with no extras, say 'serious mode'.",
+      "noted, filed under user feedback. honestly I'd rather be memorable than forgettable. but if there's something specific that's off, tell me: EMAIL",
+    ], true],
+
+    // --- strangers figuring out who I am ---
+    [/(are you|is (he|abhi)) (famous|important|someone|somebody|an influencer|a celebrity|a big deal|known)|should i (know|have heard of) (you|him|who)|why should i care|why do i care|who even is (this|he|abhi)|who (the heck|tf) is (this|abhi|he)/i, [
+      "not famous, no. just a payments product manager who made a personal site that's more fun than a PDF résumé. you don't need to know me to be here. but now you kind of do.",
+      "zero fame, lots of personality. I'm Abhi: product manager in payments, Rutgers '21, McCombs MBA '28. that's the whole headline.",
+    ], true],
+    [/what('?s| is) (your|his) (name|full name|real name)|how (do|do i|to) (you )?(pronounce|say) (your|his|abhi|abhiram)|what (should|do) i call (you|him)|is it abhi or abhiram|abhi or abhiram|nickname/i, [
+      "Abhiram Kolal. most people just call me Abhi, which is easier and also what I prefer.",
+      "Abhi is perfect. Abhiram if we're being formal. either works.",
+    ], true],
+    [/describe (yourself|you|him)|in (one|1|three|3|a few|five|5) words|sum (yourself|you|him|it) up|elevator pitch|tl;?dr|short version|quick (version|summary|rundown)|30 seconds/i, [
+      "in a few words: curious, fast learner, friendly, payments PM.",
+      "the 30-second version: I'm a product manager in payments, I went to Rutgers ('21) and I'm doing my MBA at UT McCombs ('28). I learn new things fast, I like people, and I built this site myself to prove both. EMAIL · LINKEDIN",
+      "three words: adaptive, outgoing, curious. plus one bonus word: yooooo.",
+    ], true],
+
+    // --- career people: peers, networkers, folks who found me on LinkedIn ---
+    [/(saw|found|seen|came from|clicked( on)?|got here (from|through|via)|coming from|from) (your |ur |the )?(linkedin|resume|résumé|profile|post|card|business card|email signature|link)|you (sent|gave|shared) me (this|the|your)|we met|met you|met at (a |the )?(conference|event|career fair|meetup|networking|mixer|panel)/i, [
+      "oh nice, welcome 🙏 you did the thing almost nobody does: actually clicked the link. if we met somewhere, I'd love to keep the conversation going: EMAIL",
+      "glad you made it over! this is the less formal version of me, same person though. if we were talking about something specific, email me and pick it back up: EMAIL",
+    ], true],
+    [/(i'?m|i am|i work as|i'?m also|also) (a |an )?(pm|product manager|product person|in product|apm|tpm|product owner|in payments|in fintech|in banking|in tech)|i (also )?work (in|at a|for a) (product|payments|fintech|bank|tech)|fellow (pm|product|fintech|payments)|same (field|industry|space)/i, [
+      "yooooo, a fellow product person 🤝 always happy to compare notes on frameworks, roadmaps, or the eternal 'it depends'. let's connect: LINKEDIN",
+      "love that. it's always good to meet people in the same space. send me a note at EMAIL or connect on LINKEDIN, and we can trade war stories.",
+    ], true],
+    [/coffee( chat)?|grab (a )?(coffee|call|chat|time)|pick your brain|network(ing)?\b|informational( interview)?|mentor(ship)?|can we (chat|talk|connect|meet|hop on a call)|hop on a call|(15|20|30) min(ute)?s? (chat|call)|set up a (call|chat|time)/i, [
+      "always down. I like meeting people, no agenda needed. send me a note at EMAIL with a little context and we'll find a time.",
+      "yes, happy to. email me at EMAIL or message me on LINKEDIN, and let's set something up.",
+    ], true],
+    [/refer(ral)?( me)?\b|can you (get me a job|refer|put in a word)|(is your|are you|is your team|is your company|your company) (hiring|looking)|are you hiring|any (openings|roles|positions)|job (at|with) your/i, [
+      "I'm not a hiring manager, so I can't promise anything, but I'm always happy to hear what you're looking for. send me a note at EMAIL with what you're after.",
+      "I can't speak for any hiring team in here. but reach out at EMAIL with context on what you're looking for, and I'll see if I can point you somewhere useful.",
+    ], true],
+    [/(i'?m|i am|also|me too|i went|i go|we both|i was) (at |to |in )?(rutgers|ru\b)|rutgers (alum|grad|fam|student)|fellow (rutgers|scarlet knight)|scarlet knights?|\bru rah rah\b|(i'?m|i am|also) (at|in|going to|starting at|applying to|in the) (mccombs|ut|the mba|an mba|business school|b-?school)|fellow (mccombs|longhorn|mba)|hook 'em|hook em/i, [
+      "no way, love to meet a fellow alum 🙌 always happy to connect: LINKEDIN",
+      "small world. we should definitely connect. shoot me a note at EMAIL or find me on LINKEDIN.",
+    ], true],
+    [/should i (get|do|go for) (an |the )?mba|is (an |the )?mba worth|(applying|apply) (to|for) (an |the )?(mba|business school|b-?school)|mba (advice|tips)|(why|how come) (are you|did you) (getting|doing|get|do) (an |the )?mba/i, [
+      "my honest take: an MBA is worth it if you know what you want from it. for me, it's about sharpening the business side to go with the product side. ask me again in 2028 for the full review.",
+      "depends on the goal. for me it's the business depth, the people, and leveling up as a product leader. happy to share more if you're weighing it: EMAIL",
+    ], true],
+
+    // --- old friends: college people I haven't seen in a while ---
+    [/long time|it'?s been (forever|a minute|a while|years|so long|too long|ages)|haven'?t (seen|talked to|heard from|spoken to) (you|ya|him) in|(do you|you|u) remember me|remember me\??$|blast from the past|where have you been|where'?d you go|you (disappeared|vanished|fell off)|is this (the |my )?abhi from|abhi from (rutgers|college|school|high ?school|class|back in the day|nj)|we (went to|were at|had class|took|lived|were in) .*(together|rutgers|college|school)|(no way|wait|omg|yo),? (is this|this is|it'?s) (abhi|you)|no way (this is|it'?s) (abhi|you)|from back in the day/i, [
+      "yooooo, it's been a minute! if we know each other, I'd genuinely love to catch up. AI_NAME can't see who's typing, so email me at EMAIL and tell me who this is 🙏",
+      "no way, hi!! that's the best kind of visitor. I'm doing a payments product job now and working on my MBA at McCombs. hit me at EMAIL, I want to hear what you've been up to.",
+      "it's really me, just with a website now 😅 let's actually catch up: EMAIL",
+    ], true],
+    [/you (changed|grew up)|you got (so )?(professional|corporate|grown|serious|old|fancy|big time)|since when (are|were|do|did) you|all grown up|corporate abhi|look at (you|u) now|glow ?up|proud of (you|u)|you made it|you'?re (so )?(grown|corporate|professional) now|big time now/i, [
+      "haha I know, look at me with a website 😭 same me though, just with more meetings. proud of you too, wherever you're at.",
+      "corporate on the outside, still the same guy on the inside. the 'yooooo' is proof.",
+      "appreciate that, seriously. it's been a journey. let's catch up properly: EMAIL",
+    ], true],
+
+    // --- close friends: the people who'll roast me for this ---
+    [/this is (so|soo|very|literally|such an?) (you|abhi|on brand|corny|extra|nerdy|nerd|dork)|(you'?re|you are|your) (so )?(corny|extra|a nerd|a dork|such a nerd|such a dork|a try ?hard|a tryhard)|you (made|built) (a )?(chat ?bot|bot|ai|website|chat|site) (of|about) yourself|(chat ?bot|bot|ai) (of|about) yourself|main character|full of yourself|self[- ]obsessed|narcissis|ego\b|you love yourself/i, [
+      "listen. I built a chat about myself so I could be in two places at once. that's not ego, that's scalability.",
+      "corny? yes. effective? also yes. you're still here.",
+      "main character energy is a lifestyle, not a choice.",
+      "say what you want, the o's bounce and I made them do that.",
+    ], true],
+    [/(screenshot|screenshotting|sending (this|it) to|posting (this|it)|showing (this|it) to|telling) (this|the group ?chat|everyone|the gc|the boys|the homies|the squad|the crew)|group ?chat|\bthe gc\b|sending this to everyone/i, [
+      "do it. tag me. the o's are ready for their close-up.",
+      "please do, I need the traffic. tell them to wait for the bounce.",
+    ], true],
+    [/(wanna|want to|tryna|trying to|let'?s|we should|when (are|can) we|you down to|down to) (hang|link|chill|kick it|get food|eat|grab food|grab drinks?|grab a drink|hoop|run it|go out|pull up|catch up|hit the|play|get dinner|get lunch|watch the game)|pull up|(are you|you) free (later|tonight|this weekend|tomorrow)|what are you doing (later|this weekend|tomorrow|after work)|you up\??$|let'?s link/i, [
+      "the real me is way better at making plans than AI_NAME. if you have my number, you know what to do. if not, EMAIL.",
+      "I'm down in spirit. AI_NAME can't check my calendar though, so text the real me.",
+      "AI_NAME doesn't make plans, it just hypes them. hit up the actual me 🫡",
+    ], true],
+    [/you owe me|pay me (back)?|where'?s my money|venmo me|spot me|lend me/i, [
+      "AI_NAME has no wallet and no memory of this alleged debt. take it up with the real me.",
+      "I work in payments, which is exactly why I know this chat can't send money 😭",
+    ], true],
+    [/^(it'?s me|guess who|this is (your|ur) (boy|girl|friend|homie|bro|bestie|best friend)|(your|ur) (boy|girl|homie|bestie|favorite (friend|person))|i'?m your (friend|boy|homie|bestie)|it'?s (your|ur) (boy|girl|homie))[\s!?.]*$/i, [
+      "I'd recognize you anywhere. AI_NAME, unfortunately, can't see who's typing. if it's who I think it is, text me 😂",
+      "oh it's YOU. probably. AI_NAME can't actually tell, but I'm choosing to be excited.",
     ], true],
 
     // --- small talk: greetings, how are you, wyd. these show the topic buttons after, to keep things moving ---
@@ -499,7 +626,8 @@
     log.scrollTop = log.scrollHeight;
     const asked = readings(text);
     const hit = INTENTS.find(([re]) => asked.some(t => re.test(t)));
-    if (hit && hit[0] === RECRUITER) recruiterMode = true;
+    if (hit && (hit[0] === RECRUITER || hit[0] === SERIOUS)) recruiterMode = true;
+    if (hit && hit[0] === PLAYFUL) recruiterMode = false;
     let reply = hit ? choose(hit[0].source, hit[1]) : choose("fallback", recruiterMode ? RECRUITER_FALLBACKS : FALLBACKS);
     if (reply === "__SURPRISE__") reply = surprise();
     setTimeout(() => { t.remove(); bot(reply, !hit || hit[2]); }, 420);
