@@ -146,7 +146,7 @@
       "money moving around the world is wildly complex and almost nobody thinks about it. making that invisible for the person on the other end is a fun problem. my path's on LINKEDIN.",
     ], true],
     // 5. behavioral / "tell me about a time". must sit above the final greeting intent (which grabs "tell me about").
-    [/tell me about a time|(an )?example of a time|(a |one )?time (when )?you (failed|messed up|disagreed|had to|made a mistake|screwed up|dropped the ball|led|influenced)|biggest (challenges?|mistakes?|failures?|regrets?|lessons?|setbacks?)|hardest (project|decision|lesson|problem you)|learn(ed)? from (a )?(failure|mistake)|how do you (handle|deal with|learn from|respond to) (failure|failing|mistakes|setbacks)|\bstar (method|format|story)/i, [
+    [/tell me about a time|(an )?example of a time|(a |one )?time (when )?you (failed|messed up|disagreed|had to|made a mistake|screwed up|dropped the ball|led|influenced)|biggest (challenges?|mistakes?|failures?|regrets?|lessons?|setbacks?)|hardest (project|decision|lesson|problem you)|learn(ed)? from (a )?(failure|mistake)|how do you (handle|deal with|learn from|respond to|take) (failure|failing|mistakes|setbacks|rejection|criticism|feedback|negative feedback)|\bstar (method|format|story)/i, [
       "good one, and it deserves a real story, not a chatbot one. ask me live. the short version of how I operate: own it fast, fix it, write down what I'd change.",
       "I've got stories, but they need more context than a chat bubble. when things go sideways I don't hide it, I find the root cause and fix forward. happy to walk through one: EMAIL",
     ], true],
@@ -409,7 +409,7 @@
       "yooooo, a fellow product person 🤝 always happy to compare notes on frameworks, roadmaps, or the eternal 'it depends'. let's connect: LINKEDIN",
       "love that. it's always good to meet people in the same space. send me a note at EMAIL or connect on LINKEDIN, and we can trade war stories.",
     ], true],
-    [/coffee( chat)?|grab (a )?(coffee|call|chat|time)|pick your brain|network(ing)?\b|informational( interview)?|mentor(ship)?|can we (chat|talk|connect|meet|hop on a call)|hop on a call|(15|20|30) min(ute)?s? (chat|call)|set up a (call|chat|time)/i, [
+    [/coffee(?! or)( chat)?|grab (a )?(coffee|call|chat|time)|pick your brain|network(ing)?\b|informational( interview)?|mentor(ship)?|can we (chat|talk|connect|meet|hop on a call)|hop on a call|(15|20|30) min(ute)?s? (chat|call)|set up a (call|chat|time)/i, [
       "always down. I like meeting people, no agenda needed. send me a note at EMAIL with a little context and we'll find a time.",
       "yes, happy to. email me at EMAIL or message me on LINKEDIN, and let's set something up.",
     ], true],
@@ -417,7 +417,7 @@
       "I'm not a hiring manager, so I can't promise anything, but I'm always happy to hear what you're looking for. send me a note at EMAIL with what you're after.",
       "I can't speak for any hiring team in here. but reach out at EMAIL with context on what you're looking for, and I'll see if I can point you somewhere useful.",
     ], true],
-    [/(i'?m|i am|also|me too|i went|i go|we both|i was) (at |to |in )?(rutgers|ru\b)|rutgers (alum|grad|fam|student)|fellow (rutgers|scarlet knight)|scarlet knights?|\bru rah rah\b|(i'?m|i am|also) (at|in|going to|starting at|applying to|in the) (mccombs|ut|the mba|an mba|business school|b-?school)|fellow (mccombs|longhorn|mba)|hook 'em|hook em/i, [
+    [/(i'?m|i am|also|me too|i went|(?<!should )i go|we both|i was) (at |to |in )?(rutgers|ru\b)|rutgers (alum|grad|fam|student)|fellow (rutgers|scarlet knight)|scarlet knights?|\bru rah rah\b|(i'?m|i am|also) (at|in|going to|starting at|applying to|in the) (mccombs|ut|the mba|an mba|business school|b-?school)|fellow (mccombs|longhorn|mba)|hook 'em|hook em/i, [
       "no way, love to meet a fellow alum 🙌 always happy to connect: LINKEDIN",
       "small world. we should definitely connect. shoot me a note at EMAIL or find me on LINKEDIN.",
     ], true],
@@ -605,6 +605,136 @@
       "probably dosa. if not dosa, thinking about dosa.",
       "a Chick-fil-A spicy chicken sandwich if the day went right. Arizona green tea regardless.",
       "whatever it is, it's not a dosa, so it's a downgrade.",
+    ], true],
+    // --- round 3: what the site is for, side work, background, this-or-that, life moments, off-limits topics ---
+    [/what is this (site |website |page |chat )?for|who is this (site |website |page |chat )?for|why would i use this|what'?s the purpose|purpose of (this|the) (site|website|page|chat)/i, [
+      "it's me, in website form. a little personality, a little substance, and a direct line if you want to talk: EMAIL",
+      "think of it as a handshake before the handshake. you get a feel for who I am, then we talk for real.",
+    ], true],
+    [/(is|are) (abhi|he|you) (hiring|looking for (people|candidates|interns))|are you a recruiter|(do|does) (you|he|abhi) recruit/i, [
+      "nope, no recruiting happening here. just my corner of the internet. I'm a product manager in payments: LINKEDIN",
+      "not hiring anyone through a chatbot, sadly. but if you're building something cool, I'd love to hear about it: EMAIL",
+    ], true],
+    [/freelanc|consult(ing|ant)?\b|side (gig|work|project for me)|(can|could|would) you (build|make|design) (me|us) (a |an )?(site|website|app|logo|one)|can you make me one|how much (do|would) you charge|(your|what are your) rates?\b|hire you (for|to build)/i, [
+      "I'm not running a web shop out of my chat 😄 but if you've got something interesting, tell me about it: EMAIL",
+      "this one was a labor of love, not a service. that said, I'm always curious about cool projects: EMAIL",
+    ], true],
+    [/where (did|do) you grow up|where (were|are) you (raised|born)|grew up where|where'?s home/i, [
+      "honestly? the internet raised me 😄 these days I'm between NJ/NYC and Austin, TX.",
+      "I'm a kid of the smartphone era, which is the real answer. location-wise, I'm between NJ/NYC and Austin these days.",
+    ], true],
+    [/(are|r) you (indian|desi|south indian|brown|asian)|what'?s your (ethnicity|background|heritage|culture|nationality)|where (are|is) your (family|parents) from|what are you\??$/i, [
+      "South Indian, which is why I have strong opinions about dosa 🙂",
+      "South Indian roots. ask me about dosa and you'll see how serious I am about it.",
+    ], true],
+    [/(are|r) you (american|a citizen|a us citizen)|citizenship|green card|\bh-?1b\b/i, [
+      "logistics like that are best handled directly: EMAIL",
+    ], true],
+    [/what does (abhiram|abhi|your name) mean|meaning of (abhiram|your name)|is abhi short for|short for (something|abhiram)|what'?s your (last|full|first) name|last name/i, [
+      "Abhiram Kolal. Abhi is short for Abhiram, which roughly means 'delightful' in Sanskrit. I'm trying to live up to it.",
+      "full name's Abhiram Kolal. most people call me Abhi. the name roughly means 'delightful', no pressure or anything.",
+    ], true],
+    [/^(nj|new jersey|jersey) or (ny|nyc|new york)|^(ny|nyc|new york) or (nj|new jersey|jersey)|^(austin|texas) or (nyc|new york|ny|nj|jersey)|^(nyc|new york|ny|nj|jersey) or (austin|texas)|(do|did) you like (texas|austin|new york|nyc|ny|nj|new jersey|jersey)|what do you think (of|about) (austin|texas|new york|nyc|nj|new jersey|jersey)|(austin|texas|nyc|new york|jersey) (vs|versus) /i, [
+      "I like them both. that's the whole answer, and I'm sticking to it.",
+      "NJ/NYC and Austin are both home base for me, and I like them both. diplomatic? yes. true? also yes.",
+    ], true],
+    [/best (restaurant|food|pizza|bagel|tacos?|bbq|burger|spot|place to eat)s? (in|near)|where should i eat|food recs? (in|for)|(jersey|nj|ny|new york) pizza (or|vs)|best bagel/i, [
+      "AI_NAME doesn't do city restaurant guides, but the real me definitely has opinions. ask me in person: EMAIL",
+      "that's a whole conversation, and I take it seriously. for now: if there's a dosa spot nearby, start there.",
+    ], true],
+    [/introvert or extrovert|extrovert or introvert|(are|r) you (an )?(introvert|extrovert)|social butterfly/i, [
+      "extrovert. friendly, outgoing, will talk to anyone in the room.",
+      "extrovert, easily. I like people, which is a big part of why I like product.",
+    ], true],
+    [/morning person|night owl|early bird|(do|when do) you (sleep|wake up)/i, [
+      "night owl, judging by how many YouTube documentaries I start at 1am.",
+      "I'd say night owl. the 1am documentary habit gives it away.",
+    ], true],
+    [/^(dogs?|cats?|coffee|tea|pancakes|waffles|beach|mountains|summer|winter|iphone|android|mac|pc|marvel|dc) or (dogs?|cats?|coffee|tea|pancakes|waffles|beach|mountains|summer|winter|iphone|android|mac|pc|marvel|dc)\??$|this or that|would you rather/i, [
+      "AI_NAME refuses to pick sides without me in the room. ask the real me: EMAIL",
+      "that's a debate for a real conversation. come with arguments.",
+    ], true],
+    [/what'?s your (sign|zodiac|mbti|personality type|enneagram)|myers[- ]briggs|\bmbti\b|what sign are you/i, [
+      "my personality type is 'friendly, outgoing, curious'. that's all the test I need.",
+      "I don't do signs, I do vibes. the vibe is: easy to work with, good to be around.",
+    ], true],
+    [/favou?rite (color|colour|book|podcast|author|game|video ?game|app)|what are you reading|what (books?|podcasts?) (do you|are you)/i, [
+      "honestly, my 'podcasts' are random YouTube documentaries at 1am. ask me about shows, anime or music, that's where I go deep.",
+      "that one's still loading. ask me about shows, movies, anime or music instead, I've got lists.",
+    ], true],
+
+    // life moments: be kind, keep it light
+    [/^(i'?m|im|i am|feeling) (so |really |kinda |a bit )?(sad|down|stressed|tired|anxious|having a bad day|not okay|lonely)|bad day|cheer me up|say something nice|give me a compliment|need (a )?(pick me up|motivation|compliment)/i, [
+      "sending good vibes your way 🫶 you took a minute to check out a stranger's website, which already says you're curious. that's a good trait.",
+      "here's your compliment: you have great taste in websites. and whatever today is, it's one day, not the whole story.",
+      "rough days happen. hope this one turns around. and if it helps, the o's are about to do their thing in a few seconds.",
+    ], true],
+    [/(got|get|just got) rejected|didn'?t get the (job|offer|role)|got laid off|lost my job/i, [
+      "that stings, and it happens to almost everyone at some point. it's a data point, not a verdict. keep going.",
+      "sorry, that's rough. the right fit tends to show up after a few wrong ones. rooting for you.",
+    ], true],
+    [/(i )?(just )?(got|landed|accepted) (a|the|my first) (job|offer|internship|role)|got into (college|grad school|business school|an mba|rutgers|mccombs)|i got in\b|i graduated/i, [
+      "LET'S GO 🎉 congrats, seriously. that's huge.",
+      "congrats!! that's a real W. enjoy it.",
+    ], true],
+    [/^(i'?m|im|i am) (a |an |in )?(student|high school|college|undergrad|freshman|sophomore|junior|senior|grad student|mba student|intern)/i, [
+      "love that. ask me anything: school, product, how to get into tech, whatever's useful.",
+      "welcome! I was there not that long ago. ask away 👇",
+    ], true],
+    [/what should i major in|(best|what) major|should i (study|major in)/i, [
+      "honestly, pick what keeps you curious. a lot of great product people came from totally different majors. the skill that matters most is learning fast.",
+    ], true],
+    [/(is|was) rutgers (good|worth it|fun|nice|a good school)|should i go to rutgers|how was rutgers|(thoughts|opinion) on rutgers|did you like rutgers/i, [
+      "Rutgers was good to me. big school, tons of people, and you get out of it what you put in.",
+      "I'd do it again. it's a place where you can find your people and figure things out.",
+    ], true],
+    [/(is|was) (mccombs|ut|the mba) (good|worth it|hard|fun)|how('?s| is) (the )?mba( going)?|how do you like (the mba|mccombs)|should i go to mccombs/i, [
+      "I'm biased, but McCombs is great. learning a ton and meeting really sharp people.",
+      "so far, so good. it's sharpening the business side, and the people make it.",
+    ], true],
+    [/(what'?s|what is) your gpa|\bgpa\b|what grades/i, [
+      "a respectable number. the transcript stays between me and Rutgers 😄",
+    ], true],
+    [/what (was|is) your major|what did you major in/i, [
+      "the full education details are on LINKEDIN. short version: Rutgers '21, McCombs MBA '28 in progress.",
+    ], true],
+    [/typical day|day to day|day in the life|what (does|do) (a )?(normal|regular) day look like/i, [
+      "a lot of conversations, a lot of docs, and a lot of turning complicated things into simple ones. happy to give the real version over coffee: EMAIL",
+      "talk to people, figure out the problem, get everyone pointed the same way, repeat. it's more fun than it sounds.",
+    ], true],
+    [/what('?s| is) fintech|define fintech/i, [
+      "fintech is technology that makes money stuff easier: paying, sending, borrowing, saving. if you've used a payment app, you've used fintech.",
+    ], true],
+    [/(think|thoughts|opinion|take) (about|on|of) (bitcoin|crypto|btc|ethereum|nfts?)|is (bitcoin|crypto) (a scam|real|dead|the future|worth it)|should i (buy|invest in) (bitcoin|crypto)/i, [
+      "interesting tech, wild market. definitely not financial advice, and AI_NAME is definitely not a financial advisor.",
+      "I find the tech genuinely interesting. investing advice though? not from a chatbot, and not from me either.",
+    ], true],
+    [/future of (payments|money|fintech|banking)|where (are|is) payments (going|headed)/i, [
+      "short version: money moving faster, more invisibly, and with a lot more context attached. the fun part is making it feel simple for people. happy to go deeper live: EMAIL",
+    ], true],
+    [/(you|u) seem (cool|nice|chill|fun|great|smart|awesome)|i like (you|this guy|abhi)|(wanna|want to|can we|could we) be friends|be my friend/i, [
+      "appreciate that 🙏 the feeling is mutual. well, AI_NAME's feeling. the real me would say the same though.",
+      "honestly that's the nicest thing a website visitor has said to me today. let's connect: LINKEDIN",
+    ], true],
+    [/made my day|you made me (smile|laugh)|this is (so )?(wholesome|cute|sweet)/i, [
+      "that genuinely made MY day. thanks for saying that 🙏",
+      "mission accomplished. the o's are blushing.",
+    ], true],
+    [/^(good ?night|gn|night night|sleep well|happy (friday|monday|weekend|holidays|new year|thanksgiving|diwali)|merry christmas|happy hanukkah|happy eid|have a good (day|night|one|weekend))[\s!.]*$/i, [
+      "right back at you! 🙌 thanks for stopping by.",
+      "appreciate it, you too ✌️",
+    ], true],
+    [/^happy (birthday|bday)/i, [
+      "appreciate the energy! whether or not it's today, I'll take it 🎂",
+    ], true],
+    [/vot(e|ing) for|politic|democrat|republican|liberal|conservative|trump|biden|harris|election/i, [
+      "I keep politics off my website. ask me about payments, product or anime instead, I'll go all day.",
+    ], true],
+    [/religio|(do|are) you (believe in god|pray|hindu|muslim|christian|atheist)|what'?s your faith/i, [
+      "that's a personal one I keep off the website 🙂 ask me about something else, I'm an open book on most things.",
+    ], true],
+    [/(do|did) you (drink|smoke|vape|get high|party)|\b(weed|alcohol|beer)\b/i, [
+      "keeping this one PG and professional 🙂 ask me about my favorite shows instead.",
     ], true],
     // --- small talk: greetings, how are you, wyd. these show the topic buttons after, to keep things moving ---
     [/^(hey |hi |yo |hello )?(what are you doing|what you doing|what are you up to|what you up to)( right now| today| tonight)?( abhi| bro| man| dude| fam)?[\s!?.]*$/i, [
