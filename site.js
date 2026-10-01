@@ -17,17 +17,20 @@
     "what's a PM's favorite plant? the roadmap. it never stops growing.",
   ];
   const FUN_FACTS = [
-    "fun fact: the first general-purpose charge card, Diners Club, launched in 1950 after a guy forgot his wallet at dinner (or so the legend goes).",
-    "fun fact: the first ATM opened in London in 1967. it took paper vouchers, not cards.",
-    "fun fact: the last digit of your card number is a checksum from the Luhn algorithm, created by IBM scientist Hans Peter Luhn in the 1950s. it catches most typos.",
-    "fun fact: SWIFT, the network banks use to message each other about cross-border payments, was founded in 1973.",
-    "fun fact: the US Federal Reserve launched FedNow, its instant payments service, in July 2023. checks are still hanging on though.",
-    "fun fact: a card tap usually gets approved in under two seconds, but the money actually moves (settles) later, often the next business day.",
-    "fun fact: ISO 20022, the data standard modern payments are moving to, was first published in 2004. payments move slow. the standards move slower.",
-    "fun fact: the first product ever scanned with a barcode at a checkout was a pack of Wrigley's gum, in Ohio, in 1974.",
-    "fun fact: QR codes were invented in 1994 by Denso Wave to track car parts. now they're how we read restaurant menus.",
-    "fun fact: Apple Pay and Google Pay don't send your real card number to the store. they send a stand-in 'token', so a hacked register can't leak it.",
-    "fun fact: the US got its first big real-time payments network, RTP from The Clearing House, in 2017, years after countries like the UK.",
+    "fun fact: Akira Toriyama based Goku on Sun Wukong, the Monkey King from Journey to the West. hence the tail.",
+    "fun fact: Cowboy Bebop's whole soundtrack came from Yoko Kanno and her band, the Seatbelts. that intro still goes hard.",
+    "fun fact: Samurai Champloo's soundtrack features Nujabes, one of the biggest influences on lo-fi hip hop.",
+    "fun fact: Nintendo was founded in 1889. it started out making playing cards.",
+    "fun fact: 'karate' means 'empty hand' in Japanese. I have a 2nd degree black belt, so I can confirm: hands, empty.",
+    "fun fact: the saxophone was invented by Adolphe Sax in the 1840s. yes, he named it after himself. iconic.",
+    "fun fact: Stevie Wonder signed with Motown when he was 11.",
+    "fun fact: Wu-Tang Clan made exactly one copy of the album 'Once Upon a Time in Shaolin'.",
+    "fun fact: Tame Impala is basically one guy, Kevin Parker, writing, playing and producing almost everything.",
+    "fun fact: the Spurs have landed two franchise-changing #1 picks: Tim Duncan in 1997 and Victor Wembanyama in 2023.",
+    "fun fact: the first text message ever sent, in 1992, just said 'Merry Christmas'.",
+    "fun fact: the first YouTube video, 'Me at the zoo', is 19 seconds long and went up in 2005.",
+    "fun fact: QR codes were invented in 1994 to track car parts. now they're how we read restaurant menus.",
+    "fun fact: the first credit-style card, Diners Club, started in 1950 after a guy forgot his wallet at dinner (or so the legend goes).",
   ];
   // first match wins. each intent has a few answers so repeat questions don't get the same line twice.
   // answers are fixed html; typed text is only ever shown via textContent.
@@ -74,7 +77,6 @@
   ];
   // "surprise me" leans professional: ~70% career + payments/product insight, ~30% fun. recruiters only get the professional side.
   const PRO_SURPRISES = [
-    ...FUN_FACTS,
     "career fact: I'm a product manager in payments. the whole job is making money move faster, safer, and with fewer headaches.",
     "career fact: I'm getting my MBA at UT McCombs, class of '28. Rutgers '21 before that.",
     "career fact: I built this entire site with no real coding background. learning fast is kind of my thing.",
@@ -86,12 +88,10 @@
     "product take: a metric without a decision attached to it is just trivia.",
     "product take: 'it depends' is a valid answer, as long as you say what it depends on.",
     "payments insight: most 'instant' card payments are only instantly approved. the money itself settles later.",
-    "payments insight: richer payment data (hello, ISO 20022) means better fraud screening and fewer payments stuck in manual review.",
-    "payments insight: the hardest part of moving money across borders usually isn't the tech. it's the chain of banks, FX and compliance checks in between.",
     `want the full professional story? it's all on ${LINKEDIN}.`,
-    "try asking me 'how do card payments work' or 'what does a PM do'. I've got opinions.",
+    "try asking me 'what should I know about you' or 'what makes you different'. I've got answers.",
   ];
-  const FUN_SURPRISES = () => [...JOKES, ...ME_FACTS, ...RECS];
+  const FUN_SURPRISES = () => [...JOKES, ...FUN_FACTS, ...ME_FACTS, ...RECS];
   function surprise() {
     const pro = recruiterMode || Math.random() < 0.7;
     return pro ? choose("surprise-pro", PRO_SURPRISES) : choose("surprise-fun", FUN_SURPRISES());
