@@ -217,6 +217,7 @@
       "FIRST:real answer: I grew up right as the internet and smartphones took off. my generation learned tech by living in it, and that's part of who I am. so this site celebrates it instead of hiding it. but look around: it's clean, the answers are real, and the work is serious. fun and professional aren't opposites.",
       "fair question. the résumé is professional. the website is me. both are true. the 'yooooo' stays.",
       "professional doesn't have to mean boring. the experience, the MBA and the payments stuff are all real. the 'yooooo' is just the cover letter.",
+      "the 'yooooo' is a culture-fit test. you're still here, so you passed.",
       "you caught me. LinkedIn is where I wear the suit, this is where I wear the sneakers. both are below 👇 LINKEDIN",
       "I'm professional where it counts: shipping, communicating, delivering. greetings are where I let loose.",
     ], true],
