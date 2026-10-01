@@ -113,6 +113,16 @@
       "oh hey, thanks for reaching out 🙏 here's the quick version:<ul><li><b>role:</b> product manager in payments</li><li><b>superpower:</b> I learn fast and adapt fast. no real coding background, and I still built this whole site myself</li><li><b>education:</b> Rutgers '21, UT McCombs MBA '28 (in progress)</li><li><b>based:</b> NJ/NYC and Austin, TX</li><li><b>vibe:</b> friendly, outgoing, easy to work with</li></ul>best next step: email me at EMAIL or connect on LINKEDIN. happy to chat.",
       "appreciate you stopping by. I'll keep it straight: I'm a payments product manager who ramps up fast on anything new (case in point: I built this site with no real coding background). Rutgers '21, McCombs MBA '28 in progress, based between NJ/NYC and Austin. let's talk: EMAIL · LINKEDIN",
     ], true],
+    // people calling out the vibe: "why is this professional site saying yooooo"
+    [/(why|how come)\b.*\b(yo|casual|unprofessional|informal|slang|lowercase|chill)\b|supposed to be (a )?professional|(not|isn'?t|un|very un)( very| that| really| super| exactly)? ?professional|so (casual|informal|chill)|professional\b.*\byo\b|\byo\b.*\bprofessional/i, [
+      "fair question. the résumé is professional. the website is me. both are true. the 'yooooo' stays.",
+      "professional doesn't have to mean boring. the experience, the MBA and the payments stuff are all real. the 'yooooo' is just the cover letter.",
+      "you caught me. LinkedIn is where I wear the suit, this is where I wear the sneakers. both are below 👇 LINKEDIN",
+      "the 'yooooo' is a culture-fit test. you're still here, so you passed.",
+      "I'm professional where it counts: shipping, communicating, delivering. greetings are where I let loose.",
+      "would 'Greetings, valued visitor' have been better? exactly. yooooo it is.",
+    ], true],
+
     // --- small talk: greetings, how are you, wyd. these show the topic buttons after, to keep things moving ---
     [/^(hey |hi |yo |hello )?(what are you doing|what you doing|what are you up to|what you up to)( right now| today| tonight)?( abhi| bro| man| dude| fam)?[\s!?.]*$/i, [
       "chillin. probably answering emails or watching the o's bounce on my own website for way too long. you?",
