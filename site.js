@@ -35,7 +35,8 @@
       "honestly? working, reading for the MBA, or looking at sneakers I don't need. what's up with you?",
       "just vibing. what do you wanna know about me?",
     ], true],
-    [/^(hey |hi |yo |hello )?(how are you|how are you doing|how you doing|how('s| is) it going|how have you been|how('s| is) life|how are things|how about you|what's good|what's up|sup|wassup|what's poppin|what's new)( (abhi|bro|man|dude|g|fam|there))?[\s!?.]*$/i, [
+    // any short message built around 'how are you' / 'what's up', wherever it sits in the sentence
+    [/^(?=.{0,48}$).*\b(how (are|r) (you|ya)|how (you|ya) (doing|doin|been)|how (have|has) (you|life|things) been|how('s| is| was) (it going|life|everything|things|your (day|week|weekend|morning|night|evening))|how('s| is) (your|the) (day|week|weekend) going|how about you|what's good(?! with (your|his|the))|what's up(?! with (your|his|the))|wassup|^sup\b|what's poppin|what's new(?! with (your|his|the)))/i, [
       "yooooo! I'm good, appreciate you asking 🙏 what do you wanna know?",
       "all good over here. thanks for stopping by my little corner of the internet. ask me anything 👇",
       "chillin, can't complain. what's good with you?",
