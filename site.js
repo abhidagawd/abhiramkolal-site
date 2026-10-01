@@ -34,6 +34,44 @@
   // voice: this is abhi talking. "you" in a question means abhi. the bot only shows up as
   // "Abhi Intelligence (AI)" when the question is really about the chat itself.
   // the playful ones up top catch the weird stuff before the normal intents can grab a keyword.
+  // --- abhi's taste: shared by the topic answers and "surprise me" ---
+  const ul = items => "<ul>" + items.map(i => `<li>${i}</li>`).join("") + "</ul>";
+  const pickOne = list => list[Math.random() * list.length | 0];
+  const SHOWS = ["Breaking Bad", "Better Call Saul", "The Wire", "Snowfall", "the Marvel universe", "The Fresh Prince of Bel-Air",
+    "Abbott Elementary", "Atlanta", "Impractical Jokers", "Shrinking", "Community", "Black Mirror", "The Boondocks",
+    "Game of Thrones", "Severance", "Suits"];
+  const MOVIES = ["Boyz n the Hood", "Friday", "The Dark Knight", "Superbad", "Tropic Thunder", "The Raid: Redemption", "Bullet Train"];
+  const ANIME = ["Naruto", "Dragon Ball Z", "Samurai Champloo", "Attack on Titan", "Jujutsu Kaisen", "Akira", "Cowboy Bebop"];
+  const MUSIC = {
+    "classic rock and the greats I grew up on": ["Pink Floyd", "Led Zeppelin", "Queen", "Santana", "Nirvana", "Rage Against the Machine", "Slayer", "Stevie Wonder", "Michael Jackson"],
+    "2000s kid essentials": ["Linkin Park", "N.E.R.D", "Incubus", "Green Day"],
+    "hip hop": ["A Tribe Called Quest", "Wu-Tang Clan", "Kendrick Lamar", "Lupe Fiasco", "J. Cole", "Drake", "Baby Keem", "Kanye West", "Travis Scott", "Mac Miller"],
+    "R&B and the new wave": ["The Weeknd", "SZA", "The Internet", "Hiatus Kaiyote", "Kokoroko", "Tame Impala", "Toro y Moi", "KAYTRANADA"],
+  };
+  const ARTISTS = Object.values(MUSIC).flat();
+  const FOODS = ["dosa (I'm South Indian, so this is non-negotiable)", "biryani", "chicken tikka", "pizza", "tacos", "jerk chicken",
+    "Thai red curry", "a Chick-fil-A spicy chicken sandwich", "a bacon, egg and cheese", "boba", "Arizona green tea"];
+  const CUISINES = ["Indian", "Mexican", "Thai", "Italian", "Caribbean"];
+  const ME_FACTS = [
+    "fact about me: I have a 2nd degree black belt in karate. very friendly though, I promise.",
+    "fact about me: I played saxophone all through childhood.",
+    "fact about me: I'm South Indian, which means I have strong opinions about dosa.",
+    "fact about me: I will happily disappear into a random YouTube documentary at 1am.",
+    "fact about me: my playlist goes Pink Floyd → Wu-Tang → Hiatus Kaiyote → Stevie Wonder with no skips.",
+    "fact about me: I'm trying to get better at cooking. emphasis on trying.",
+    "fact about me: Arizona green tea is basically a personality trait at this point.",
+    "fact about me: I played basketball and baseball as a kid. key word: played. not dominated.",
+    "fact about me: Spurs fan and Giants fan. yes, I've accepted the emotional cost.",
+    "fact about me: I'm into cars and driving. a good drive with a good playlist fixes most things.",
+    "fact about me: I dabble in graphic design, which is why this site has a vibe.",
+  ];
+  const RECS = [
+    ...SHOWS.map(s => `show rec: ${s}. trust me.`),
+    ...MOVIES.map(m => `movie rec: ${m}. tonight. no excuses.`),
+    ...ANIME.map(a => `anime rec: ${a}. thank me later.`),
+    ...ARTISTS.map(a => `music rec: go put on some ${a}.`),
+    ...FOODS.map(f => `food rec: ${f}. you're welcome.`),
+  ];
   const AI = "Abhi Intelligence (AI)";
   // recruiter mode: once someone says they're hiring, skip the bits and lead with the pitch + contact
   const RECRUITER = /\b(i'?m|i am|we'?re|we are) (a |an )?(recruiter|recruiting|hiring|in talent|from talent)|\brecruiter here\b|hiring manager|talent (acquisition|partner)|(open|available) (role|position)|job (opening|opportunity)|reach(ing)? out about (a |an )?(role|position|job|opportunity)|interested in (you|him|hiring)|are you open to|(you|he) (be )?interested in a (role|job|position)/i;
@@ -171,7 +209,7 @@
       "whoa. keep it PG, this is a professional website (mostly).",
       "language! the o's are watching.",
     ]],
-    [/1 ?v ?1|one on one|can (he|you) (dunk|hoop|ball)|(is he|are you) (good|nice) at basketball|hooper|buckets|lebron|jordan|curry/i, [
+    [/1 ?v ?1|one on one|can (he|you) (dunk|hoop|ball)|(is he|are you) (good|nice) at basketball|hooper|buckets|lebron|jordan|steph curry/i, [
       "I'll take that 1v1. results not guaranteed.",
       "I hoop. whether I hoop well depends on who you ask and what day it is.",
     ]],
@@ -181,9 +219,46 @@
       "I built a website with escaping vowels and a chat about myself. draw your own conclusions.",
       "friendly, outgoing, and I pick things up fast. so yes, I'd say pretty cool.",
     ]],
+    // --- my taste: shows, movies, anime, music, food, sports, and the random stuff ---
+    [/fact about (you|him)|something (about|random about) (you|him)|tell me something (i don'?t know|random|about you)|random fact|fun facts? about (you|him)/i, ME_FACTS],
+    [/\bshows?\b.*\b(watch|like|favou?rite|recommend|rec)\b|\b(watch|like|favou?rite|recommend|rec)\b.*\bshows?\b|tv show|\bseries\b|binge|netflix|\bhbo\b|what (should i|do you|to) watch|currently watching|breaking bad|better call saul|the wire\b(?! transfer)|severance|game of thrones|snowfall|abbott|boondocks|black mirror|\bsuits\b|community|fresh prince|impractical jokers|shrinking|\batlanta\b/i, [
+      `shows I'd put you on:${ul(SHOWS)}`,
+      `if you only watch one show this month, make it ${pickOne(SHOWS)}. the full list:${ul(SHOWS)}`,
+      `my TV résumé is stacked:${ul(SHOWS)}want a movie instead? ask me about movies.`,
+    ]],
+    [/movies?|films?|cinema|dark knight|superbad|tropic thunder|bullet train|the raid|boyz n|\bfriday\b.*(movie|film|ice cube)/i, [
+      `movies I'll always rewatch:${ul(MOVIES)}`,
+      `my movie night lineup:${ul(MOVIES)}if you haven't seen The Raid, fix that immediately.`,
+    ]],
+    [/anime|manga|naruto|\bdbz\b|dragon ?ball|samurai champloo|attack on titan|\baot\b|jujutsu|\bjjk\b|\bakira\b|cowboy bebop|nintendo|video ?games?|gaming|\bgamer\b|zelda|mario|smash bros/i, [
+      `anime that shaped me:${ul(ANIME)}and on the games side, Nintendo forever.`,
+      `if you're new to anime, start with Cowboy Bebop or Samurai Champloo. then the full list:${ul(ANIME)}plus a lifelong Nintendo habit.`,
+    ]],
+    [/what (kind of |type of |sort of )?music|music taste|taste in music|favou?rite (artists?|rappers?|bands?|albums?|songs?|singers?|music|genres?)|who do you listen to|what do you listen to|listening to|playlist|genres?|hip ?hop|\br&b\b|\brnb\b|classic rock|kendrick|wu[- ]tang|pink floyd|led zeppelin|stevie wonder|michael jackson|drake|j\.? ?cole|\bsza\b|tame impala|kaytranada|mac miller|tribe called quest|linkin park/i, [
+      "my music taste is all over the place, in the best way:" + Object.entries(MUSIC).map(([lane, names]) => `<br><b>${lane}</b>: ${names.join(", ")}`).join("") + "<br>I can go deep on any of these.",
+      `I'll go from Pink Floyd to Wu-Tang to Hiatus Kaiyote in one sitting. right now? probably some ${pickOne(ARTISTS)}. ask me about a genre and I'll go deeper.`,
+    ]],
+    [/favou?rite (food|meal|dish|snack|drink|restaurant|cuisine)|what (do you|you) (like to )?eat|\bcuisine\b|\bhungry\b|\bfood\b|dosa|biryani|tikka|pizza|tacos?|\bboba\b|arizona|chick[- ]fil[- ]a|jerk chicken|curry|bacon,? egg|\bcook(ing)?\b|south indian/i, [
+      `I'm South Indian, so dosa and that whole world is home base. beyond that:${ul(FOODS)}cuisine-wise, ${CUISINES.join(", ")} are all sooooo good. also trying to get better at cooking (emphasis on trying).`,
+      `food is a core value. top picks:${ul(FOODS.slice(0, 7))}and I'll never turn down ${CUISINES.join(", ")} food.`,
+    ]],
+    [/karate|martial arts?|black ?belt|kung fu|taekwondo|can (you|he) fight|self defen[cs]e/i, [
+      "2nd degree black belt in karate, after a lot of years of it. I'm very friendly though. very.",
+      "I did karate for years and made it to a 2nd degree black belt. don't worry, I mostly use it to break down product requirements now.",
+    ]],
+    [/saxophone|\bsax\b|instruments?|play (an |any )?instrument|marching band|band kid/i, [
+      "I played saxophone all through childhood. somewhere out there is a middle school concert recording I hope never resurfaces.",
+      "saxophone, my whole childhood. it's probably why my music taste goes so deep.",
+    ]],
+    [/sports?|\bnba\b|\bnfl\b|fantasy( football)?|football|baseball|favou?rite (team|player)|what teams|teams (do|you) |root(ing)? for|who do you (support|rep)|spurs|giants|wemby|wembanyama/i, [
+      "sports-wise:<ul><li><b>NBA:</b> Spurs fan</li><li><b>NFL:</b> NY Giants fan</li><li><b>fantasy football:</b> yes, every season</li><li><b>growing up:</b> played basketball and baseball. not the best, but I had fun</li></ul>",
+      "Spurs in the NBA, Giants in the NFL, fantasy football every season. as a Giants fan, I've learned patience. as a fantasy player, I've learned none.",
+    ]],
+    [/\bcars?\b|driving|road trip|graphic design|documentar|youtube rabbit hole|entertainment/i, [
+      "a few more things I'm into:<ul><li>cars and driving (a good drive with a good playlist fixes most things)</li><li>graphic design</li><li>random YouTube documentaries at 1am</li><li>entertainment in general: TV, movies, anime, music, all of it</li></ul>",
+    ]],
     [/favou?rite|best (song|food|shoe|sneaker|team|movie|place)|top (5|five|3|three)\b(?! reasons)/i, [
-      "too many favorites to fit in a chat bubble. ask me directly: EMAIL",
-      "I haven't loaded my favorites into AI_NAME yet, and it refuses to make stuff up.",
+      "favorites depend on the category:<ul><li>shows: Breaking Bad, The Wire, Severance…</li><li>movies: The Dark Knight, Superbad, Bullet Train…</li><li>anime: Cowboy Bebop, Naruto, JJK…</li><li>music: way too much, ask me</li><li>food: dosa, always</li><li>teams: Spurs and Giants</li></ul>ask about any of them and I'll go deeper.",
     ]],
     [/meaning of life|why are we here|what is love|is the earth flat|aliens|simulation/i, [
       "42. also, good product sense.",
@@ -211,7 +286,7 @@
     [/^(help|menu|options|commands)\b|what can (you|i) (do|ask)|what should i ask/i, [
       "here's what you can ask me:<ul><li>my experience, school and MBA</li><li>hobbies (there are many)</li><li>how to reach me</li><li>payments and product explainers (try 'how do card payments work')</li><li>jokes, fun facts, and a little self-roasting</li></ul>",
     ]],
-    [/surprise me|random|bored|entertain me/i, [...JOKES, ...FUN_FACTS]],
+    [/surprise me|random|bored|entertain me/i, [...JOKES, ...FUN_FACTS, ...ME_FACTS, ...ME_FACTS, ...RECS]],
     [/fun fact|did you know|teach me|something (smart|interesting|cool)|interesting/i, FUN_FACTS],
     [/joke|make me laugh|something funny|tell me something fun/i, JOKES],
     [/why (should (i|we) )?hire|why hire|reasons to|convince me|sell me|pitch (him|me|yourself)|top (5|five) reasons|why (you|him)\b/i, [
@@ -322,9 +397,8 @@
       "product manager, payments. I'm the person asking 'but what problem are we solving' in every meeting. work history's on LINKEDIN.",
     ]],
     [/hobb|\bfun\b|music|free time|interest|weekend|basketball|hoop|nba|sneaker|shoe|food|\beat\b|restaurant|tech|travel|trip|hike|hiking|walk|friends|like to do/i, [
-      "outside of work: music (making it and listening to it), basketball, tech, food, sneakers, hanging out with friends, walks and hikes, and traveling whenever I can afford to lol.",
-      "music, basketball, tech, sneakers and good food. also walks, hikes, friends, and traveling when the budget allows.",
-      "off the clock it's music, hoops, sneakers, food, tech, hikes, and the occasional trip (budget permitting lol).",
+      "outside of work:<ul><li>music (making it and listening to it, very diverse taste)</li><li>TV, movies, anime and Nintendo</li><li>food, and trying to get better at cooking</li><li>basketball, the NBA (Spurs) and the NFL (Giants), plus fantasy football</li><li>cars and driving</li><li>graphic design and tech</li><li>sneakers</li><li>random YouTube documentaries</li><li>friends, walks, hikes, and traveling whenever I can afford to lol</li></ul>ask about any of these and I'll go deeper.",
+      "music, TV and anime, food, hoops, cars, graphic design, sneakers, YouTube documentaries, and traveling when the budget allows. also a 2nd degree black belt and a childhood of saxophone, if you want the deep cuts.",
     ]],
     [/contact|email|mail|reach|hire|connect|talk|get in touch|\bdm\b/i, [
       "best way to reach me is EMAIL, or connect on LINKEDIN.",
