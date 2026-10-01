@@ -294,10 +294,11 @@
       "totally fair reaction. short version: I'm a payments product manager, and this is my personal site, built by me, written how I actually talk. the buttons below are a good place to start 👇",
     ], true],
     [/did (ai|chat ?gpt|claude|an ai|a bot) (make|build|write|design|code) (this|the site|this site|you|it)|is (this|the site|this site|it) (made by |built by |written by )?ai\b|ai[- ]generated|(did|do) you (use|have) ai (to )?(make|build|write|code|for)|did you (actually )?(make|build|code|design) (this|it) yourself|you made this\?*$/i, [
-      "I made it. when I want to get something done, I make sure it happens.",
-      "all me. I don't really do 'someday.' when I want something done, it gets done.",
-      "yes, I made it. I had no real coding background, and it still got built. that's how I work in general: pick things up fast and make them happen.",
-      "I built it myself. the ideas, the design calls, the taste and every word in this chat are mine. when I decide something's happening, it happens.",
+      "all me. 100% handcrafted. ...lol ok I'm lying, AI def helped. let's call it a collaboration where I was the boss 😌",
+      "did AI help? maybe. did I make it happen? definitely. we'll leave it there 🤫",
+      "the ideas, the design calls, the taste and every word in this chat are mine. AI just did what it was told 😌",
+      "a magician never reveals his tricks. but if one of those tricks was AI... I'm not saying it wasn't 👀",
+      "I made it. when I want to get something done, I make sure it happens. (ok fine, AI helped. but I was the one telling it what to do.)",
     ], true],
 
     // --- the o's and compliments on the site ---
@@ -314,9 +315,10 @@
       "I tried fewer. it felt like a shrug. five felt like a real hello.",
     ], true],
     // TECH_STACK: "how did you code this", "what language is this written in", cost/time/difficulty
-    [/how did (you|he) (code|program|host|deploy|make the (o'?s|chat|animation)|build the (o'?s|chat|animation))|what (programming )?(language|languages|tech ?stack|stack|tech|tools|frameworks?)( is| was| are)? (this|it|the site|the chat) (written|built|made|coded|running)|what (programming )?(language|tech ?stack|stack|tech|tools|frameworks?) did (you|he) (use|build|code)(?! (at|for) (work|your job))|programming language|(written|built|coded|made) (in|with) (what|which)|what('s| is) (the |your )?(tech ?)?stack|is (this|it|a site like this) (hard|difficult|easy|tough) to (build|make|code)|how (hard|long|difficult) (is it|was it|did it take|would it take|does it take)( you)? to (build|make|code)|how (much|long) (does|did|would) (it|this|the site) (cost|take)( you)?( to)? ?(host|build|make|run|keep)?|(cost|price) to (host|run)|hosting|where (is|do you) (this|it|the site)? ?(host|hosted)|(are|r) you using (react|wordpress|squarespace|wix|a template|a framework)|(is|was) (this|it) (made|built) (with|on|in) (react|wordpress|squarespace|wix|a template)/i, [
+    [/^(what|which|your|the)? ?(tech ?stack|stack|tech used|framework)[\s?!.]*$|how did (you|he) (code|program|host|deploy|make the (o'?s|chat|animation)|build the (o'?s|chat|animation))|what (programming )?(language|languages|tech ?stack|stack|tech|tools|frameworks?)( is| was| are)? (this|it|the site|the chat) (written|built|made|coded|running)|what (programming )?(language|tech ?stack|stack|tech|tools|frameworks?) did (you|he) (use|build|code)(?! (at|for) (work|your job))|programming language|(written|built|coded|made) (in|with) (what|which)|what('s| is) (the |your )?(tech ?)?stack|is (this|it|a site like this) (hard|difficult|easy|tough) to (build|make|code)|how (hard|long|difficult) (is it|was it|did it take|would it take|does it take)( you)? to (build|make|code)|how (much|long) (does|did|would) (it|this|the site) (cost|take)( you)?( to)? ?(host|build|make|run|keep)?|(cost|price) to (host|run)|hosting|where (is|do you) (this|it|the site)? ?(host|hosted)|(are|r) you using (react|wordpress|squarespace|wix|a template|a framework)|(is|was) (this|it) (made|built) (with|on|in) (react|wordpress|squarespace|wix|a template)/i, [
       "when I want to get something done, I make sure it happens. that's the whole secret 😌",
       "trade secret. let's just say I'm a very skilled person lol",
+      "trade secret. (it's not that secret. AI may have been involved. the vision was all me though.)",
       "a magician never reveals his tricks. what I can tell you: when I decide something's happening, it happens.",
       "harder than it looks, easier than you'd think. the o's took the most tuning. the rest is a trade secret 😌",
       "I'd never really coded before this. it got built anyway, because when I want something done, I make sure it happens. happy to nerd out about it over coffee: EMAIL",
