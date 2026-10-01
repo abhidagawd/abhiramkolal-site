@@ -113,8 +113,14 @@
       "oh hey, thanks for reaching out 🙏 here's the quick version:<ul><li><b>role:</b> product manager in payments</li><li><b>superpower:</b> I learn fast and adapt fast. no real coding background, and I still built this whole site myself</li><li><b>education:</b> Rutgers '21, UT McCombs MBA '28 (in progress)</li><li><b>based:</b> NJ/NYC and Austin, TX</li><li><b>vibe:</b> friendly, outgoing, easy to work with</li></ul>best next step: email me at EMAIL or connect on LINKEDIN. happy to chat.",
       "appreciate you stopping by. I'll keep it straight: I'm a payments product manager who ramps up fast on anything new (case in point: I built this site with no real coding background). Rutgers '21, McCombs MBA '28 in progress, based between NJ/NYC and Austin. let's talk: EMAIL · LINKEDIN",
     ], true],
+    // why the site exists / what the idea is
+    [/why (did|would) you (make|build|create) (this|a website|this site|a chatbot|this chat)|why (does )?this (site|website) exist|what('s| is) the (point|idea|story) (of|behind) (this|the site|this site)|why the (o'?s|bouncing|chat)/i, [
+      "I'm part of the generation that grew up alongside the internet. smartphones showed up when we were kids, and we picked up every new piece of tech as it landed. that's part of my identity, so I wanted my site to feel like it: playful on the surface, serious underneath. ask me anything professional and you'll see.",
+      "two reasons: I wanted a site that actually feels like me, and I wanted to prove I could build one from scratch with no real coding background. the bouncing o's are the fun part. the payments PM, the MBA and the fast learning are the serious part. both are real.",
+    ], true],
     // people calling out the vibe: "why is this professional site saying yooooo"
     [/(why|how come)\b.*\b(yo|casual|unprofessional|informal|slang|lowercase|chill)\b|supposed to be (a )?professional|(not|isn'?t|un|very un)( very| that| really| super| exactly)? ?professional|so (casual|informal|chill)|professional\b.*\byo\b|\byo\b.*\bprofessional/i, [
+      "real answer: I grew up right as the internet and smartphones took off. my generation learned tech by living in it, and that's part of who I am. so this site celebrates it instead of hiding it. but look around: it's clean, the answers are real, and the work is serious. fun and professional aren't opposites.",
       "fair question. the résumé is professional. the website is me. both are true. the 'yooooo' stays.",
       "professional doesn't have to mean boring. the experience, the MBA and the payments stuff are all real. the 'yooooo' is just the cover letter.",
       "you caught me. LinkedIn is where I wear the suit, this is where I wear the sneakers. both are below 👇 LINKEDIN",
