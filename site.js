@@ -3,7 +3,10 @@
 (() => {
   const LINKEDIN = '<a href="https://www.linkedin.com/in/abhiram-kolal/" target="_blank" rel="noopener">LinkedIn</a>';
   const EMAIL = '<a href="mailto:abhi.kolal@gmail.com">abhi.kolal@gmail.com</a>';
-  const CHIPS = ["experience", "education", "MBA", "hobbies", "contact", "LinkedIn", "surprise me"];
+  // one pool for the topic buttons and the question-bar suggestions, so they always look alike
+  const SUGGESTIONS = ["what should I know?", "what makes you different?", "what do you do?", "what are you watching?", "favorite anime?",
+    "why the yooooo?", "why should I care?", "how did you make this?", "where are you based?", "hot take?", "surprise me",
+    "how do I reach you?", "serious mode"];
   const JOKES = [
     "why did the payment break up with the bank? it needed some space between transactions.",
     "a product manager walks into a bar. asks the bartender what problem he's actually trying to solve.",
@@ -102,7 +105,7 @@
   const AI = "Abhi Intelligence (AI)";
   // recruiter mode: once someone says they're hiring, skip the bits and lead with the pitch + contact
   const RECRUITER = /\b(i'?m|i am|we'?re|we are) (a |an )?(recruiter|recruiting|hiring|in talent|from talent)|\brecruiter here\b|hiring manager|talent (acquisition|partner)|(open|available) (role|position)|job (opening|opportunity)|reach(ing)? out about (a |an )?(role|position|job|opportunity)|interested in (you|him|hiring)|are you open to|(you|he) (be )?interested in a (role|job|position)/i;
-  const RECRUITER_CHIPS = ["why hire me", "experience", "education", "location", "contact", "LinkedIn"];
+  const RECRUITER_CHIPS = ["why should I hire you?", "what do you do?", "where did you go to school?", "where are you based?", "how do I reach you?", "LinkedIn?"];
   const SERIOUS = /\b(be|get|act|talk|go|switch to|turn on) (serious|professional|formal|normal)\b|serious mode|professional mode|formal mode|(ok|okay|alright|but)?,? ?(seriously|for real|real talk|no jokes?|no cap)( though| tho| now)?[\s?!.]*$|can you be (serious|professional|normal)|drop the (jokes|bit|act)|give it to me straight|straight answers?|less (jokes|casual|playful)/i;
   const PLAYFUL = /\b(fun|casual|playful|chill|silly) mode|be (fun|casual|playful|silly) again|back to (fun|normal|casual)|bring back the (fun|jokes|yo)|un-?serious/i;
   let recruiterMode = false;
@@ -892,7 +895,7 @@
     ]],
     // --- my taste: shows, movies, anime, music, food, sports, and the random stuff ---
     [/fact about (you|him)|something (about|random about) (you|him)|tell me something (i don'?t know|random|about you)|random fact|fun facts? about (you|him)/i, ME_FACTS],
-    [/\bshows?\b.*\b(watch|like|favou?rite|recommend|rec)\b|\b(watch|like|favou?rite|recommend|rec)\b.*\bshows?\b|tv show|\bseries\b|binge|netflix|\bhbo\b|what (should i|do you|to) watch|currently watching|breaking bad|better call saul|the wire\b(?! transfer)|severance|game of thrones|snowfall|abbott|boondocks|black mirror|\bsuits\b|community|fresh prince|impractical jokers|shrinking|\batlanta\b/i, [
+    [/what (are you|you|have you been) (watching|bingeing|binging)|watching (anything|lately|right now)|what('s| is) on your (watchlist|tv)|\bshows?\b.*\b(watch|like|favou?rite|recommend|rec)\b|\b(watch|like|favou?rite|recommend|rec)\b.*\bshows?\b|tv show|\bseries\b|binge|netflix|\bhbo\b|what (should i|do you|to) watch|currently watching|breaking bad|better call saul|the wire\b(?! transfer)|severance|game of thrones|snowfall|abbott|boondocks|black mirror|\bsuits\b|community|fresh prince|impractical jokers|shrinking|\batlanta\b/i, [
       () => `lately? ${and(sample(SHOWS, 2))}. ask me again and I'll give you a different rec.`,
       () => `if you only watch one show this month, make it ${pickOne(SHOWS)}. trust me.`,
       () => `${pickOne(SHOWS)} is always in my rotation. I've got more, but that's a coffee conversation.`,
@@ -1117,13 +1120,14 @@
 
   const chat = document.getElementById("chat"), log = document.getElementById("log"), ask = document.getElementById("ask"),
         form = document.getElementById("form"), q = document.getElementById("q");
-  let started = false;
+  let started = false, shownChips = [];
 
   function bot(html, withChips) {
     const m = document.createElement("div"); m.className = "msg bot"; m.innerHTML = html; log.appendChild(m);
     if (withChips) {
       const c = document.createElement("div"); c.className = "chips";
-      (recruiterMode ? RECRUITER_CHIPS : CHIPS).forEach(t => { const b = document.createElement("button"); b.type = "button"; b.textContent = t; b.onclick = () => send(t); c.appendChild(b); });
+      shownChips = recruiterMode ? RECRUITER_CHIPS : sample(SUGGESTIONS.filter(s => s !== q.placeholder), 5);
+      shownChips.forEach(t => { const b = document.createElement("button"); b.type = "button"; b.textContent = t; b.onclick = () => send(t); c.appendChild(b); });
       log.appendChild(c);
     }
     log.scrollTop = log.scrollHeight;
@@ -1158,9 +1162,7 @@
     if (reply === "__SURPRISE__") reply = surprise();
     setTimeout(() => { t.remove(); bot(reply, !hit || hit[2]); nextTip(); }, 420);
   }
-  const SUGGESTIONS = ["what makes you different?", "what are you watching?", "surprise me", "why the yooooo?", "what do you do?",
-    "why should I care?", "favorite anime?", "how did you make this?", "serious mode", "where are you based?", "hot take?"];
-  const nextTip = () => { q.placeholder = choose("tip", SUGGESTIONS); };
+  const nextTip = () => { const fresh = SUGGESTIONS.filter(s => !shownChips.includes(s) && s !== q.placeholder); q.placeholder = pickOne(fresh); };
   function open() {
     chat.classList.add("open"); ask.style.display = "none";
     if (!started) { started = true; bot("yooooo, it's abhi. what would you like to know about me?", true); }
