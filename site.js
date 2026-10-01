@@ -3,7 +3,25 @@
 (() => {
   const LINKEDIN = '<a href="https://www.linkedin.com/in/abhiram-kolal/" target="_blank" rel="noopener">LinkedIn</a>';
   const EMAIL = '<a href="mailto:abhi.kolal@gmail.com">abhi.kolal@gmail.com</a>';
-  const CHIPS = ["experience", "education", "MBA", "hobbies", "contact", "LinkedIn"];
+  const CHIPS = ["experience", "education", "MBA", "hobbies", "contact", "LinkedIn", "surprise me"];
+  const JOKES = [
+    "why did the payment break up with the bank? it needed some space between transactions.",
+    "a product manager walks into a bar. asks the bartender what problem he's actually trying to solve.",
+    "why don't wire transfers ever win arguments? they always need a confirmation.",
+    "how many product managers does it take to change a lightbulb? first, let's align on what 'light' means for the user.",
+    "a PM's favorite exercise? stretch goals.",
+    "why did the roadmap go to therapy? too many dependencies.",
+    "an engineer asks a PM how long it'll take. the PM says 'it depends.' that's the whole joke. that's every meeting.",
+  ];
+  const FUN_FACTS = [
+    "fun fact: the first general-purpose charge card, Diners Club, launched in 1950 after a guy forgot his wallet at dinner (or so the legend goes).",
+    "fun fact: the first ATM opened in London in 1967. it took paper vouchers, not cards.",
+    "fun fact: the last digit of your card number is a checksum from the Luhn algorithm, created by IBM scientist Hans Peter Luhn in the 1950s. it catches most typos.",
+    "fun fact: SWIFT, the network banks use to message each other about cross-border payments, was founded in 1973.",
+    "fun fact: the US Federal Reserve launched FedNow, its instant payments service, in July 2023. checks are still hanging on though.",
+    "fun fact: a card tap usually gets approved in under two seconds, but the money actually moves (settles) later, often the next business day.",
+    "fun fact: ISO 20022, the data standard modern payments are moving to, was first published in 2004. payments move slow. the standards move slower.",
+  ];
   // first match wins. each intent has a few answers so repeat questions don't get the same line twice.
   // answers are fixed html; typed text is only ever shown via textContent.
   // the playful ones up top catch the weird stuff before the normal intents can grab a keyword.
@@ -41,22 +59,22 @@
     [/roast|insult|trash talk|\bdiss\b|clown|cringe|ugly|\blame\b|\bmid\b/i, [
       "i'm contractually obligated to only say nice things. that said, he probably owns too many sneakers.",
       "roast him? he built a website where the letter o runs away from him every 15 seconds. he's roasting himself.",
+      "he says 'let's circle back' unironically. sometimes to his friends.",
+      "he has more browser tabs open than finished side projects. this website is the rare exception.",
+      "he built a chatbot so he'd never have to answer questions about himself in person. classic PM move: automate the awkward part.",
+      "his sneaker collection and his budget spreadsheet are not on speaking terms.",
+      "he'd make a slide deck about whether to make a slide deck. and it'd have an appendix.",
+      "he calls it 'user research' when he asks his friends which restaurant to go to.",
     ]],
     [/fuck|shit|bitch|\bwtf\b|\bstfu\b|asshole|dumbass/i, [
       "whoa. keep it PG, this is a professional website (mostly).",
       "language! the o's are watching.",
     ]],
-    [/joke|make me laugh|something funny|tell me something fun/i, [
-      "why did the payment break up with the bank? it needed some space between transactions.",
-      "a product manager walks into a bar. asks the bartender what problem he's actually trying to solve.",
-      "why don't wire transfers ever win arguments? they always need a confirmation.",
-      "how many product managers does it take to change a lightbulb? first, let's align on what 'light' means for the user.",
-    ]],
     [/1 ?v ?1|one on one|can he (dunk|hoop|ball)|is he (good|nice) at basketball|hooper|buckets|lebron|jordan|curry/i, [
       "he'll take that 1v1. results not guaranteed.",
       "he hoops. whether he hoops well depends on who you ask and what day it is.",
     ]],
-    [/is he (cool|funny|nice|smart|good|tall|hot|cute|a good)|should i (hire|meet|talk to|follow)|worth (it|hiring|meeting)/i, [
+    [/is he (cool|funny|nice|smart|good|tall|hot|cute|a good)|should i (meet|talk to|follow)|worth (it|hiring|meeting)/i, [
       "yooooo. you saw the o's. you tell me.",
       "the bot is biased, but yes. obviously.",
       "he built a website with escaping vowels and a chatbot about himself. draw your own conclusions.",
@@ -79,6 +97,56 @@
       "glad you're having fun. ask me anything about abhi.", "ikr.",
     ]],
 
+    [/^(help|menu|options|commands)\b|what can (you|i) (do|ask)|what should i ask/i, [
+      "here's what i'm good for:<ul><li>his experience, school and MBA</li><li>hobbies (there are many)</li><li>how to reach him</li><li>payments and product explainers (try 'how do card payments work')</li><li>jokes, fun facts, and light roasting</li></ul>",
+    ]],
+    [/surprise me|random|bored|entertain me/i, [...JOKES, ...FUN_FACTS]],
+    [/fun fact|did you know|teach me|something (smart|interesting|cool)|interesting/i, FUN_FACTS],
+    [/joke|make me laugh|something funny|tell me something fun/i, JOKES],
+    [/why (should (i|we) )?hire|reasons to|convince me|sell me|pitch (him|me)|top (5|five) reasons/i, [
+      "top 5 reasons to talk to abhi:<ol><li>payments product manager, so he speaks both engineer and business</li><li>Rutgers '21, McCombs MBA '28 in progress</li><li>he'll ask 'what problem are we solving?' before anyone writes a line of code</li><li>he built this site, the bouncing o's, and me</li><li>he answers his email: EMAIL</li></ol>",
+    ]],
+    [/what (does|do) (a |an )?(pm|product manager)s? (do|actually do)|what is (a )?product manag|what('s| is) product management/i, [
+      "a product manager figures out what to build and why. the job, roughly:<ul><li>find the real customer problem</li><li>decide what matters most (and what waits)</li><li>get engineering, design and business pointed the same way</li><li>ship, measure, learn, repeat</li></ul>abhi does this in payments. more on LINKEDIN.",
+      "PMs own the 'what' and the 'why'. engineers own the 'how'. the PM's job is to make sure the team builds the right thing, not just builds the thing right.",
+    ]],
+    [/how (do|does) (card |credit card |debit card |a card )?payments? (actually )?work|what happens when (i|you) (tap|swipe|pay)|how (do|does) (a )?card (payment|transaction)/i, [
+      "a card payment in about two seconds:<ol><li>you tap or swipe</li><li>the store's bank (the acquirer) sends the request over the card network</li><li>your bank (the issuer) checks your balance and fraud signals, then approves or declines</li><li>the approval comes back to the terminal</li><li>later, usually the next business day, the money actually moves between banks (clearing and settlement)</li></ol>",
+    ]],
+    [/iso ?20022/i, [
+      "ISO 20022 is a global standard for financial messages. it's the newer, richer way banks talk to each other about payments:<ul><li>structured data (real names, addresses, purpose of payment) instead of cramped text fields</li><li>better fraud and sanctions screening because the data is cleaner</li><li>SWIFT moved cross-border payments onto it, wrapping up the transition in November 2025</li></ul>basically: payments, but with better paperwork.",
+    ]],
+    [/cross[- ]border|international (payment|transfer|wire)s?|why (are|is) (international|overseas) (payments?|transfers?|wires?) slow/i, [
+      "why international payments are slow and pricey:<ul><li>the money often hops through several 'correspondent' banks</li><li>each hop can add fees and a delay</li><li>there's currency conversion (FX) along the way</li><li>every bank runs its own compliance and sanctions checks</li></ul>newer rails, richer data standards like ISO 20022, and stablecoins are all chipping away at it.",
+    ]],
+    [/stablecoin/i, [
+      "a stablecoin is a crypto token designed to hold a steady value, usually pegged 1:1 to a currency like the US dollar and backed by reserves. the pitch in payments: money that moves 24/7 and settles in minutes instead of days.",
+    ]],
+    [/\bach\b.*\bwire|\bwire.*\bach\b|ach vs|difference between ach/i, [
+      "ACH vs wire, quick version:<ul><li><b>ACH</b>: processed in batches, cheap or free, usually 1 to 2 business days (same-day exists). think paychecks and bill pay.</li><li><b>wire</b>: sent individually and settles fast, often same day, costs more, and is basically irreversible. think house down payments.</li></ul>",
+    ]],
+    [/framework|prioriti[sz]|\brice\b|jobs to be done|jtbd|north star metric/i, [
+      "a few product frameworks worth knowing:<ul><li><b>RICE</b>: score ideas by Reach × Impact × Confidence ÷ Effort</li><li><b>jobs to be done</b>: people don't buy a drill, they hire it to make a hole</li><li><b>north star metric</b>: the one number that best captures the value users get</li></ul>frameworks help you argue less. they don't decide for you.",
+    ]],
+    [/(get|break|transition) into (product|pm|tech)|become a (pm|product manager)|how (do|did) (i|he) get into product|career advice|any advice|tips for/i, [
+      "general advice for breaking into product:<ol><li>get close to the product you already work near (support, analytics, engineering, ops all count)</li><li>write down problems you'd fix and why. that's PM thinking</li><li>learn enough tech to ask good questions</li><li>talk to customers whenever you can</li><li>ship something, even a side project. like, say, a website with a chatbot</li></ol>for his actual path, see LINKEDIN.",
+    ]],
+    [/i love you|marry me|do you like me|are we friends|you('re| are) (cute|cool|funny|smart)/i, [
+      "the bot is flattered, but it's a static website. it can't love. it can only link to LinkedIn.",
+      "aw. i'd blush but i'm made of javascript.",
+    ]],
+    [/\bsing\b|rap for me|freestyle|beatbox/i, [
+      "la la la. that's my entire range.",
+      "the bot doesn't perform. it just answers questions about résumés, very confidently.",
+    ]],
+    [/what time|weather|temperature|news|stock price|score of/i, [
+      "no idea, i don't have windows. well, i live in browser windows, but i can't see out of them.",
+      "i only know about abhi. for everything else there's literally the rest of the internet.",
+    ]],
+    [/chatgpt|claude|gemini|better than you|smarter than you/i, [
+      "they're smarter. i'm more focused. i know one person really well.",
+      "i'm not competing with the big models. i'm a résumé with a personality.",
+    ]],
     // --- the real stuff ---
     [/linked\s*in/i, [
       "Here's his LINKEDIN.",
