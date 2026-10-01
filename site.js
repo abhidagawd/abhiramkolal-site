@@ -1158,9 +1158,8 @@
     if (reply === "__SURPRISE__") reply = surprise();
     setTimeout(() => { t.remove(); bot(reply, !hit || hit[2]); nextTip(); }, 420);
   }
-  const SUGGESTIONS = ['ask "what makes you different?"', 'ask "what are you watching?"', 'try "surprise me"',
-    'ask "why the yooooo?"', 'ask "what do you do?"', 'ask "why should I care?"', 'ask "favorite anime?"',
-    'ask "how did you make this?"', 'try "serious mode"', 'ask "where are you based?"', 'ask "hot take?"'];
+  const SUGGESTIONS = ["what makes you different?", "what are you watching?", "surprise me", "why the yooooo?", "what do you do?",
+    "why should I care?", "favorite anime?", "how did you make this?", "serious mode", "where are you based?", "hot take?"];
   const nextTip = () => { q.placeholder = choose("tip", SUGGESTIONS); };
   function open() {
     chat.classList.add("open"); ask.style.display = "none";
@@ -1171,7 +1170,7 @@
   ask.onclick = open;
   document.getElementById("close").onclick = close;
   addEventListener("keydown", e => { if (e.key === "Escape" && chat.classList.contains("open")) close(); });
-  form.onsubmit = e => { e.preventDefault(); send(q.value.trim() || (q.placeholder.match(/"(.+)"/) || [])[1] || ""); q.value = ""; };
+  form.onsubmit = e => { e.preventDefault(); send(q.value.trim() || q.placeholder); q.value = ""; };
 })();
 
 (() => {
