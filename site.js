@@ -29,6 +29,29 @@
   // the playful ones up top catch the weird stuff before the normal intents can grab a keyword.
   const AI = "Abhi Intelligence (AI)";
   const INTENTS = [
+    // --- small talk: greetings, how are you, wyd. these show the topic buttons after, to keep things moving ---
+    [/^(hey |hi |yo |hello )?(what are you doing|what you doing|what are you up to|what you up to)( right now| today| tonight)?( abhi| bro| man| dude| fam)?[\s!?.]*$/i, [
+      "chillin. probably answering emails or watching the o's bounce on my own website for way too long. you?",
+      "honestly? working, reading for the MBA, or looking at sneakers I don't need. what's up with you?",
+      "just vibing. what do you wanna know about me?",
+    ], true],
+    [/^(hey |hi |yo |hello )?(how are you|how are you doing|how you doing|how('s| is) it going|how have you been|how('s| is) life|how are things|how about you|what's good|what's up|sup|wassup|what's poppin|what's new)( (abhi|bro|man|dude|g|fam|there))?[\s!?.]*$/i, [
+      "yooooo! I'm good, appreciate you asking 🙏 what do you wanna know?",
+      "all good over here. thanks for stopping by my little corner of the internet. ask me anything 👇",
+      "chillin, can't complain. what's good with you?",
+      "not much, just watching my o's bounce around. what's up?",
+      "living the dream. the dream is a website with a chat of me in it. what's good?",
+    ], true],
+    [/^(yo|hey|hi|hiya|hello|howdy|gm|good (morning|afternoon|evening)|greetings)( (abhi|bro|man|dude|g|fam|there))?[\s!?.]*$/i, [
+      "yooooo! welcome to my little corner of the internet. what do you wanna know?",
+      "hey hey 👋 ask me anything.",
+      "yo! glad you stopped by. what's good?",
+    ], true],
+    [/^(i'm |i am |im )?(good|great|fine|not much|nothing much|chillin|chilling|vibing|same|ok|okay|alright|doing (good|well|great))( too| as well| also| thanks| thank you)?( and you| how about you)?[\s!?.]*$/i, [
+      "love that. so what do you wanna know about me?",
+      "we love to hear it. ask me anything 👇",
+    ], true],
+
     // --- questions about the chat itself: Abhi Intelligence (AI) answers ---
     [/ignore (all|previous|your)|system prompt|jailbreak|prompt injection|developer mode|\bhack/i, [
       "AI_NAME is like twelve if-statements in a trench coat. there's nothing to jailbreak, but I respect the hustle.",
@@ -211,7 +234,7 @@
       "I'm Abhi (Abhiram Kolal): product manager in payments, Rutgers '21, and an MBA candidate at UT McCombs ('28). here's my LINKEDIN.",
       "yooooo, it's Abhi. payments product manager, Rutgers '21, McCombs MBA '28. ask me anything, or peep my LINKEDIN.",
     ]],
-  ].map(([re, answers]) => [re, answers.map(a => a.replaceAll("LINKEDIN", LINKEDIN).replaceAll("EMAIL", EMAIL).replaceAll("AI_NAME", AI))]);
+  ].map(([re, answers, chips]) => [re, answers.map(a => a.replaceAll("LINKEDIN", LINKEDIN).replaceAll("EMAIL", EMAIL).replaceAll("AI_NAME", AI)), !!chips]);
   const FALLBACKS = [
     `not sure about that one. try one of these, or email me at ${EMAIL}.`,
     `that one's outside what ${AI} knows. try a button below, or ask me directly: ${EMAIL}`,
@@ -244,7 +267,7 @@
     wat: "what", wut: "what", wht: "what", whats: "what's", wats: "what's", hows: "how's", wheres: "where's", whos: "who's",
     im: "i'm", hes: "he's", youre: "you're", ure: "you're", dont: "don't", cant: "can't", doesnt: "doesn't",
     abt: "about", bc: "because", cuz: "because", pls: "please", plz: "please", rn: "right now", tysm: "thank you",
-    wyd: "what are you doing", wya: "where are you at", hbu: "how about you", wbu: "how about you", n: "and", w: "with",
+    wyd: "what are you doing", wya: "where are you at", hbu: "how about you", wbu: "how about you", n: "and", w: "with", hru: "how are you", hyd: "how you doing", wsg: "what's good", wsp: "what's up", nm: "not much", gm: "gm",
   };
   function readings(text) {
     const base = text.toLowerCase().replace(/[’‘]/g, "'").replace(/\bw\//g, "with ").replace(/\s+/g, " ").replace(/([a-z])\1{2,}/g, "$1")   // "heyyy" -> "hey"
@@ -258,7 +281,7 @@
     log.scrollTop = log.scrollHeight;
     const asked = readings(text);
     const hit = INTENTS.find(([re]) => asked.some(t => re.test(t)));
-    setTimeout(() => { t.remove(); bot(hit ? choose(hit[0].source, hit[1]) : choose("fallback", FALLBACKS), !hit); }, 420);
+    setTimeout(() => { t.remove(); bot(hit ? choose(hit[0].source, hit[1]) : choose("fallback", FALLBACKS), !hit || hit[2]); }, 420);
   }
   function open() {
     chat.classList.add("open"); ask.style.display = "none";
