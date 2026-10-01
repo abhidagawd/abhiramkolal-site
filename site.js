@@ -73,6 +73,14 @@
       "my love life is not in AI_NAME's training data 💀",
       "that's above this chat's clearance level. I can tell you I went to Rutgers though?",
     ]],
+    [/what('s| is) wrong with (you|him|abhi)|what('s| is) (your|his) (problem|deal|issue)|what('s| is) the matter with (you|him)|something wrong with (you|him)/i, [
+      "where do I even start:<ol><li>I own too many sneakers</li><li>I made the letter o run away from me. on purpose</li><li>I say 'let's circle back' to my friends</li><li>I built a chat of myself instead of just answering my texts</li></ol>none of it's a dealbreaker though.",
+      "nothing's wrong with me. it's a feature. I'll put it on the roadmap for Q3.",
+      "I filed that as a bug. status: won't fix, working as intended.",
+      "honestly? too many browser tabs, not enough sleep, and a website where the vowels escape. otherwise, flawless.",
+      "my product backlog says 'a lot, but we're prioritizing.'",
+      "Abhi Intelligence (AI) ran diagnostics. results: 98% fine, 2% sneaker addiction. no action needed.",
+    ]],
     [/roast|insult|trash talk|\bdiss\b|clown|cringe|ugly|\blame\b|\bmid\b/i, [
       "self-roast, since you asked: I probably own too many sneakers.",
       "I built a website where the letter o runs away from me every 15 seconds. I'm already roasting myself.",
@@ -236,10 +244,10 @@
     wat: "what", wut: "what", wht: "what", whats: "what's", wats: "what's", hows: "how's", wheres: "where's", whos: "who's",
     im: "i'm", hes: "he's", youre: "you're", ure: "you're", dont: "don't", cant: "can't", doesnt: "doesn't",
     abt: "about", bc: "because", cuz: "because", pls: "please", plz: "please", rn: "right now", tysm: "thank you",
-    wyd: "what are you doing", wya: "where are you at", hbu: "how about you", wbu: "how about you", n: "and",
+    wyd: "what are you doing", wya: "where are you at", hbu: "how about you", wbu: "how about you", n: "and", w: "with",
   };
   function readings(text) {
-    const base = text.toLowerCase().replace(/[’‘]/g, "'").replace(/([a-z])\1{2,}/g, "$1")   // "heyyy" -> "hey"
+    const base = text.toLowerCase().replace(/[’‘]/g, "'").replace(/\bw\//g, "with ").replace(/\s+/g, " ").replace(/([a-z])\1{2,}/g, "$1")   // "heyyy" -> "hey"
       .replace(/\b[a-z]+\b/g, w => SLANG[w] ?? w);
     return [base.replace(/\bur\b/g, "your"), base.replace(/\bur\b/g, "you're")];
   }
