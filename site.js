@@ -47,9 +47,13 @@
       "old enough to have strong opinions about sneakers, young enough to still buy them. the exact number is classified.",
       "ageless. timeless. undisclosed.",
     ]],
-    [/where (does|do) he live|address|where is he (from|based|located)|hometown|location|where('s| is) he at/i, [
-      "somewhere with good wifi and decent food. for anything real, hit his email: EMAIL",
-      "the bot doesn't do addresses. he's reachable on LINKEDIN though.",
+    [/address|street|apartment|zip ?code|exact location|where exactly/i, [
+      "the bot doesn't do addresses. NJ/NYC and Austin, TX is as specific as it gets 🙂",
+      "nice try. he's somewhere between NJ/NYC and Austin. for anything more, EMAIL",
+    ]],
+    [/where (does|do) he live|where is he (from|based|located)|hometown|location|where('s| is) he at|which city|what city|based (in|out of)/i, [
+      "He's based between NJ/NYC and Austin, TX, and likes them both.",
+      "Split between NJ/NYC and Austin, TX. He's a fan of both.",
     ]],
     [/single|dating|date him|girlfriend|boyfriend|wife|husband|married|marry|crush|relationship|rizz|is he taken|love life/i, [
       "the bot is strictly professional. ask me about his MBA instead, it's very romantic.",
@@ -78,6 +82,7 @@
       "yooooo. you saw the o's. you tell me.",
       "the bot is biased, but yes. obviously.",
       "he built a website with escaping vowels and a chatbot about himself. draw your own conclusions.",
+      "super friendly, outgoing, and picks things up fast. so yes, very cool.",
     ]],
     [/favou?rite|best (song|food|shoe|sneaker|team|movie|place)|top (5|five|3|three)/i, [
       "too many favorites to fit in a chat bubble. ask him yourself: EMAIL",
@@ -104,7 +109,8 @@
     [/fun fact|did you know|teach me|something (smart|interesting|cool)|interesting/i, FUN_FACTS],
     [/joke|make me laugh|something funny|tell me something fun/i, JOKES],
     [/why (should (i|we) )?hire|reasons to|convince me|sell me|pitch (him|me)|top (5|five) reasons/i, [
-      "top 5 reasons to talk to abhi:<ol><li>payments product manager, so he speaks both engineer and business</li><li>Rutgers '21, McCombs MBA '28 in progress</li><li>he'll ask 'what problem are we solving?' before anyone writes a line of code</li><li>he built this site, the bouncing o's, and me</li><li>he answers his email: EMAIL</li></ol>",
+      "why abhi is worth the call:<ol><li><b>he learns fast. really fast.</b> he had no real coding background, then taught himself enough web dev to build this whole site (the bouncing o's, this chatbot, all of it) using the resources around him</li><li><b>he adapts.</b> new team, new domain, new tools: he gets up to speed quickly and starts contributing</li><li><b>payments product manager</b>, so he can talk engineering and business in the same meeting</li><li><b>Rutgers '21, UT McCombs MBA '28</b> in progress, always sharpening the business side</li><li><b>super friendly and outgoing</b>, the kind of person teams actually like working with</li></ol>based between NJ/NYC and Austin, TX. reach him at EMAIL or on LINKEDIN.",
+      "the short pitch: give abhi something he's never done before and watch what happens. he'd never really coded, and he still built this site, animations and chatbot included, by figuring it out with the resources he had. add payments product experience, an MBA in progress at UT McCombs, and a genuinely friendly, outgoing personality, and you get someone who ramps up fast and makes the team better. EMAIL · LINKEDIN",
     ]],
     [/what (does|do) (a |an )?(pm|product manager)s? (do|actually do)|what is (a )?product manag|what('s| is) product management/i, [
       "a product manager figures out what to build and why. the job, roughly:<ul><li>find the real customer problem</li><li>decide what matters most (and what waits)</li><li>get engineering, design and business pointed the same way</li><li>ship, measure, learn, repeat</li></ul>abhi does this in payments. more on LINKEDIN.",
@@ -147,6 +153,14 @@
       "they're smarter. i'm more focused. i know one person really well.",
       "i'm not competing with the big models. i'm a résumé with a personality.",
     ]],
+    [/what('s| is) he like|personality|vibe|as a person|is he (friendly|outgoing|easy to work with|a team player)|team player|work(ing)? with him/i, [
+      "super friendly and outgoing. he's the person who talks to everyone in the room and remembers what they said.",
+      "easy to work with, friendly, outgoing, and quick to adapt. the kind of teammate who makes the work more fun.",
+    ]],
+    [/who (built|made|coded|designed) (this|the site|you)|how (did|was) (he|this|the site) (build|built|make|made)|can he code|does he code|is he (technical|a developer|an engineer|a coder)|quick learner|learn(s)? fast|adapt/i, [
+      "he built this whole site himself, and he had no real coding background going in. he picked up the web dev as he went, leaned on the resources around him, and shipped it: the bouncing o's, this chatbot, all of it.",
+      "fun story: he's a product manager, not an engineer, and he never really coded before this. he figured it out anyway. that's kind of his thing: drop him into something new and he picks it up fast.",
+    ]],
     // --- the real stuff ---
     [/linked\s*in/i, [
       "Here's his LINKEDIN.",
@@ -154,7 +168,7 @@
     ]],
     [/mba|mccombs|\but\b|austin|grad(uate)? school|business school/i, [
       "He's currently getting his MBA at UT Austin's McCombs School of Business, class of 2028. More on LINKEDIN.",
-      "MBA at UT McCombs, class of 2028. Working full-time and doing night classes, so be nice to him. LINKEDIN has more.",
+      "MBA at UT McCombs, class of 2028. LINKEDIN has the rest.",
     ]],
     [/educat|school|college|rutgers|undergrad|degree|stud(y|ied)|graduat/i, [
       "Rutgers University, class of 2021. Now working on an MBA at UT McCombs (class of 2028). Full background on LINKEDIN.",
@@ -162,7 +176,7 @@
     ]],
     [/doing now|currently|these days|up to\b/i, [
       "Right now he's a product manager in payments and getting his MBA at UT McCombs (class of 2028). Details on LINKEDIN.",
-      "Building payments products by day, MBA classes by night, bouncing o's on his website in between. More on LINKEDIN.",
+      "Building payments products, working through his MBA at UT McCombs, and making the o's on his website bounce in between. More on LINKEDIN.",
     ]],
     [/experience|job|work|role|career|resume|résumé|\bcv\b|product|\bpm\b|for a living|does he do|what he does|occupation|skill|background|company|employer|recruit|professional|industry|fintech|payments/i, [
       "Abhi's a product manager working in payments. The full work history is on LINKEDIN.",
