@@ -1120,18 +1120,20 @@
 
   const chat = document.getElementById("chat"), log = document.getElementById("log"), ask = document.getElementById("ask"),
         form = document.getElementById("form"), q = document.getElementById("q");
-  let started = false, shownChips = [];
+  let started = false, shownChips = [], lastAsked = "";
+  const bare = s => s.toLowerCase().replace(/[^a-z0-9 ]/g, "").trim();   // "What do you do?" == "what do you do"
 
-  function bot(html, withChips) {
+  // every reply ends with 3 buttons, and the question bar always suggests the first one, so the two never disagree
+  function bot(html) {
     const m = document.createElement("div"); m.className = "msg bot"; m.innerHTML = html; log.appendChild(m);
-    if (withChips) {
-      const c = document.createElement("div"); c.className = "chips";
-      shownChips = recruiterMode ? [RECRUITER_CHIPS[0], ...sample(RECRUITER_CHIPS.slice(1), 2)]   // 3 buttons max, keeps it easy
-        : shownChips.length ? sample(SUGGESTIONS.filter(s => s !== q.placeholder), 3)
-        : [SUGGESTIONS[0], ...sample(SUGGESTIONS.slice(1), 2)];   // greeting always leads with "what should I know?"
-      shownChips.forEach(t => { const b = document.createElement("button"); b.type = "button"; b.textContent = t; b.onclick = () => send(t); c.appendChild(b); });
-      log.appendChild(c);
-    }
+    const fresh = list => list.filter(s => bare(s) !== lastAsked);
+    shownChips = recruiterMode ? [...fresh(RECRUITER_CHIPS).slice(0, 1), ...sample(fresh(RECRUITER_CHIPS).slice(1), 2)]
+      : shownChips.length ? sample(fresh(SUGGESTIONS), 3)
+      : [SUGGESTIONS[0], ...sample(SUGGESTIONS.slice(1), 2)];   // greeting leads with "what should I know?"
+    const c = document.createElement("div"); c.className = "chips";
+    shownChips.forEach(t => { const b = document.createElement("button"); b.type = "button"; b.textContent = t; b.onclick = () => send(t); c.appendChild(b); });
+    log.appendChild(c);
+    q.placeholder = shownChips[0];
     log.scrollTop = log.scrollHeight;
   }
   // texting shorthand -> plain english before matching, so "where r u from" works like "where are you from".
@@ -1150,30 +1152,32 @@
   }
   function send(text) {
     text = text.trim(); if (!text) return;
+    lastAsked = bare(text);
     const m = document.createElement("div"); m.className = "msg me"; m.textContent = text; log.appendChild(m);
     const t = document.createElement("div"); t.className = "msg bot typing"; t.textContent = "typing…"; log.appendChild(t);
     log.scrollTop = log.scrollHeight;
     const asked = readings(text);
     const kind = lastTopic && (asked.some(t => DOUBT.test(t)) ? "doubt" : asked.some(t => WHY.test(t)) ? "why" : asked.some(t => CLARIFY.test(t)) ? "clarify" : null);
-    if (kind) { const reply = followUp(kind); setTimeout(() => { t.remove(); bot(reply, true); nextTip(); }, 420); return; }
+    if (kind) { const reply = followUp(kind); setTimeout(() => { t.remove(); bot(reply); }, 420); return; }
     const hit = INTENTS.find(([re]) => asked.some(t => re.test(t)));
     if (hit && (hit[0] === RECRUITER || hit[0] === SERIOUS)) recruiterMode = true;
     if (hit && hit[0] === PLAYFUL) recruiterMode = false;
     if (!hit || !hit[3]) lastTopic = hit || null;   // acks like "cool" keep the previous topic alive
     let reply = hit ? pick(hit[0].source, hit[1]) : choose("fallback", recruiterMode ? RECRUITER_FALLBACKS : FALLBACKS);
     if (reply === "__SURPRISE__") reply = surprise();
-    setTimeout(() => { t.remove(); bot(reply, !hit || hit[2]); nextTip(); }, 420);
+    setTimeout(() => { t.remove(); bot(reply); }, 420);
   }
-  const nextTip = () => { const fresh = SUGGESTIONS.filter(s => !shownChips.includes(s) && s !== q.placeholder); q.placeholder = pickOne(fresh); };
   function open() {
     chat.classList.add("open"); ask.style.display = "none";
-    if (!started) { started = true; bot("yooooo, it's abhi. what would you like to know about me?", true); }
+    if (!started) { started = true; bot("yooooo, it's abhi. what would you like to know about me?"); }
     q.focus();
   }
   function close() { chat.classList.remove("open"); ask.style.display = ""; }
   ask.onclick = open;
   document.getElementById("close").onclick = close;
   addEventListener("keydown", e => { if (e.key === "Escape" && chat.classList.contains("open")) close(); });
+  // the "enter" chip in the empty bar (phones) asks the suggested question
+  document.getElementById("hint").onclick = () => form.requestSubmit();
   // tab on an empty bar fills in the suggested question
   q.addEventListener("keydown", e => { if (e.key === "Tab" && !e.shiftKey && !q.value) { e.preventDefault(); q.value = q.placeholder; } });
   form.onsubmit = e => { e.preventDefault(); send(q.value.trim() || q.placeholder); q.value = ""; };
