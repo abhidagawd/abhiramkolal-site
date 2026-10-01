@@ -103,6 +103,10 @@
   const SERIOUS = /\b(be|get|act|talk|go|switch to|turn on) (serious|professional|formal|normal)\b|serious mode|professional mode|formal mode|(ok|okay|alright|but)?,? ?(seriously|for real|real talk|no jokes?|no cap)( though| tho| now)?[\s?!.]*$|can you be (serious|professional|normal)|drop the (jokes|bit|act)|give it to me straight|straight answers?|less (jokes|casual|playful)/i;
   const PLAYFUL = /\b(fun|casual|playful|chill|silly) mode|be (fun|casual|playful|silly) again|back to (fun|normal|casual)|bring back the (fun|jokes|yo)|un-?serious/i;
   let recruiterMode = false;
+  // follow-up shapes, used by send() and by the no-context fallbacks in INTENTS
+  const DOUBT = /^(really|rly|no way|are you sure|you sure|is that (true|right|real)|cap|that'?s cap|prove it|liar|lies|lying|you'?re lying|stop lying|i don'?t believe (you|that|it|this)|sure jan|yeah right|ok buddy|doubt|x to doubt|be honest|honestly|wait really|actually|for real though)[\s?!.]*$|^(fr|for real|seriously|true|real|no cap|swear|you swear|on god|deadass)\?+[\s!.]*$/i;
+  const WHY = /^(why|why not|how come|how|how so|like what|such as|example|for example|give me an example|why'?s that|how'?s that)[\s?!.]*$/i;
+  const CLARIFY = /^(what|huh|wdym|what do you mean|what does that mean|meaning|meaning what|explain|explain (that|please|more|yourself)|elaborate|say more|go on|tell me more|more|and|so|so what|and then|ok and|okay and|what about it|come again|i don'?t get it|i'?m lost|\?+)[\s?!.]*$/i;
   const INTENTS = [
     // hiring logistics: always answered straight, never with a joke
     [/salary (expectation|range|requirement)s?|compensation|\bcomp\b|pay (range|expectations?)|desired (salary|pay)|rate expectations?/i, [
@@ -220,6 +224,26 @@
       "AI_NAME has verified this as 100% no cap.",
       "on god. the o's agree.",
     ], true],
+    // acknowledgements and bare yes/no: keep things moving
+    [/^(cool|nice|interesting|got it|gotcha|makes sense|fair|fair enough|i see|oh|ohh|ah|ahh|ahh ok|oh ok|oh okay|hmm|hm|neat|sweet|dope|aight|sounds good|good to know|noted|love it|love that|nice nice|cool cool|oh nice|oh cool|ok cool|okay cool|ok nice)[\s!.]*$/i, [
+      "glad that landed. what else do you wanna know? 👇",
+      "cool cool. pick another one 👇",
+      "AI_NAME has plenty more where that came from 👇",
+      "right? ask me something else.",
+    ], true, "ack"],
+    [/^(yes|yeah|yea|yep|yup|yess|sure|of course|definitely|absolutely|no|nope|not really|maybe|idk|i don'?t know)[\s!.]*$/i, [
+      "love the energy. what do you wanna know? 👇",
+      "fair enough. tap something below and let's keep going 👇",
+      "noted. so what are we talking about next? 👇",
+    ], true, "ack"],
+    [DOUBT, [
+      "really what? 😄 ask me something and I'll back it up.",
+      "I haven't even said anything yet. ask away 👇",
+    ], true, "ack"],
+    [/^(why|how|what|huh|wdym|what do you mean|\?+)[\s?!.]*$/i, [
+      "why what? 😄 give me a little more and I'll answer.",
+      "I need a little more than that. try a button below 👇",
+    ], true, "ack"],
     [SERIOUS, [
       "you got it. straight version, no bits:<ul><li><b>who:</b> Abhiram Kolal, product manager in payments</li><li><b>education:</b> Rutgers '21, UT McCombs MBA '28 (in progress)</li><li><b>strengths:</b> I learn fast, adapt fast, and I'm easy to work with</li><li><b>based:</b> NJ/NYC and Austin, TX</li><li><b>contact:</b> EMAIL · LINKEDIN</li></ul>I'll keep it professional from here. say 'fun mode' anytime to bring the jokes back.",
       "serious mode on. I'm a payments product manager (Rutgers '21, McCombs MBA '28 in progress) who ramps up quickly on anything new. the best ways to reach me are EMAIL and LINKEDIN. ask me anything and I'll answer it straight. 'fun mode' switches it back.",
@@ -495,7 +519,7 @@
       "AI_NAME logged that as a successful user interaction 📈",
       "careful, laughing at a résumé is how it starts.",
       "glad it landed. the real me is funnier, for the record.",
-    ], true],
+    ], true, "ack"],
     // disbelief: "nah this is crazy", "abhi really said yooooo", "bro", "bruh", "smh"
     [/^((nah|naw|bro|bruh|man|dude|abhi|lmao|lol|yo|wait),? )*(nah|naw|bro|bruh|smh|ain'?t no way|no way|really said yo|said yo|i can'?t( with you)?|you'?re not serious|you can'?t be serious|(this is|this|you'?re|you are|that'?s|he'?s) (actually |so |lowkey |genuinely |literally )?(crazy|insane|unreal|unwell|outrageous|ridiculous|not serious|a menace|psycho))( bro| abhi| lmao| lol)?[\s!?.💀😭😂]*$/i, [
       "yes, I really said yooooo. on purpose.",
@@ -778,7 +802,7 @@
     ]],
     [/^(lol|lmao|haha|💀|😂)[\s!?.💀😂😭]*$/i, [
       "glad you're having fun. ask me anything.", "ikr.",
-    ]],
+    ], false, "ack"],
     [/i love you|marry me|do you like me|are we friends|you('re| are) (so )?(cute|cool|funny|smart|awesome|great)[\s!.]*$/i, [
       "appreciate that 🙏 let's start with LinkedIn and see where it goes: LINKEDIN",
       "stop, you're gonna make the o's blush.",
@@ -915,7 +939,23 @@
       "I'm Abhi (Abhiram Kolal): product manager in payments, Rutgers '21, and an MBA candidate at UT McCombs ('28). here's my LINKEDIN.",
       "yooooo, it's Abhi. payments product manager, Rutgers '21, McCombs MBA '28. ask me anything, or peep my LINKEDIN.",
     ]],
-  ].map(([re, answers, chips]) => [re, answers.map(a => a.replaceAll("LINKEDIN", LINKEDIN).replaceAll("EMAIL", EMAIL).replaceAll("AI_NAME", AI)), !!chips]);
+  ].map(([re, answers, chips, tag]) => [re, answers.map(a => a.replaceAll("LINKEDIN", LINKEDIN).replaceAll("EMAIL", EMAIL).replaceAll("AI_NAME", AI)), !!chips, tag]);
+  // short follow-ups ("really?", "why?", "wdym") are about whatever was just said, so they get handled
+  // against the last topic: another take on the same answer, with a lead-in that fits the follow-up.
+  const DOUBT_LEADS = ["really really.", "100%.", "swear 🤞", "no cap.", "dead serious."];
+  const WHY_TAILS = ["the longer version is a better conversation: EMAIL", "the full story is more fun in person: EMAIL", "happy to go deeper on that live: EMAIL"].map(s => s.replace("EMAIL", EMAIL));
+  const CLARIFY_LEADS = ["said differently:", "ok, another way to put it:", "let me try that again:", "fair, here's another angle:"];
+  let lastTopic = null;
+  function followUp(kind) {
+    const [re, answers] = lastTopic;
+    if (answers[0] === "__SURPRISE__") return kind === "doubt" ? `${choose("doubt-lead", DOUBT_LEADS)} ${surprise()}` : surprise();
+    if (kind === "why") return answers.length > 1 ? `short version: ${choose(re.source, answers).replace(/^short version:\s*/i, "")} ${choose("why-tail", WHY_TAILS)}` : `the honest answer needs more than a chat bubble. ${choose("why-tail", WHY_TAILS)}`;
+    const lead = kind === "doubt" ? choose("doubt-lead", DOUBT_LEADS) : choose("clarify-lead", CLARIFY_LEADS);
+    if (answers.length > 1) return `${lead} ${choose(re.source, answers)}`;
+    return kind === "doubt"
+      ? `${lead} that's the real answer. anything else you wanna know?`
+      : `that's about as deep as ${AI} goes on that one. the real me can go way deeper: ${EMAIL}`;
+  }
   const RECRUITER_FALLBACKS = [
     `good question, and probably one better answered live. email me at ${EMAIL} or reach me on ${LINKEDIN}.`,
     `I don't have that one loaded here, but I'm happy to cover it directly: ${EMAIL}`,
@@ -965,9 +1005,12 @@
     const t = document.createElement("div"); t.className = "msg bot typing"; t.textContent = "typing…"; log.appendChild(t);
     log.scrollTop = log.scrollHeight;
     const asked = readings(text);
+    const kind = lastTopic && (asked.some(t => DOUBT.test(t)) ? "doubt" : asked.some(t => WHY.test(t)) ? "why" : asked.some(t => CLARIFY.test(t)) ? "clarify" : null);
+    if (kind) { const reply = followUp(kind); setTimeout(() => { t.remove(); bot(reply, true); }, 420); return; }
     const hit = INTENTS.find(([re]) => asked.some(t => re.test(t)));
     if (hit && (hit[0] === RECRUITER || hit[0] === SERIOUS)) recruiterMode = true;
     if (hit && hit[0] === PLAYFUL) recruiterMode = false;
+    if (!hit || !hit[3]) lastTopic = hit || null;   // acks like "cool" keep the previous topic alive
     let reply = hit ? choose(hit[0].source, hit[1]) : choose("fallback", recruiterMode ? RECRUITER_FALLBACKS : FALLBACKS);
     if (reply === "__SURPRISE__") reply = surprise();
     setTimeout(() => { t.remove(); bot(reply, !hit || hit[2]); }, 420);
