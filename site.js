@@ -38,8 +38,11 @@
   // "Abhi Intelligence (AI)" when the question is really about the chat itself.
   // the playful ones up top catch the weird stuff before the normal intents can grab a keyword.
   // --- abhi's taste: shared by the topic answers and "surprise me" ---
-  const ul = items => "<ul>" + items.map(i => `<li>${i}</li>`).join("") + "</ul>";
   const pickOne = list => list[Math.random() * list.length | 0];
+  const sample = (list, n) => [...list].sort(() => Math.random() - 0.5).slice(0, n);
+  const and = xs => xs.length < 2 ? xs[0] : `${xs.slice(0, -1).join(", ")} and ${xs[xs.length - 1]}`;
+  const HOBBIES = ["music", "anime", "cooking (trying, at least)", "hoops", "fantasy football", "sneakers", "long drives",
+    "graphic design", "random YouTube documentaries", "hikes", "traveling when the budget allows"];
   const SHOWS = ["Breaking Bad", "Better Call Saul", "The Wire", "Snowfall", "the Marvel universe", "The Fresh Prince of Bel-Air",
     "Abbott Elementary", "Atlanta", "Impractical Jokers", "Shrinking", "Community", "Black Mirror", "The Boondocks",
     "Game of Thrones", "Severance", "Suits"];
@@ -107,6 +110,7 @@
   const DOUBT = /^(really|rly|no way|are you sure|you sure|is that (true|right|real)|cap|that'?s cap|prove it|liar|lies|lying|you'?re lying|stop lying|i don'?t believe (you|that|it|this)|sure jan|yeah right|ok buddy|doubt|x to doubt|be honest|honestly|wait really|actually|for real though)[\s?!.]*$|^(fr|for real|seriously|true|real|no cap|swear|you swear|on god|deadass)\?+[\s!.]*$/i;
   const WHY = /^(why|why not|how come|how|how so|like what|such as|example|for example|give me an example|why'?s that|how'?s that)[\s?!.]*$/i;
   const CLARIFY = /^(what|huh|wdym|what do you mean|what does that mean|meaning|meaning what|explain|explain (that|please|more|yourself)|elaborate|say more|go on|tell me more|more|and|so|so what|and then|ok and|okay and|what about it|come again|i don'?t get it|i'?m lost|\?+)[\s?!.]*$/i;
+  const fill = s => s.replaceAll("LINKEDIN", LINKEDIN).replaceAll("EMAIL", EMAIL).replaceAll("AI_NAME", AI);
   const INTENTS = [
     // hiring logistics: always answered straight, never with a joke
     [/salary (expectation|range|requirement)s?|compensation|\bcomp\b|pay (range|expectations?)|desired (salary|pay)|rate expectations?/i, [
@@ -889,25 +893,25 @@
     // --- my taste: shows, movies, anime, music, food, sports, and the random stuff ---
     [/fact about (you|him)|something (about|random about) (you|him)|tell me something (i don'?t know|random|about you)|random fact|fun facts? about (you|him)/i, ME_FACTS],
     [/\bshows?\b.*\b(watch|like|favou?rite|recommend|rec)\b|\b(watch|like|favou?rite|recommend|rec)\b.*\bshows?\b|tv show|\bseries\b|binge|netflix|\bhbo\b|what (should i|do you|to) watch|currently watching|breaking bad|better call saul|the wire\b(?! transfer)|severance|game of thrones|snowfall|abbott|boondocks|black mirror|\bsuits\b|community|fresh prince|impractical jokers|shrinking|\batlanta\b/i, [
-      `shows I'd put you on:${ul(SHOWS)}`,
-      `if you only watch one show this month, make it ${pickOne(SHOWS)}. the full list:${ul(SHOWS)}`,
-      `my TV résumé is stacked:${ul(SHOWS)}want a movie instead? ask me about movies.`,
+      () => `lately? ${and(sample(SHOWS, 2))}. ask me again and I'll give you a different rec.`,
+      () => `if you only watch one show this month, make it ${pickOne(SHOWS)}. trust me.`,
+      () => `${pickOne(SHOWS)} is always in my rotation. I've got more, but that's a coffee conversation.`,
     ]],
     [/movies?|films?|cinema|dark knight|superbad|tropic thunder|bullet train|the raid|boyz n|\bfriday\b.*(movie|film|ice cube)/i, [
-      `movies I'll always rewatch:${ul(MOVIES)}`,
-      `my movie night lineup:${ul(MOVIES)}if you haven't seen The Raid, fix that immediately.`,
+      () => `${pickOne(MOVIES)} is a rewatch every single time. ask again for another.`,
+      () => `movie night pick: ${pickOne(MOVIES)}. and if you haven't seen The Raid, fix that immediately.`,
     ]],
     [/anime|manga|naruto|\bdbz\b|dragon ?ball|samurai champloo|attack on titan|\baot\b|jujutsu|\bjjk\b|\bakira\b|cowboy bebop|nintendo|video ?games?|gaming|\bgamer\b|zelda|mario|smash bros/i, [
-      `anime that shaped me:${ul(ANIME)}and on the games side, Nintendo forever.`,
-      `if you're new to anime, start with Cowboy Bebop or Samurai Champloo. then the full list:${ul(ANIME)}plus a lifelong Nintendo habit.`,
+      () => `${and(sample(ANIME, 2))} shaped me. and Nintendo forever.`,
+      "if you're new to anime, start with Cowboy Bebop or Samurai Champloo. thank me later.",
     ]],
     [/what (kind of |type of |sort of )?music|music taste|taste in music|favou?rite (artists?|rappers?|bands?|albums?|songs?|singers?|music|genres?)|who do you listen to|what do you listen to|listening to|playlist|genres?|hip ?hop|\br&b\b|\brnb\b|classic rock|kendrick|wu[- ]tang|pink floyd|led zeppelin|stevie wonder|michael jackson|drake|j\.? ?cole|\bsza\b|tame impala|kaytranada|mac miller|tribe called quest|linkin park/i, [
-      "my music taste is all over the place, in the best way:" + Object.entries(MUSIC).map(([lane, names]) => `<br><b>${lane}</b>: ${names.join(", ")}`).join("") + "<br>I can go deep on any of these.",
-      `I'll go from Pink Floyd to Wu-Tang to Hiatus Kaiyote in one sitting. right now? probably some ${pickOne(ARTISTS)}. ask me about a genre and I'll go deeper.`,
+      () => `all over the place, in the best way. right now? probably some ${pickOne(ARTISTS)}.`,
+      () => `I'll go from ${pickOne(MUSIC["classic rock and the greats I grew up on"])} to ${pickOne(MUSIC["hip hop"])} to ${pickOne(MUSIC["R&B and the new wave"])} in one sitting. pick a genre and I'll go deeper.`,
     ]],
     [/favou?rite (food|meal|dish|snack|drink|restaurant|cuisine)|what (do you|you) (like to )?eat|\bcuisine\b|\bhungry\b|\bfood\b|dosa|biryani|tikka|pizza|tacos?|\bboba\b|arizona|chick[- ]fil[- ]a|jerk chicken|curry|bacon,? egg|\bcook(ing)?\b|south indian/i, [
-      `I'm South Indian, so dosa and that whole world is home base. beyond that:${ul(FOODS)}cuisine-wise, ${CUISINES.join(", ")} are all sooooo good. also trying to get better at cooking (emphasis on trying).`,
-      `food is a core value. top picks:${ul(FOODS.slice(0, 7))}and I'll never turn down ${CUISINES.join(", ")} food.`,
+      "I'm South Indian, so dosa is home base. non-negotiable.",
+      () => `dosa first, always. after that? ${pickOne(FOODS.slice(1))}. also trying to get better at cooking (emphasis on trying).`,
     ]],
     [/karate|martial arts?|black ?belt|kung fu|taekwondo|can (you|he) fight|self defen[cs]e/i, [
       "2nd degree black belt in karate, after a lot of years of it. I'm very friendly though. very.",
@@ -918,14 +922,15 @@
       "saxophone, my whole childhood. it's probably why my music taste goes so deep.",
     ]],
     [/sports?|\bnba\b|\bnfl\b|fantasy( football)?|football|baseball|favou?rite (team|player)|what teams|teams (do|you) |root(ing)? for|who do you (support|rep)|spurs|giants|wemby|wembanyama/i, [
-      "sports-wise:<ul><li><b>NBA:</b> Spurs fan</li><li><b>NFL:</b> NY Giants fan</li><li><b>fantasy football:</b> yes, every season</li><li><b>growing up:</b> played basketball and baseball. not the best, but I had fun</li></ul>",
+      "Spurs in the NBA, Giants in the NFL. that's my whole emotional portfolio.",
       "Spurs in the NBA, Giants in the NFL, fantasy football every season. as a Giants fan, I've learned patience. as a fantasy player, I've learned none.",
     ]],
     [/\bcars?\b|driving|road trip|graphic design|documentar|youtube rabbit hole|entertainment/i, [
-      "a few more things I'm into:<ul><li>cars and driving (a good drive with a good playlist fixes most things)</li><li>graphic design</li><li>random YouTube documentaries at 1am</li><li>entertainment in general: TV, movies, anime, music, all of it</li></ul>",
+      "a good drive with a good playlist fixes most things.",
+      () => `lately it's ${pickOne(["long drives", "graphic design", "random YouTube documentaries at 1am"])}. ask me about it.`,
     ]],
     [/favou?rite|best (song|food|shoe|sneaker|team|movie|place)|top (5|five|3|three)\b(?! reasons)/i, [
-      "favorites depend on the category:<ul><li>shows: Breaking Bad, The Wire, Severance…</li><li>movies: The Dark Knight, Superbad, Bullet Train…</li><li>anime: Cowboy Bebop, Naruto, JJK…</li><li>music: way too much, ask me</li><li>food: dosa, always</li><li>teams: Spurs and Giants</li></ul>ask about any of them and I'll go deeper.",
+      () => `depends on the day. today? ${pickOne(SHOWS)} for TV, ${pickOne(MOVIES)} for movies, and dosa, always.`,
     ]],
     [/meaning of life|why are we here|what is love|is the earth flat|aliens|simulation/i, [
       "42. also, good product sense.",
@@ -1065,8 +1070,8 @@
       "product manager, payments. I'm the person asking 'but what problem are we solving' in every meeting. work history's on LINKEDIN.",
     ]],
     [/hobb|\bfun\b|music|free time|interest|weekend|basketball|hoop|nba|sneaker|shoe|food|\beat\b|restaurant|tech|travel|trip|hike|hiking|walk|friends|like to do/i, [
-      "outside of work:<ul><li>music (making it and listening to it, very diverse taste)</li><li>TV, movies, anime and Nintendo</li><li>food, and trying to get better at cooking</li><li>basketball, the NBA (Spurs) and the NFL (Giants), plus fantasy football</li><li>cars and driving</li><li>graphic design and tech</li><li>sneakers</li><li>random YouTube documentaries</li><li>friends, walks, hikes, and traveling whenever I can afford to lol</li></ul>ask about any of these and I'll go deeper.",
-      "music, TV and anime, food, hoops, cars, graphic design, sneakers, YouTube documentaries, and traveling when the budget allows. also a 2nd degree black belt and a childhood of saxophone, if you want the deep cuts.",
+      () => `off the clock? probably ${and(sample(HOBBIES, 2))}. ask about either.`,
+      "music, anime, food and hoops cover most of it. the deep cuts you have to ask for 😄",
     ]],
     [/contact|email|mail|reach|hire|connect|talk|get in touch|\bdm\b/i, [
       "best way to reach me is EMAIL, or connect on LINKEDIN.",
@@ -1076,7 +1081,7 @@
       "I'm Abhi (Abhiram Kolal): product manager in payments, Rutgers '21, and an MBA candidate at UT McCombs ('28). here's my LINKEDIN.",
       "yooooo, it's Abhi. payments product manager, Rutgers '21, McCombs MBA '28. ask me anything, or peep my LINKEDIN.",
     ]],
-  ].map(([re, answers, chips, tag]) => [re, answers.map(a => a.replaceAll("LINKEDIN", LINKEDIN).replaceAll("EMAIL", EMAIL).replaceAll("AI_NAME", AI)), !!chips, tag]);
+  ].map(([re, answers, chips, tag]) => [re, answers.map(a => typeof a === "function" ? () => fill(a()) : fill(a)), !!chips, tag]);
   // short follow-ups ("really?", "why?", "wdym") are about whatever was just said, so they get handled
   // against the last topic: another take on the same answer, with a lead-in that fits the follow-up.
   const DOUBT_LEADS = ["really really.", "100%.", "swear 🤞", "no cap.", "dead serious."];
@@ -1086,9 +1091,9 @@
   function followUp(kind) {
     const [re, answers] = lastTopic;
     if (answers[0] === "__SURPRISE__") return kind === "doubt" ? `${choose("doubt-lead", DOUBT_LEADS)} ${surprise()}` : surprise();
-    if (kind === "why") return answers.length > 1 ? `short version: ${choose(re.source, answers).replace(/^short version:\s*/i, "")} ${choose("why-tail", WHY_TAILS)}` : `the honest answer needs more than a chat bubble. ${choose("why-tail", WHY_TAILS)}`;
+    if (kind === "why") return answers.length > 1 ? `short version: ${pick(re.source, answers).replace(/^short version:\s*/i, "")} ${choose("why-tail", WHY_TAILS)}` : `the honest answer needs more than a chat bubble. ${choose("why-tail", WHY_TAILS)}`;
     const lead = kind === "doubt" ? choose("doubt-lead", DOUBT_LEADS) : choose("clarify-lead", CLARIFY_LEADS);
-    if (answers.length > 1) return `${lead} ${choose(re.source, answers)}`;
+    if (answers.length > 1) return `${lead} ${pick(re.source, answers)}`;
     return kind === "doubt"
       ? `${lead} that's the real answer. anything else you wanna know?`
       : `that's about as deep as ${AI} goes on that one. the real me can go way deeper: ${EMAIL}`;
@@ -1104,6 +1109,7 @@
     `hmm, ${AI} has no answer for that one. try a button below 👇`,
   ];
   const lastPick = new Map();
+  const pick = (key, list) => { const a = choose(key, list); return typeof a === "function" ? a() : a; };
   function choose(key, list) {          // random answer, never the same one twice in a row
     let i; do i = Math.random() * list.length | 0; while (list.length > 1 && i === lastPick.get(key));
     lastPick.set(key, i); return list[i];
@@ -1143,15 +1149,19 @@
     log.scrollTop = log.scrollHeight;
     const asked = readings(text);
     const kind = lastTopic && (asked.some(t => DOUBT.test(t)) ? "doubt" : asked.some(t => WHY.test(t)) ? "why" : asked.some(t => CLARIFY.test(t)) ? "clarify" : null);
-    if (kind) { const reply = followUp(kind); setTimeout(() => { t.remove(); bot(reply, true); }, 420); return; }
+    if (kind) { const reply = followUp(kind); setTimeout(() => { t.remove(); bot(reply, true); nextTip(); }, 420); return; }
     const hit = INTENTS.find(([re]) => asked.some(t => re.test(t)));
     if (hit && (hit[0] === RECRUITER || hit[0] === SERIOUS)) recruiterMode = true;
     if (hit && hit[0] === PLAYFUL) recruiterMode = false;
     if (!hit || !hit[3]) lastTopic = hit || null;   // acks like "cool" keep the previous topic alive
-    let reply = hit ? choose(hit[0].source, hit[1]) : choose("fallback", recruiterMode ? RECRUITER_FALLBACKS : FALLBACKS);
+    let reply = hit ? pick(hit[0].source, hit[1]) : choose("fallback", recruiterMode ? RECRUITER_FALLBACKS : FALLBACKS);
     if (reply === "__SURPRISE__") reply = surprise();
-    setTimeout(() => { t.remove(); bot(reply, !hit || hit[2]); }, 420);
+    setTimeout(() => { t.remove(); bot(reply, !hit || hit[2]); nextTip(); }, 420);
   }
+  const SUGGESTIONS = ['ask "what makes you different?"', 'ask "what are you watching?"', 'try "surprise me"',
+    'ask "why the yooooo?"', 'ask "what do you do?"', 'ask "why should I care?"', 'ask "favorite anime?"',
+    'ask "how did you make this?"', 'try "serious mode"', 'ask "where are you based?"', 'ask "hot take?"'];
+  const nextTip = () => { q.placeholder = choose("tip", SUGGESTIONS); };
   function open() {
     chat.classList.add("open"); ask.style.display = "none";
     if (!started) { started = true; bot("yooooo, it's abhi. what would you like to know about me?", true); }
@@ -1161,7 +1171,7 @@
   ask.onclick = open;
   document.getElementById("close").onclick = close;
   addEventListener("keydown", e => { if (e.key === "Escape" && chat.classList.contains("open")) close(); });
-  form.onsubmit = e => { e.preventDefault(); send(q.value); q.value = ""; };
+  form.onsubmit = e => { e.preventDefault(); send(q.value.trim() || (q.placeholder.match(/"(.+)"/) || [])[1] || ""); q.value = ""; };
 })();
 
 (() => {

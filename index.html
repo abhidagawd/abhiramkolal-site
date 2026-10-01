@@ -71,6 +71,8 @@
   .chat form { display: flex; gap: .5rem; padding: .7rem; border-top: 1px solid color-mix(in srgb, var(--fg) 12%, transparent); }
   .chat input { flex: 1; min-width: 0; font: inherit; color: var(--fg); background: color-mix(in srgb, var(--fg) 7%, transparent);
                 border: 0; border-radius: 999px; padding: .6rem .9rem; outline: none; }
+  .chat input::placeholder { color: color-mix(in srgb, var(--fg) 45%, transparent); }
+  @media (max-width: 480px) { .chat input::placeholder { font-size: .8em; } }
   .lock { position: relative; margin-left: .4rem; font-size: .8rem; cursor: help; opacity: .6; border-radius: 6px; }
   .lock:hover, .lock:focus { opacity: 1; outline: none; }
   .lock::after { content: attr(data-tip); position: absolute; left: 0; top: calc(100% + 8px); width: 210px; z-index: 2;
@@ -90,7 +92,7 @@
   <section class="chat" id="chat" role="dialog" aria-label="ask about abhi">
     <header><span>ask about abhi<span class="lock" tabindex="0" role="note" aria-label="nothing you type here is saved. it all disappears when you refresh." data-tip="nothing you type here is saved. it all disappears when you refresh.">🔒</span></span> <button id="close" aria-label="close">✕</button></header>
     <div class="log" id="log" aria-live="polite"></div>
-    <form id="form"><input id="q" placeholder="type a question…" autocomplete="off" aria-label="your question"><button>send</button></form>
+    <form id="form"><input id="q" placeholder="ask &quot;what should I know about abhi?&quot;" autocomplete="off" aria-label="your question"><button>send</button></form>
   </section>
 <script src="/site.js"></script>
 </body>
