@@ -296,6 +296,8 @@
     [/did (ai|chat ?gpt|claude|an ai|a bot) (make|build|write|design|code) (this|the site|this site|you|it)|is (this|the site|this site|it) (made by |built by |written by )?ai\b|ai[- ]generated|(did|do) you (use|have) ai (to )?(make|build|write|code|for)|did you (actually )?(make|build|code|design) (this|it) yourself|you made this\?*$/i, [
       "I made it. when I want to get something done, I make sure it happens.",
       "all me. I don't really do 'someday.' when I want something done, it gets done.",
+      "yes, I made it. I had no real coding background, and it still got built. that's how I work in general: pick things up fast and make them happen.",
+      "I built it myself. the ideas, the design calls, the taste and every word in this chat are mine. when I decide something's happening, it happens.",
     ], true],
 
     // --- the o's and compliments on the site ---
@@ -316,11 +318,15 @@
       "when I want to get something done, I make sure it happens. that's the whole secret 😌",
       "trade secret. let's just say I'm a very skilled person lol",
       "a magician never reveals his tricks. what I can tell you: when I decide something's happening, it happens.",
+      "harder than it looks, easier than you'd think. the o's took the most tuning. the rest is a trade secret 😌",
+      "I'd never really coded before this. it got built anyway, because when I want something done, I make sure it happens. happy to nerd out about it over coffee: EMAIL",
     ], true],
     // BUILD_YOUR_OWN: students/kids who want to make one too
     [/how (do|can|would|could|should) (i|someone|people|you|one) (make|build|create|code|start|get) (a |an |my own |my |their own |your own )?(personal )?(website|site|web ?page|page|portfolio|chat ?bot)|(website|site|page|chat ?bot) like (this|yours|this one)|teach me (how )?(to )?(code|program|make (a )?(website|site)|build (a )?(website|site))|(learn|start) (to |how to |learning )?(code|coding|program|programming|web ?dev)|where (do|should) i (start|learn)( to code| coding)?|can (i|you) (make|build) (one|a site) (like this|too)/i, [
       "step one: decide you're actually going to do it. step two: don't stop until it's done. that's how this one happened.",
       "pick one idea that feels like you and refuse to quit on it. that's the whole playbook 🙂",
+      "do it! pick one small idea that's yours, ship something rough first, and keep going. I had no real coding background either, and look at this.",
+      "start tiny: one page that says who you are, plus one fun thing. mine was the bouncing o's. finishing one small site teaches you more than ten tutorials.",
     ], true],
     // LANGUAGES: "do you speak X", "translate", "say something in my language". English only, no claims.
     [/(do|can) (you|he|abhi) (speak|talk|understand|reply|answer|chat|write)( in)? (spanish|hindi|kannada|tamil|telugu|french|german|chinese|mandarin|japanese|korean|arabic|urdu|portuguese|russian|italian|english|other languages|any (other )?languages?|my language)|what languages? (do|does|can) (you|he) (speak|know|understand)|how many languages|(in|use|speak) my (language|native language)|other languages?|^i (only |mostly )?speak \w+[\s!.]*$|^(please )?translate( (this|that|it|the (page|site|greeting|yo)|please|to \w+))?[\s?!.]*$|translat(e|ion) (the |this )?(yo|greeting|page|site)|(english|it'?s) (is )?not my (first|native) language|en espa[nñ]ol|\bhabla(s)? |parlez|sprechen/i, [
@@ -337,7 +343,7 @@
       "a little tribute to the DVD logo. they bounce for 15 seconds, rest for 15, and each one finds its own way back. I may have spent too long tuning the physics. no regrets.",
     ], true],
     [/(nice|cool|sick|fire|clean|dope|great|awesome|amazing|beautiful|fun|creative|hard|slick|sleek|neat|fresh|unique) (site|website|page|chat|design|idea|concept|vibe)|(site|website|page|chat|design) (is|looks) (so )?(fire|sick|cool|dope|clean|nice|hard|great|amazing|awesome|fun|creative|good)|(love|like|dig|loving) (the|this|your) (site|website|page|o'?s|chat|vibe|design|idea)|this is (actually |so |really |lowkey )?(cool|sick|fire|dope|hard|clean|awesome|amazing|creative|genius|fun|great)|(i'?m|im) (impressed|obsessed)|10\/10/i, [
-      "appreciate that a lot 🙏 I built it myself. when I want something done, I make it happen. glad it landed.",
+      "appreciate that a lot 🙏 I built it myself, with no real coding background. when I want something done, I make it happen. glad it landed.",
       "thank you! that's exactly the reaction I was going for: fun to look at, real info underneath.",
       "that means a lot. tell a friend, the o's love an audience.",
     ], true],
@@ -823,6 +829,7 @@
     [/who (built|made|coded|designed|wrote) (this|the site|you|it)|how did (he|you) (build|make)|how (was|is) (this|the site) (built|made)|can (he|you) code|do(es)? (he|you) code|(is he|are you) (technical|a developer|an engineer|a coder)|quick learner|learn(s)? fast|adapt/i, [
       "I built this whole site myself. when I want to get something done, I make sure it happens.",
       "me, myself and a lot of determination. I'm a product manager, not an engineer, and it still got built. when I want something done, it happens.",
+      "fun story: I'm a product manager, not an engineer, and I'd never really coded before this. it got built anyway. that's kind of my thing: drop me into something new and I make it happen.",
     ]],
 
     // --- interview-style questions: lists + a little humor ---
