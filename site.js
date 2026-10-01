@@ -231,7 +231,14 @@
       "AI_NAME has plenty more where that came from 👇",
       "right? ask me something else.",
     ], true, "ack"],
-    [/^(yes|yeah|yea|yep|yup|yess|sure|of course|definitely|absolutely|no|nope|not really|maybe|idk|i don'?t know)[\s!.]*$/i, [
+    // "no" / "nothing": could be "nothing much" small talk or "nothing else, I'm done", so the answers work for both
+    [/^(no|nope|nah|naw|no thanks|no thank you|nah i'?m good|no i'?m good|not really|not rn|not right now|nothing|nothing else|nothing rn|nothing really|nada|that'?s it|that'?s all|i'?m done|done|we'?re good|that'?s everything)[\s!.]*$/i, [
+      "fair enough 😄 I'm here if anything comes to mind. or say hi to the real me: EMAIL",
+      "all good. the o's will keep bouncing whenever you're back.",
+      "no worries. thanks for stopping by, seriously 🙏",
+      "say less. AI_NAME will be right here. the real me is at EMAIL.",
+    ], true, "ack"],
+    [/^(yes|yeah|yea|yep|yup|yess|sure|of course|definitely|absolutely|maybe|idk|i don'?t know)[\s!.]*$/i, [
       "love the energy. what do you wanna know? 👇",
       "fair enough. tap something below and let's keep going 👇",
       "noted. so what are we talking about next? 👇",
