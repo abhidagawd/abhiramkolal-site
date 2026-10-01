@@ -140,6 +140,18 @@
       "yooooo, we're back 🎉 ask me anything.",
       "fun mode restored. the o's are relieved.",
     ], true],
+    // the obvious answer to the greeting: "what should i know about abhi?"
+    [/what (should|do|would|must|can) (i|we|people|someone|one) (know|learn) (about )?(you|him|abhi|abhiram)|what (do|would) you want (me|people|us) to know|what('s| is) (important|worth knowing|the (main|most important|biggest|key) thing) (to know )?(about )?(you|him|abhi)?|(anything|something) (i|we) should know|what (should|do) (i|we) know\??$|^(idk|i don'?t know),? (you tell me|what should i (know|ask))|you tell me[\s?!.]*$|(give me|what are) (the |your )?(highlights|basics|main points|key points)/i, [
+      "three things:<ol><li>I'm good at what I do: product manager in payments, Rutgers '21, MBA at UT McCombs</li><li>I learn fast. I'd never really coded, and I built this whole site</li><li>I'm easy to work with. friendly, curious, and I actually like people</li></ol>the fun stuff you'll find by poking around 👇",
+      "the headline: payments product manager who picks up new things fast and is genuinely easy to work with. the fine print: I'm curious about everything, from how money moves to why Cowboy Bebop still holds up. the rest is better in conversation: EMAIL",
+      "that I take the work seriously and myself a little less seriously. payments PM, McCombs MBA in progress, built this site from scratch, and always down to talk about cool stuff. ask me anything 👇",
+      "honestly? that I'm the person you'd want on your team: I figure things out fast, I communicate well, and I make the work more fun. and that I have a 2nd degree black belt, just in case 🥋",
+    ], true],
+    [/why (should|would|do) (i|we|anyone|people) (want to )?(care( about)?|talk to|meet|know|connect with|work with|pay attention to) ?(you|him|abhi|abhiram)?|why (are you|is (he|abhi)) (worth|important|interesting|special)|what'?s so (special|great|interesting) about (you|him|abhi)/i, [
+      "fair question. because I'm the person who makes the work easier: I figure out new things fast, I keep everyone pointed in the same direction, and I'm genuinely good to be around. payments PM, McCombs MBA in progress. worth a conversation, I think: EMAIL",
+      "you don't have to. but you're still here, so something caught your eye 👀 the short case: curious, capable, easy to work with. I'd never really coded, and I still built everything you're looking at.",
+      "because people who are both fun and good at their job are rarer than they should be. I'm trying to be one of them. judge for yourself: EMAIL · LINKEDIN",
+    ], true],
     // "this doesn't say much about you": a taste of the personality, then a nudge to actually talk
     [/(doesn'?t|does not|didn'?t|don'?t|do not) (say|tell( me)?|show|explain) (much|a lot|anything|enough)|(not|barely) (much|a lot|enough) (info|information|here|to go on|about you)|(still )?(don'?t|do not) know (anything|much|a lot) about (you|him)|^(is that it|that'?s it|that'?s all|is that all|and\??|and\.\.\.|go on|tell me more|more|say more|keep going|then what|what else)[\s?!.]*$|who (are you|is he|is abhi) (really|actually|for real|deep down)|(the )?real (you|abhi)\??$|what (else|more) (is there|should i know|about you)|(go|dig|get) deeper|beyond (the|your) (resume|résumé|job|linkedin)|what makes you (you|tick|different)|what drives you/i, [
       "honestly, I'm better in conversation than in a chat bubble. what I can tell you: I'm curious about pretty much everything, I pick things up fast, and I'm easy to work with. the rest is more fun to tell you myself: EMAIL",
