@@ -72,6 +72,30 @@
     ...ARTISTS.map(a => `music rec: go put on some ${a}.`),
     ...FOODS.map(f => `food rec: ${f}. you're welcome.`),
   ];
+  // "surprise me" leans professional: ~70% career + payments/product insight, ~30% fun. recruiters only get the professional side.
+  const PRO_SURPRISES = [
+    ...FUN_FACTS,
+    "career fact: I'm a product manager in payments. the whole job is making money move faster, safer, and with fewer headaches.",
+    "career fact: I'm getting my MBA at UT McCombs, class of '28. Rutgers '21 before that.",
+    "career fact: I built this entire site with no real coding background. learning fast is kind of my thing.",
+    "career fact: I'm based between NJ/NYC and Austin, TX, and I'm comfortable working with teams in either.",
+    "product take: the best feature is often the one you decide not to build.",
+    "product take: if you can't explain the problem in one sentence, you're not ready to build the solution.",
+    "product take: in payments, trust is the product. nobody wants a faster way to lose money.",
+    "product take: talk to users early. it's a lot cheaper than a rewrite.",
+    "product take: a metric without a decision attached to it is just trivia.",
+    "product take: 'it depends' is a valid answer, as long as you say what it depends on.",
+    "payments insight: most 'instant' card payments are only instantly approved. the money itself settles later.",
+    "payments insight: richer payment data (hello, ISO 20022) means better fraud screening and fewer payments stuck in manual review.",
+    "payments insight: the hardest part of moving money across borders usually isn't the tech. it's the chain of banks, FX and compliance checks in between.",
+    `want the full professional story? it's all on ${LINKEDIN}.`,
+    "try asking me 'how do card payments work' or 'what does a PM do'. I've got opinions.",
+  ];
+  const FUN_SURPRISES = () => [...JOKES, ...ME_FACTS, ...RECS];
+  function surprise() {
+    const pro = recruiterMode || Math.random() < 0.7;
+    return pro ? choose("surprise-pro", PRO_SURPRISES) : choose("surprise-fun", FUN_SURPRISES());
+  }
   const AI = "Abhi Intelligence (AI)";
   // recruiter mode: once someone says they're hiring, skip the bits and lead with the pitch + contact
   const RECRUITER = /\b(i'?m|i am|we'?re|we are) (a |an )?(recruiter|recruiting|hiring|in talent|from talent)|\brecruiter here\b|hiring manager|talent (acquisition|partner)|(open|available) (role|position)|job (opening|opportunity)|reach(ing)? out about (a |an )?(role|position|job|opportunity)|interested in (you|him|hiring)|are you open to|(you|he) (be )?interested in a (role|job|position)/i;
@@ -286,7 +310,7 @@
     [/^(help|menu|options|commands)\b|what can (you|i) (do|ask)|what should i ask/i, [
       "here's what you can ask me:<ul><li>my experience, school and MBA</li><li>hobbies (there are many)</li><li>how to reach me</li><li>payments and product explainers (try 'how do card payments work')</li><li>jokes, fun facts, and a little self-roasting</li></ul>",
     ]],
-    [/surprise me|random|bored|entertain me/i, [...JOKES, ...FUN_FACTS, ...ME_FACTS, ...ME_FACTS, ...RECS]],
+    [/surprise me|random|bored|entertain me/i, ["__SURPRISE__"]],
     [/fun fact|did you know|teach me|something (smart|interesting|cool)|interesting/i, FUN_FACTS],
     [/joke|make me laugh|something funny|tell me something fun/i, JOKES],
     [/why (should (i|we) )?hire|why hire|reasons to|convince me|sell me|pitch (him|me|yourself)|top (5|five) reasons|why (you|him)\b/i, [
@@ -460,7 +484,9 @@
     const asked = readings(text);
     const hit = INTENTS.find(([re]) => asked.some(t => re.test(t)));
     if (hit && hit[0] === RECRUITER) recruiterMode = true;
-    setTimeout(() => { t.remove(); bot(hit ? choose(hit[0].source, hit[1]) : choose("fallback", recruiterMode ? RECRUITER_FALLBACKS : FALLBACKS), !hit || hit[2]); }, 420);
+    let reply = hit ? choose(hit[0].source, hit[1]) : choose("fallback", recruiterMode ? RECRUITER_FALLBACKS : FALLBACKS);
+    if (reply === "__SURPRISE__") reply = surprise();
+    setTimeout(() => { t.remove(); bot(reply, !hit || hit[2]); }, 420);
   }
   function open() {
     chat.classList.add("open"); ask.style.display = "none";
