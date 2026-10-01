@@ -123,7 +123,7 @@
       "good question. logistics like timing, location and work setup are best covered directly: EMAIL. for context, I'm based between NJ/NYC and Austin, TX.",
     ], true],
     [RECRUITER, [
-      "oh hey, thanks for reaching out 🙏 here's the quick version:<ul><li><b>role:</b> product manager in payments</li><li><b>superpower:</b> I learn fast and adapt fast. no real coding background, and I still built this whole site myself</li><li><b>education:</b> Rutgers '21, UT McCombs MBA '28 (in progress)</li><li><b>based:</b> NJ/NYC and Austin, TX</li><li><b>vibe:</b> friendly, outgoing, easy to work with</li></ul>best next step: email me at EMAIL or connect on LINKEDIN. happy to chat.",
+      "oh hey, thanks for reaching out 🙏 here's the quick version:<ul><li><b>role:</b> product manager in payments</li><li><b>superpower:</b> I learn anything fast and adapt even faster. no real coding background, and I still built this whole site myself</li><li><b>education:</b> Rutgers '21, UT McCombs MBA '28 (in progress)</li><li><b>based:</b> NJ/NYC and Austin, TX</li><li><b>vibe:</b> sharp, driven, and the teammate people want in the room</li></ul>best next step: email me at EMAIL or connect on LINKEDIN. happy to chat.",
       "appreciate you stopping by. I'll keep it straight: I'm a payments product manager who ramps up fast on anything new (case in point: I built this site with no real coding background). Rutgers '21, McCombs MBA '28 in progress, based between NJ/NYC and Austin. let's talk: EMAIL · LINKEDIN",
     ], true],
     // --- career people checking me out: goals, how I work, why payments. high up so generic intents don't steal them ---
@@ -165,7 +165,7 @@
     // 7. conflict / stakeholders / saying no / pushback. above the "address" privacy intent.
     [/conflicts?\b|disagreements?\b|disagree(ing)? with (engineers?|engineering|your (boss|manager|team|lead)|stakeholders|leadership|design|someone|a coworker)|stakeholders?|say(ing)? no (to|when)|how do you say no|push(ing)? back|pushback|difficult (people|person|coworkers?|colleagues?|stakeholders?|conversations?|boss|manager)|manag(e|ing) (up|expectations|executives|leadership|stakeholders)|(get|getting|build|building) (buy[- ]in|alignment|consensus)|\bbuy[- ]in\b|competing (priorities|asks|requests)/i, [
       "get everyone agreeing on the problem before arguing about the solution. most conflict is people optimizing for different goals. name the goals and half of it goes away.",
-      "saying no is half the job. the trick is making it a clear 'not now, here's why, here's what we're doing instead.' it helps that I genuinely like people, the hard conversations get easier.",
+      "saying no is half the job. the trick is making it a clear 'not now, here's why, here's what we're doing instead.' it helps that people trust me, so the hard conversations go smoother.",
       "if engineering pushes back, they usually know something I don't, so I start by listening. disagree in the room, commit after.",
     ], true],
     // 8. working with engineers / design / cross-functional. above the dating intent ("relationship").
@@ -187,13 +187,13 @@
     ], true],
     // 11. what makes you different / stand out. ("why should I hire you" stays with the existing hire-pitch intent.)
     [/what makes you (different|unique|special|stand out|better)|(how|why) (are you|is he) (different|unique)|\bstand out\b|set(s)? you apart|differentiat\w*|what (do|can|would) you bring( to the table)?|unique (value|skills?|strengths?|perspective)|over (other|the other|another) (candidates?|pms?|applicants?)/i, [
-      "the combo: payments depth, I learn absurdly fast (exhibit A: this site, no real coding background), and I genuinely like people, which makes alignment way easier. plus a design eye, clearly.",
+      "the combo: payments depth, I learn absurdly fast (exhibit A: this site, no real coding background), and I'm great with people, which makes alignment way easier. plus a design eye, clearly.",
       "plenty of PMs can run the process. what I bring is speed to understanding: new domain, new tools, new team, I get to useful fast. happy to prove it in a conversation: EMAIL",
     ], true],
     // 12. management / leadership / working style / what coworkers would say. no claims about direct reports.
     [/(management|leadership|working|work|communication|collaboration|pm|product) style|how do you (lead|manage (people|a team|teams|others))\b|(do|have) you (ever )?(manage|managed|lead|led) (people|a team|teams|direct reports|reports)|direct reports|what kind of (leader|manager|teammate|coworker|colleague|pm|product manager) (are you|is he|would you be)|(how would|what would) (your )?(coworkers|colleagues|teammates|peers|manager|boss|team) (say|describe)|what do (your )?(coworkers|colleagues|teammates|peers|manager|boss|team) (say|think) (about|of) you/i, [
       "lead with context, not control. most PM leadership happens without a reporting line, so it's about making the why clear and giving people room to own the how.",
-      "my teammates would probably say: friendly, quick to pick things up, and very into getting everyone pointed at the same goal. the real version comes from them, later in a real process.",
+      "my teammates would probably say: sharp, fast, and the person who gets everyone pointed at the same goal. the real version comes from them, later in a real process.",
       "clear, direct, and written down. a short doc beats a long meeting, and I'd rather over-share context than have someone guess.",
     ], true],
     // 13. resume / CV / references. above the experience catch-all (which grabs "resume" and "cv").
@@ -258,7 +258,7 @@
       "I need a little more than that. try a button below 👇",
     ], true, "ack"],
     [SERIOUS, [
-      "you got it. straight version, no bits:<ul><li><b>who:</b> Abhiram Kolal, product manager in payments</li><li><b>education:</b> Rutgers '21, UT McCombs MBA '28 (in progress)</li><li><b>strengths:</b> I learn fast, adapt fast, and I'm easy to work with</li><li><b>based:</b> NJ/NYC and Austin, TX</li><li><b>contact:</b> EMAIL · LINKEDIN</li></ul>I'll keep it professional from here. say 'fun mode' anytime to bring the jokes back.",
+      "you got it. straight version, no bits:<ul><li><b>who:</b> Abhiram Kolal, product manager in payments</li><li><b>education:</b> Rutgers '21, UT McCombs MBA '28 (in progress)</li><li><b>strengths:</b> I learn anything fast, adapt instantly, and raise the level of every team I'm on</li><li><b>based:</b> NJ/NYC and Austin, TX</li><li><b>contact:</b> EMAIL · LINKEDIN</li></ul>I'll keep it professional from here. say 'fun mode' anytime to bring the jokes back.",
       "serious mode on. I'm a payments product manager (Rutgers '21, McCombs MBA '28 in progress) who ramps up quickly on anything new. the best ways to reach me are EMAIL and LINKEDIN. ask me anything and I'll answer it straight. 'fun mode' switches it back.",
     ], true],
     [PLAYFUL, [
@@ -296,21 +296,21 @@
     ], true],
     // the obvious answer to the greeting: "what should i know about abhi?"
     [/what (should|do|would|must|can) (i|we|people|someone|one) (know|learn) (about )?(you|him|abhi|abhiram)|what (do|would) you want (me|people|us) to know|what('s| is) (important|worth knowing|the (main|most important|biggest|key) thing) (to know )?(about )?(you|him|abhi)?|(anything|something) (i|we) should know|what (should|do) (i|we) know\??$|^(idk|i don'?t know),? (you tell me|what should i (know|ask))|you tell me[\s?!.]*$|(give me|what are) (the |your )?(highlights|basics|main points|key points)/i, [
-      "the short version: this site is basically me. the 'yooooo' and the bouncing o's are the personality: I grew up right alongside the internet, I'm into cool stuff, and I take myself seriously but still know how to be unserious. the answers underneath are the professional part: payments product manager, Rutgers '21, McCombs MBA in progress. curious, capable, easy to work with. that's the whole idea.",
-      "three things, and this whole site is built around them:<ol><li><b>I'm good at what I do.</b> payments product manager, Rutgers '21, MBA at UT McCombs</li><li><b>I'm curious.</b> I'd never really coded, and I built everything you're looking at because I wanted to figure it out</li><li><b>I'm easy to work with.</b> friendly, outgoing, and fun to be around</li></ol>the 'yooooo' is the personality. the rest is the work.",
-      "that fun and capable aren't opposites. I wanted a site that feels like me: playful on the surface, serious underneath. I'm a payments PM who picks things up fast, gets genuinely excited about cool stuff (tech, anime, food, the Spurs), and makes the teams I'm on better to be part of.",
+      "the short version: this site is basically me. the 'yooooo' and the bouncing o's are the personality: I grew up right alongside the internet, I'm into cool stuff, and I take myself seriously but still know how to be unserious. the answers underneath are the professional part: payments product manager, Rutgers '21, McCombs MBA in progress. sharp, driven, curious, and genuinely great to work with. that's the whole idea.",
+      "three things, and this whole site is built around them:<ol><li><b>I'm good at what I do.</b> payments product manager, Rutgers '21, MBA at UT McCombs</li><li><b>I'm curious.</b> I'd never really coded, and I built everything you're looking at because I wanted to figure it out</li><li><b>I'm the teammate people want.</b> outgoing, driven, and great to be around</li></ol>the 'yooooo' is the personality. the rest is the work.",
+      "that fun and really good at what you do aren't opposites. I wanted a site that feels like me: playful on the surface, serious underneath. I'm a payments PM who learns anything fast, gets genuinely excited about cool stuff (tech, anime, food, the Spurs), and makes the teams I'm on better to be part of.",
     ], true],
     [/why (should|would|do) (i|we|anyone|people) (want to )?(care( about)?|talk to|meet|know|connect with|work with|pay attention to) ?(you|him|abhi|abhiram)?|why (are you|is (he|abhi)) (worth|important|interesting|special)|what'?s so (special|great|interesting) about (you|him|abhi)/i, [
-      "because I'm more than a résumé, and this site is here to show the person behind it: someone who takes the work seriously, learns fast, and is genuinely good to work with. payments PM, McCombs MBA in progress, and the guy who taught himself enough to build all of this. worth a conversation, I think: EMAIL",
-      "you don't have to. but you're still here, so something caught your eye 👀 that's the point of all this: the o's show you the personality, the answers show you I can do the job. curious, capable, easy to work with.",
+      "because I'm more than a résumé, and this site is here to show the person behind it: someone who takes the work seriously, learns at a ridiculous pace, and makes every team better. payments PM, McCombs MBA in progress, and the guy who taught himself enough to build all of this. worth a conversation, I think: EMAIL",
+      "you don't have to. but you're still here, so something caught your eye 👀 that's the point of all this: the o's show you the personality, the answers show you I'm really good at what I do. sharp, driven, and great to work with.",
       "because people who are both fun and good at their job are rarer than they should be. this site is me showing you I'm both: the o's are the fun, the answers are the substance. judge for yourself: EMAIL · LINKEDIN",
     ], true],
     // "this doesn't say much about you": a taste of the personality, then a nudge to actually talk
     [/(doesn'?t|does not|didn'?t|don'?t|do not) (say|tell( me)?|show|explain) (much|a lot|anything|enough)|(not|barely) (much|a lot|enough) (info|information|here|to go on|about you)|(still )?(don'?t|do not) know (anything|much|a lot) about (you|him)|^(is that it|that'?s it|that'?s all|is that all|and\??|and\.\.\.|go on|tell me more|more|say more|keep going|then what|what else)[\s?!.]*$|who (are you|is he|is abhi) (really|actually|for real|deep down)|(the )?real (you|abhi)\??$|what (else|more) (is there|should i know|about you)|(go|dig|get) deeper|beyond (the|your) (resume|résumé|job|linkedin)|what makes you (you|tick|different)|what drives you/i, [
-      "honestly, I'm better in conversation than in a chat bubble. what I can tell you: I'm curious about pretty much everything, I pick things up fast, and I'm easy to work with. the rest is more fun to tell you myself: EMAIL",
+      "honestly, I'm better in conversation than in a chat bubble. what I can tell you: I'm endlessly curious, I learn anything fast, and I make the teams I'm on better. the rest is more fun to tell you myself: EMAIL",
       "the quick version: payments PM, MBA student at McCombs, and the person in the room asking 'wait, how does this actually work?' ask me something specific and I'll give you a taste.",
       "I could list everything, but résumés are boring and I'm not. pick a lane (payments, anime, food, the Spurs) and see where it goes. or skip ahead and say hi: EMAIL",
-      "short answer: I like figuring things out and I like people. the long answer usually comes with coffee ☕ EMAIL · LINKEDIN",
+      "short answer: I'm relentless about figuring things out, and I'm great with people. the long answer usually comes with coffee ☕ EMAIL · LINKEDIN",
     ], true],
     [/is (this|that|it|the yo|this site|this website|this page|this chat|abhi|he|you) (a |an |some )?(joke|prank|satire|parody|bit|troll|meme|gag|real\b|serious|for real|actually serious)|(are|r) you (joking|trolling|kidding|serious|for real|being serious|pranking)|is this (supposed to be )?(a )?(real|actual) (website|site|person|thing)|this (can'?t|cannot) be (real|serious)|(is|was) this (made )?as a joke/i, [
       "not a joke, I promise. I'm a real payments product manager, Rutgers '21, McCombs MBA '28. the site is just written in my actual voice instead of résumé-speak. ask me anything serious and you'll get a serious answer. or say 'serious mode' and I'll drop the bits entirely.",
@@ -401,8 +401,8 @@
       "Abhi is perfect. Abhiram if we're being formal. either works.",
     ], true],
     [/describe (yourself|you|him)|in (one|1|three|3|a few|five|5) words|sum (yourself|you|him|it) up|elevator pitch|tl;?dr|short version|quick (version|summary|rundown)|30 seconds/i, [
-      "in a few words: curious, fast learner, friendly, payments PM.",
-      "the 30-second version: I'm a product manager in payments, I went to Rutgers ('21) and I'm doing my MBA at UT McCombs ('28). I learn new things fast, I like people, and I built this site myself to prove both. EMAIL · LINKEDIN",
+      "in a few words: sharp, driven, endlessly curious, payments PM.",
+      "the 30-second version: I'm a product manager in payments, I went to Rutgers ('21) and I'm doing my MBA at UT McCombs ('28). I learn anything fast, I'm great with people, and I built this site myself to prove it. EMAIL · LINKEDIN",
       "three words: adaptive, outgoing, curious. plus one bonus word: yooooo.",
     ], true],
 
@@ -649,8 +649,8 @@
       "that's a whole conversation, and I take it seriously. for now: if there's a dosa spot nearby, start there.",
     ], true],
     [/introvert or extrovert|extrovert or introvert|(are|r) you (an )?(introvert|extrovert)|social butterfly/i, [
-      "extrovert. friendly, outgoing, will talk to anyone in the room.",
-      "extrovert, easily. I like people, which is a big part of why I like product.",
+      "extrovert. outgoing, high-energy, will talk to anyone in the room.",
+      "extrovert, easily. people energize me, which is a big part of why I'm good at product.",
     ], true],
     [/morning person|night owl|early bird|(do|when do) you (sleep|wake up)/i, [
       "night owl, judging by how many YouTube documentaries I start at 1am.",
@@ -661,8 +661,8 @@
       "that's a debate for a real conversation. come with arguments.",
     ], true],
     [/what'?s your (sign|zodiac|mbti|personality type|enneagram)|myers[- ]briggs|\bmbti\b|what sign are you/i, [
-      "my personality type is 'friendly, outgoing, curious'. that's all the test I need.",
-      "I don't do signs, I do vibes. the vibe is: easy to work with, good to be around.",
+      "my personality type is 'driven, outgoing, endlessly curious'. that's all the test I need.",
+      "I don't do signs, I do vibes. the vibe is: sharp, driven, and great to be around.",
     ], true],
     [/favou?rite (color|colour|book|podcast|author|game|video ?game|app)|what are you reading|what (books?|podcasts?) (do you|are you)/i, [
       "honestly, my 'podcasts' are random YouTube documentaries at 1am. ask me about shows, anime or music, that's where I go deep.",
@@ -890,7 +890,7 @@
       "yooooo. you saw the o's. you tell me.",
       "I'm biased, but yes. obviously.",
       "I built a website with escaping vowels and a chat about myself. draw your own conclusions.",
-      "friendly, outgoing, and I pick things up fast. so yes, I'd say pretty cool.",
+      "outgoing, sharp, and I learn anything fast. so yes, very cool.",
     ]],
     // --- my taste: shows, movies, anime, music, food, sports, and the random stuff ---
     [/fact about (you|him)|something (about|random about) (you|him)|tell me something (i don'?t know|random|about you)|random fact|fun facts? about (you|him)/i, ME_FACTS],
@@ -964,8 +964,8 @@
     [/fun fact|did you know|teach me|something (smart|interesting|cool)|interesting/i, FUN_FACTS],
     [/joke|make me laugh|something funny|tell me something fun/i, JOKES],
     [/why (should (i|we) )?hire|why hire|reasons to|convince me|sell me|pitch (him|me|yourself)|top (5|five) reasons|why (you|him)\b/i, [
-      "why I'm worth the call:<ol><li><b>I learn fast. really fast.</b> I had no real coding background, and I still built this whole site (the bouncing o's, this chat, all of it)</li><li><b>I adapt.</b> new team, new domain, new tools: I get up to speed quickly and start contributing</li><li><b>payments product manager</b>, so I can talk engineering and business in the same meeting</li><li><b>Rutgers '21, UT McCombs MBA '28</b> in progress, always sharpening the business side</li><li><b>friendly and outgoing.</b> I genuinely like people, and it shows on a team</li></ol>I'm based between NJ/NYC and Austin, TX. reach me at EMAIL or on LINKEDIN.",
-      "short version: give me something I've never done before and watch what happens. I'd never really coded, and I still built this site, animations and chat included, because I decided it was happening. add payments product experience, an MBA in progress at UT McCombs, and a genuinely friendly, outgoing personality, and you get someone who ramps up fast and makes the team better. EMAIL · LINKEDIN",
+      "why I'm worth the call:<ol><li><b>I learn fast. really fast.</b> I had no real coding background, and I still built this whole site (the bouncing o's, this chat, all of it)</li><li><b>I adapt.</b> new team, new domain, new tools: I get up to speed quickly and start contributing</li><li><b>payments product manager</b>, so I can talk engineering and business in the same meeting</li><li><b>Rutgers '21, UT McCombs MBA '28</b> in progress, always sharpening the business side</li><li><b>great with people.</b> outgoing and high-energy, and it shows on every team I'm on</li></ol>I'm based between NJ/NYC and Austin, TX. reach me at EMAIL or on LINKEDIN.",
+      "short version: give me something I've never done before and watch what happens. I'd never really coded, and I still built this site, animations and chat included, because I decided it was happening. add payments product experience, an MBA in progress at UT McCombs, and an outgoing, high-energy personality, and you get someone who ramps up fast and raises the level of the whole team. EMAIL · LINKEDIN",
     ]],
     [/what (does|do) (a |an )?(pm|product manager)s? (do|actually do)|what is (a )?product manag|what('s| is) product management/i, [
       "a product manager figures out what to build and why. the job, roughly:<ul><li>find the real customer problem</li><li>decide what matters most (and what waits)</li><li>get engineering, design and business pointed the same way</li><li>ship, measure, learn, repeat</li></ul>I do this in payments. more on LINKEDIN.",
@@ -994,7 +994,7 @@
     ]],
     [/what('s he| are you| is he) like|personality|vibe|as a person|(is he|are you) (friendly|outgoing|easy to work with|a team player)|team player|work(ing)? with (him|you)/i, [
       "friendly and outgoing. I'm the person who talks to everyone in the room and remembers what they said.",
-      "easy to work with, friendly, outgoing, and quick to adapt. I like making the work more fun for everyone around me.",
+      "sharp, outgoing, and quick to adapt. I like making the work more fun for everyone around me.",
     ]],
     [/who (built|made|coded|designed|wrote) (this|the site|you|it)|how did (he|you) (build|make)|how (was|is) (this|the site) (built|made)|can (he|you) code|do(es)? (he|you) code|(is he|are you) (technical|a developer|an engineer|a coder)|quick learner|learn(s)? fast|adapt/i, [
       "I built this whole site myself. when I want to get something done, I make sure it happens.",
@@ -1004,7 +1004,7 @@
 
     // --- interview-style questions: lists + a little humor ---
     [/strength|what are you good at|best (skill|quality|qualities)|superpower/i, [
-      "my strengths, in list form because I'm a PM:<ol><li><b>I learn fast.</b> new domain, new tool, new codebase: I ramp quickly (this site is proof)</li><li><b>I adapt.</b> priorities shift, I shift with them without losing the plot</li><li><b>I translate.</b> engineering, business, design: I can sit in all those rooms and get everyone pointed the same way</li><li><b>I'm easy to work with.</b> friendly, outgoing, and I actually like people</li></ol>",
+      "my strengths, in list form because I'm a PM:<ol><li><b>I learn fast.</b> new domain, new tool, new codebase: I ramp quickly (this site is proof)</li><li><b>I adapt.</b> priorities shift, I shift with them without losing the plot</li><li><b>I translate.</b> engineering, business, design: I can sit in all those rooms and get everyone pointed the same way</li><li><b>I'm great with people.</b> outgoing, high-energy, and the teammate people want around</li></ol>",
     ]],
     [/weakness|what are you bad at|areas? (of|for) (improvement|growth)|flaw/i, [
       "honest answer: I get excited about new problems and want to fix all of them at once. I've learned to prioritize hard (shoutout RICE) and finish things. this website shipped, didn't it?",
