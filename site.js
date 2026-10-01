@@ -12,6 +12,9 @@
     "a PM's favorite exercise? stretch goals.",
     "why did the roadmap go to therapy? too many dependencies.",
     "an engineer asks a PM how long it'll take. the PM says 'it depends.' that's the whole joke. that's every meeting.",
+    "why did the credit card go to therapy? it had too many unresolved disputes.",
+    "my favorite kind of meeting is the one that could've been an email. my second favorite is the email that could've been a meme.",
+    "what's a PM's favorite plant? the roadmap. it never stops growing.",
   ];
   const FUN_FACTS = [
     "fun fact: the first general-purpose charge card, Diners Club, launched in 1950 after a guy forgot his wallet at dinner (or so the legend goes).",
@@ -21,6 +24,10 @@
     "fun fact: the US Federal Reserve launched FedNow, its instant payments service, in July 2023. checks are still hanging on though.",
     "fun fact: a card tap usually gets approved in under two seconds, but the money actually moves (settles) later, often the next business day.",
     "fun fact: ISO 20022, the data standard modern payments are moving to, was first published in 2004. payments move slow. the standards move slower.",
+    "fun fact: the first product ever scanned with a barcode at a checkout was a pack of Wrigley's gum, in Ohio, in 1974.",
+    "fun fact: QR codes were invented in 1994 by Denso Wave to track car parts. now they're how we read restaurant menus.",
+    "fun fact: Apple Pay and Google Pay don't send your real card number to the store. they send a stand-in 'token', so a hacked register can't leak it.",
+    "fun fact: the US got its first big real-time payments network, RTP from The Clearing House, in 2017, years after countries like the UK.",
   ];
   // first match wins. each intent has a few answers so repeat questions don't get the same line twice.
   // answers are fixed html; typed text is only ever shown via textContent.
@@ -90,7 +97,7 @@
     ], true],
 
     // --- questions about the chat itself: Abhi Intelligence (AI) answers ---
-    [/(save|store|record|log|track|keep|see)(s|d|ing)? (my|this|these|what i|our|me)|privacy|is this (private|saved|recorded)|data/i, [
+    [/(save|store|record|log|track|keep|see)(s|d|ing)? (my|this|these|what i|our|me)|privacy|is this (private|saved|recorded)|(collect|collecting|store|storing|keep|keeping) (my )?data/i, [
       "nope. nothing you type here is saved or sent anywhere. AI_NAME runs entirely in your browser, and it all disappears when you refresh.",
       "this chat is private. no logs, no tracking, no cookies. refresh and it's gone.",
     ]],
@@ -154,6 +161,11 @@
       "my sneaker collection and my budget spreadsheet are not on speaking terms.",
       "I'd make a slide deck about whether to make a slide deck. and it'd have an appendix.",
       "I call it 'user research' when I ask my friends which restaurant to go to.",
+      "I've called meetings a 'quick sync' that were neither quick nor a sync.",
+      "my notes app has 400 ideas and 3 of them are done. this website is one of the 3.",
+      "I'll research a $40 purchase for three weeks, then buy sneakers in 30 seconds.",
+      "I name files final_final_v3_ACTUAL. and then make a v4.",
+      "I'm the friend who turns a group dinner plan into a decision framework.",
     ]],
     [/fuck|shit|bitch|\bwtf\b|\bstfu\b|asshole|dumbass/i, [
       "whoa. keep it PG, this is a professional website (mostly).",
@@ -186,7 +198,7 @@
     [/^(lol|lmao|haha|💀|😂)/i, [
       "glad you're having fun. ask me anything.", "ikr.",
     ]],
-    [/i love you|marry me|do you like me|are we friends|you('re| are) (so )?(cute|cool|funny|smart|awesome|great)/i, [
+    [/i love you|marry me|do you like me|are we friends|you('re| are) (so )?(cute|cool|funny|smart|awesome|great)[\s!.]*$/i, [
       "appreciate that 🙏 let's start with LinkedIn and see where it goes: LINKEDIN",
       "stop, you're gonna make the o's blush.",
     ]],
@@ -238,6 +250,53 @@
     [/who (built|made|coded|designed) (this|the site|you|it)|how did (he|you) (build|make)|how (was|is) (this|the site) (built|made)|can (he|you) code|do(es)? (he|you) code|(is he|are you) (technical|a developer|an engineer|a coder)|quick learner|learn(s)? fast|adapt/i, [
       "I built this whole site myself, and I had no real coding background going in. I picked up the web dev as I went, leaned on the resources around me, and shipped it: the bouncing o's, this chat, all of it.",
       "fun story: I'm a product manager, not an engineer, and I'd never really coded before this. figured it out anyway. that's kind of my thing: drop me into something new and I pick it up fast.",
+    ]],
+
+    // --- interview-style questions: lists + a little humor ---
+    [/strength|what are you good at|best (skill|quality|qualities)|superpower/i, [
+      "my strengths, in list form because I'm a PM:<ol><li><b>I learn fast.</b> new domain, new tool, new codebase: I ramp quickly (this site is proof)</li><li><b>I adapt.</b> priorities shift, I shift with them without losing the plot</li><li><b>I translate.</b> engineering, business, design: I can sit in all those rooms and get everyone pointed the same way</li><li><b>I'm easy to work with.</b> friendly, outgoing, and I actually like people</li></ol>",
+    ]],
+    [/weakness|what are you bad at|areas? (of|for) (improvement|growth)|flaw/i, [
+      "honest answer: I get excited about new problems and want to fix all of them at once. I've learned to prioritize hard (shoutout RICE) and finish things. this website shipped, didn't it?",
+      "the classic interview answer is 'I work too hard.' my real one: I'll fall down a rabbit hole learning something new. the upside is I come out the other side knowing it.",
+    ]],
+    [/motivat|inspire me|words of wisdom|life advice|pep talk/i, [
+      "ship it. you can fix it in v2.",
+      "nobody starts out knowing how. I didn't know how to build a website a few weeks ago. now look at these o's.",
+      "done is better than perfect. but make the o's bounce anyway.",
+      "the best way to learn something is to need it for a real project. pick one and start.",
+    ]],
+
+    // --- more smart stuff ---
+    [/\bapi\b|\bapis\b/i, [
+      "an API is how two pieces of software talk to each other. think of it like a restaurant menu:<ul><li>the menu lists what you can order (the endpoints)</li><li>you place an order in a set format (the request)</li><li>the kitchen sends back your food (the response)</li><li>you never go into the kitchen (the internals stay hidden)</li></ul>almost every payment you make goes through a bunch of APIs.",
+    ]],
+    [/\bagile\b|\bscrum\b|\bsprints?\b|stand-?up|\bkanban\b/i, [
+      "agile in one breath: build in small chunks, show it to people early, adjust based on what you learn, repeat.<ul><li><b>scrum</b>: work in short sprints (often 2 weeks) with planning, daily standups and a retro</li><li><b>kanban</b>: a continuous flow of work on a board, with limits on how much is in progress</li></ul>the point isn't the ceremonies. it's learning faster than you'd otherwise.",
+    ]],
+    [/\bprd\b|product requirements?|spec doc|requirements doc/i, [
+      "a PRD (product requirements document) is the 'what and why' of a feature. a good one covers:<ol><li>the problem and who has it</li><li>what success looks like (metrics)</li><li>what's in scope and what's not</li><li>user flows and edge cases</li><li>open questions and risks</li></ol>short and clear beats long and perfect.",
+    ]],
+    [/metric|\bkpis?\b|\bokrs?\b|measure success|how do you measure/i, [
+      "how I'd think about measuring a product:<ul><li><b>north star</b>: the one number that captures the value users get</li><li><b>activation</b>: do new users reach the 'aha' moment?</li><li><b>retention</b>: do they come back?</li><li><b>guardrails</b>: things that must not get worse (errors, fraud, support tickets)</li></ul>in payments, guardrails matter a lot. a faster checkout isn't a win if fraud doubles.",
+    ]],
+    [/chargebacks?|dispute (a |my )?(charge|transaction)|how do disputes work/i, [
+      "a chargeback, step by step:<ol><li>you see a charge you don't recognize (or never got the item) and dispute it with your bank</li><li>your bank (the issuer) pulls the money back from the merchant's bank</li><li>the merchant can fight it with evidence, like receipts or tracking info</li><li>the card network's rules decide who wins</li></ol>great for consumers, expensive for merchants, so fraud prevention matters on both sides.",
+    ]],
+    [/interchange|swipe fees?|merchant fees?|processing fees?|why do stores (hate|charge for) (credit )?cards/i, [
+      "when you pay with a card, the store doesn't get 100%. the main piece is interchange: a fee the merchant's bank pays to your card's bank, with rates set by the card networks. in the US it's often around 1.5% to 3% for credit cards. that's partly what funds your rewards points.",
+    ]],
+    [/tokeni[sz]|apple pay|google pay|digital wallet|tap to pay/i, [
+      "tokenization swaps your real card number for a stand-in 'token'.<ul><li>your phone stores a token, not your card number</li><li>each payment adds a one-time code, so a stolen token isn't much use</li><li>the store never sees your real number</li></ul>that's why paying with your phone is usually safer than swiping.",
+    ]],
+    [/real[- ]time payments?|\brtp\b|fednow|instant payments?/i, [
+      "real-time payments move money between banks in seconds, any time, any day, including weekends. in the US the big rails are RTP (from The Clearing House, 2017) and FedNow (from the Federal Reserve, 2023). the catch: they're usually irreversible, so fraud prevention has to happen before you hit send.",
+    ]],
+    [/\bkyc\b|\baml\b|know your customer|anti[- ]money|money laundering/i, [
+      "KYC and AML are the 'who are you, and is this legit' parts of finance:<ul><li><b>KYC (know your customer)</b>: verifying you're really you when you open an account</li><li><b>AML (anti-money laundering)</b>: monitoring transactions for patterns that look like dirty money moving around</li></ul>it's why opening a bank account asks for ID, and why some transfers get held for review.",
+    ]],
+    [/open banking|\bplaid\b|connect (my|your) bank/i, [
+      "open banking means you can let apps access your bank data (with your permission) through secure APIs, instead of handing over your password. it's what powers budgeting apps, instant account verification, and 'pay by bank' at checkout.",
     ]],
 
     // --- the real stuff ---
