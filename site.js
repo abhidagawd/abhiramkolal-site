@@ -1126,7 +1126,9 @@
     const m = document.createElement("div"); m.className = "msg bot"; m.innerHTML = html; log.appendChild(m);
     if (withChips) {
       const c = document.createElement("div"); c.className = "chips";
-      shownChips = recruiterMode ? RECRUITER_CHIPS : sample(SUGGESTIONS.filter(s => s !== q.placeholder), 5);
+      shownChips = recruiterMode ? RECRUITER_CHIPS
+        : shownChips.length ? sample(SUGGESTIONS.filter(s => s !== q.placeholder), 5)
+        : [SUGGESTIONS[0], ...sample(SUGGESTIONS.slice(1), 4)];   // greeting always leads with "what should I know?"
       shownChips.forEach(t => { const b = document.createElement("button"); b.type = "button"; b.textContent = t; b.onclick = () => send(t); c.appendChild(b); });
       log.appendChild(c);
     }
@@ -1172,6 +1174,8 @@
   ask.onclick = open;
   document.getElementById("close").onclick = close;
   addEventListener("keydown", e => { if (e.key === "Escape" && chat.classList.contains("open")) close(); });
+  // tab on an empty bar fills in the suggested question
+  q.addEventListener("keydown", e => { if (e.key === "Tab" && !e.shiftKey && !q.value) { e.preventDefault(); q.value = q.placeholder; } });
   form.onsubmit = e => { e.preventDefault(); send(q.value.trim() || q.placeholder); q.value = ""; };
 })();
 
