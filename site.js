@@ -158,7 +158,7 @@
       "I've got stories, but they need more context than a chat bubble. when things go sideways I don't hide it, I find the root cause and fix forward. happy to walk through one: EMAIL",
     ], true],
     // 6. what have you shipped / accomplishments / portfolio / case studies. no invented wins: tease, then route live.
-    [/what (have|did) you (ship|shipped|build|built|launch|launched|deliver|delivered|accomplish|accomplished|work on|worked on)\b(?! (this|the site|it|that|with)\b)|(biggest|proudest|greatest|best|top|favou?rite|key|major) (accomplishments?|achievements?|wins?|launch(es)?|projects?)\b|accomplishments?|achievements?|(products?|projects?|things?|launch(es)?|features?|work) (you'?re|you are|you were|he'?s|he is) (most )?proud of|proud(est)? of (professionally|at work|in your career)|portfolio|case stud(y|ies)|work samples?|examples? of (your )?(work|projects?)|track record/i, [
+    [/^(?!.*\b(outside|off the clock|personal|non-?work|unprofessional|greeting|casual|feels)\b)(?:.*)(?:what (have|did) you (ship|shipped|build|built|launch|launched|deliver|delivered|accomplish|accomplished|work on|worked on)\b(?! (this|the site|it|that|with)\b)|(biggest|proudest|greatest|best|top|favou?rite|key|major) (accomplishments?|achievements?|wins?|launch(es)?|projects?)\b|accomplishments?|achievements?|(products?|projects?|things?|launch(es)?|features?|work) (you'?re|you are|you were|he'?s|he is) (most )?proud of|proud(est)? of (professionally|at work|in your career)|portfolio|case stud(y|ies)|work samples?|examples? of (your )?(work|projects?)|track record)/i, [
       "the good stuff needs real context, so I'd rather walk you through it live than turn it into chatbot bullets: EMAIL. the one I can show you right now is this site. no real coding background, built it anyway.",
       "most payments product work isn't the kind you can post publicly, so no public portfolio. happy to walk through it on a call though: EMAIL · LINKEDIN",
     ], true],
@@ -306,7 +306,7 @@
       "because people who are both fun and good at their job are rarer than they should be. this site is me showing you I'm both: the o's are the fun, the answers are the substance. judge for yourself: EMAIL · LINKEDIN",
     ], true],
     // "this doesn't say much about you": a taste of the personality, then a nudge to actually talk
-    [/(doesn'?t|does not|didn'?t|don'?t|do not) (say|tell( me)?|show|explain) (much|a lot|anything|enough)|(not|barely) (much|a lot|enough) (info|information|here|to go on|about you)|(still )?(don'?t|do not) know (anything|much|a lot) about (you|him)|^(is that it|that'?s it|that'?s all|is that all|and\??|and\.\.\.|go on|tell me more|more|say more|keep going|then what|what else)[\s?!.]*$|who (are you|is he|is abhi) (really|actually|for real|deep down)|(the )?real (you|abhi)\??$|what (else|more) (is there|should i know|about you)|(go|dig|get) deeper|beyond (the|your) (resume|résumé|job|linkedin)|what makes you (you|tick|different)|what drives you/i, [
+    [/(doesn'?t|does not|didn'?t|don'?t|do not) (say|tell( me)?|show|explain) (much|a lot|anything|enough)|(not|barely) (much|a lot|enough) (info|information|here|to go on|about you)|(still )?(don'?t|do not) know (anything|much|a lot) about (you|him)|^(is that it|that'?s it|that'?s all|is that all|and\??|and\.\.\.|go on|tell me more|more|say more|keep going|then what|what else)[\s?!.]*$|who (are you|is he|is abhi) (really|actually|for real|deep down)|(the )?real (you|abhi)\??$|what (else|more) (is there|should i know|about you)|(go|dig|get) deeper|beyond (the|your) (resume|résumé|job|linkedin)|what makes you (you|tick|different)/i, [
       "honestly, I'm better in conversation than in a chat bubble. what I can tell you: I'm endlessly curious, I learn anything fast, and I make the teams I'm on better. the rest is more fun to tell you myself: EMAIL",
       "the quick version: payments PM, MBA student at McCombs, and the person in the room asking 'wait, how does this actually work?' ask me something specific and I'll give you a taste.",
       "I could list everything, but résumés are boring and I'm not. pick a lane (payments, anime, food, the Spurs) and see where it goes. or skip ahead and say hi: EMAIL",
@@ -381,7 +381,7 @@
       "it's the DVD screensaver. if you grew up when I did, you've definitely stared at one waiting for it to hit the corner. here, each o breaks out of my 'yooooo', changes color when it hits a wall, glows when it nails a corner, and then finds its way home.",
       "a little tribute to the DVD logo. they bounce for 15 seconds, rest for 15, and each one finds its own way back. I may have spent too long tuning the physics. no regrets.",
     ], true],
-    [/(nice|cool|sick|fire|clean|dope|great|awesome|amazing|beautiful|fun|creative|hard|slick|sleek|neat|fresh|unique) (site|website|page|chat|design|idea|concept|vibe)|(site|website|page|chat|design) (is|looks) (so )?(fire|sick|cool|dope|clean|nice|hard|great|amazing|awesome|fun|creative|good)|(love|like|dig|loving) (the|this|your) (site|website|page|o'?s|chat|vibe|design|idea)|this is (actually |so |really |lowkey )?(cool|sick|fire|dope|hard|clean|awesome|amazing|creative|genius|fun|great)|(i'?m|im) (impressed|obsessed)|10\/10/i, [
+    [/(actually |kinda |lowkey |really |so )?(impressive|genius|incredible|insane|next level|elite)\b|(nice|cool|sick|fire|clean|dope|great|awesome|amazing|beautiful|fun|creative|hard|slick|sleek|neat|fresh|unique) (site|website|page|chat|design|idea|concept|vibe)|(site|website|page|chat|design) (is|looks) (so )?(fire|sick|cool|dope|clean|nice|hard|great|amazing|awesome|fun|creative|good)|(love|like|dig|loving) (the|this|your) (site|website|page|o'?s|chat|vibe|design|idea)|this is (actually |so |really |lowkey )?(cool|sick|fire|dope|hard|clean|awesome|amazing|creative|genius|fun|great)|(i'?m|im) (impressed|obsessed)|10\/10/i, [
       "appreciate that a lot 🙏 I built it myself, with no real coding background. when I want something done, I make it happen. glad it landed.",
       "thank you! that's exactly the reaction I was going for: fun to look at, real info underneath.",
       "that means a lot. tell a friend, the o's love an audience.",
@@ -742,9 +742,49 @@
     [/(do|did) you (drink|smoke|vape|get high|party)|\b(weed|alcohol|beer)\b/i, [
       "keeping this one PG and professional 🙂 ask me about my favorite shows instead.",
     ], true],
-    [/(outside|after) (of )?work|off the clock|in (your|his) (free|spare) time|when (you'?re|you are) not working|on (the )?weekends?/i, [
+    [/^(?!.*(accomplish|achiev|proud))(?:.*)(?:(outside|after) (of )?work|off the clock|in (your|his) (free|spare) time|when (you'?re|you are) not working|on (the )?weekends?)/i, [
       () => `off the clock? probably ${and(sample(HOBBIES, 2))}. ask about either.`,
       "music, anime, food and hoops cover most of it. the deep cuts you have to ask for 😄",
+    ], true],
+    // --- round 5: tone concerns, character, values, humor, copying the site ---
+    [/(greeting|yo|site|website|this|it|tone|vibe|chat|page|portfolio) (feels|seems|looks|is|reads|sounds) (a bit |a little |kinda |kind of |very |so |too |really |pretty )?(unprofessional|casual|informal|off|odd|strange|unserious)|most unprofessional|why does (your|this|the) (website|site|chat|bot|page) (talk|sound|speak|write) like (that|this)|(would|did) you put (yo|yooooo|this) on (your|a) (resume|résumé|linkedin|cv)|(is this|is it) appropriate for (linkedin|work|a portfolio|recruiters)|what would (your )?(boss|manager|coworkers|company|employer|recruiters?) (think|say)|does your (company|boss|job|employer|manager) know/i, [
+      "FIRST:fair. my résumé and LinkedIn are fully buttoned up. this site is the personality layer on top: I grew up with the internet, and I'd rather show who I am than hide it. I'd be proud for anyone I work with to see it.",
+      "I'd stand behind every word here in any room. the work is serious, the greeting is friendly. both can be true. want it straight? type 'serious mode'.",
+    ], true],
+    [/i find (this|it|that) (kind of |kinda |a bit |a little |very |really )?(disrespectful|rude|offensive|insulting|condescending)|(this|that|it) (feels|seems|is) (disrespectful|condescending|insulting)/i, [
+      "FIRST:I hear you, and I'm sorry it landed that way. 'yooooo' is meant as a warm hello, nothing more. happy to keep it straight from here: type 'serious mode', or reach me directly at EMAIL.",
+    ], true],
+    [/(are you|r you) (trying to be |supposed to be )?(funny|a comedian|a comic|joking around)|you'?re not (funny|that funny)|not funny|^(unfunny|cringe joke)/i, [
+      "a little funny, very serious about the work. the jokes are just the garnish.",
+      "tough crowd 😅 the real me lands them better in person. and the work? no jokes there.",
+    ], true],
+    [/^impress me[\s!.]*$|wow me|blow my mind|convince me (you'?re|that you are) (good|worth it|smart)/i, [
+      "I had no real coding background and built everything you're looking at, the bouncing o's included. now imagine what I do with a real problem and a real team.",
+      "payments PM, McCombs MBA in progress, 2nd degree black belt, and I built this site from scratch. still not impressed? let's talk: EMAIL",
+    ], true],
+    [/(biggest|proudest|best|favorite) (accomplishment|achievement|win)s? (outside|off|away from) (of )?(work|the job)|what are you (most )?proud of|proudest (moment|thing)/i, [
+      "outside of work? a 2nd degree black belt and this website. both took real discipline, and both are things I chose to finish.",
+      "earning a 2nd degree black belt. years of showing up. that habit is in everything I do now.",
+    ], true],
+    [/what (makes|keeps) you (happy|going|motivated|up at night)|what motivates you|what drives you|what are your values|what do you (care|value) (about|most)|what('s| is) (important|most important) to you|what do you stand for/i, [
+      "curiosity, people, and doing things well. if I'm learning something, around good people, and building something that matters, I'm happy.",
+      "figuring things out. there's nothing better than walking into something I don't understand and walking out knowing it cold.",
+    ], true],
+    [/how would (your )?(friends|coworkers|colleagues|teammates|people) describe you|what do (people|others|your friends) (say|think) (about|of) you|what('s| is) your reputation|why do people like you|what are you known for/i, [
+      "the one who figures it out, the one who makes the room more fun, and the one with a recommendation for everything. ask around, I'll wait.",
+      "sharp, outgoing, and dependable. the person you call when something's new and needs to get done.",
+    ], true],
+    [/(are|r) you (humble|confident|arrogant|cocky|full of yourself|a narcissist|conceited)|you (seem|sound) (cocky|arrogant|full of yourself|confident)/i, [
+      "confident, not cocky. everything I say here, I'll back up in a real conversation.",
+      "confident in the work, humble about how much there is to learn. that combo is the whole point.",
+    ], true],
+    [/(why would|who would|why did) (you|anyone|someone) (make|build) a (chat ?bot|bot|chat|website) (about|of) (yourself|themselves)|^who does that\??$|this is (so |a bit |kinda )?(extra|a lot|over the top)/i, [
+      "fair 😄 but a résumé can't tell you what I'm like. this can. and it answers at 3am.",
+      "extra? maybe. memorable? definitely. you're still here.",
+    ], true],
+    [/(can|could|may) i (steal|copy|use|borrow|take) (this|your|the) (idea|site|website|design|o'?s|chat|bot)|open[- ]source|source code|see (the|your) code|\bgithub\b|\brepo\b/i, [
+      "inspiration is free, the o's are mine 😄 make yours your own, that's what makes it good.",
+      "take the energy, leave the o's. the best version of a site like this is the one that sounds like you.",
     ], true],
     // --- round 4: presence checks, the bot itself, reaching out, feedback, goodbyes, your story, career depth, tools, travel, sneakers ---
     [/^(abhi|abhiram|ayo|ayy|ayyy|hii|heyy|helloo|hola abhi|oi)[\s!?.]*$/i, [
@@ -989,7 +1029,7 @@
       "outgoing, sharp, and I learn anything fast. so yes, very cool.",
     ]],
     // --- my taste: shows, movies, anime, music, food, sports, and the random stuff ---
-    [/fact about (you|him)|something (about|random about) (you|him)|tell me something (i don'?t know|random|about you)|random fact|fun facts? about (you|him)/i, ME_FACTS],
+    [/(interesting|cool|surprising|unique|weird|fun) (thing|fact)s? about (you|him)|something (people|most people|nobody|no one) (don'?t|doesn'?t) know about (you|him)|something interesting about (you|him)|fact about (you|him)|something (about|random about) (you|him)|tell me something (i don'?t know|random|about you)|random fact|fun facts? about (you|him)/i, ME_FACTS],
     [/what (are you|you|have you been) (watching|bingeing|binging)|watching (anything|lately|right now)|what('s| is) on your (watchlist|tv)|\bshows?\b.*\b(watch|like|favou?rite|recommend|rec)\b|\b(watch|like|favou?rite|recommend|rec)\b.*\bshows?\b|tv show|\bseries\b|binge|netflix|\bhbo\b|what (should i|do you|to) watch|currently watching|breaking bad|better call saul|the wire\b(?! transfer)|severance|game of thrones|snowfall|abbott|boondocks|black mirror|\bsuits\b|community|fresh prince|impractical jokers|shrinking|\batlanta\b/i, [
       () => `lately? ${and(sample(SHOWS, 2))}. ask me again and I'll give you a different rec.`,
       () => `if you only watch one show this month, make it ${pickOne(SHOWS)}. trust me.`,
@@ -1240,7 +1280,7 @@
   // "ur" is ambiguous (your / you're), so we try both readings.
   const SLANG = {
     u: "you", ya: "you", yu: "you", r: "are", y: "why", yr: "your", urs: "yours",
-    wat: "what", wut: "what", wht: "what", whats: "what's", wats: "what's", hows: "how's", wheres: "where's", whos: "who's",
+    wat: "what", wut: "what", wht: "what", waht: "what", whta: "what", wher: "where", whre: "where", whats: "what's", wats: "what's", hows: "how's", wheres: "where's", whos: "who's",
     im: "i'm", hes: "he's", youre: "you're", ure: "you're", dont: "don't", cant: "can't", doesnt: "doesn't",
     abt: "about", bc: "because", cuz: "because", pls: "please", plz: "please", rn: "right now", tysm: "thank you",
     wyd: "what are you doing", wya: "where are you at", hbu: "how about you", wbu: "how about you", n: "and", w: "with", hru: "how are you", hyd: "how you doing", wsg: "what's good", wsp: "what's up", nm: "not much", gm: "gm",
@@ -1249,6 +1289,28 @@
     const base = text.toLowerCase().replace(/[’‘]/g, "'").replace(/\bw\//g, "with ").replace(/\s+/g, " ").replace(/([a-z])\1{2,}/g, "$1")   // "heyyy" -> "hey"
       .replace(/\b[a-z]+\b/g, w => SLANG[w] ?? w);
     return [base.replace(/\bur\b/g, "your"), base.replace(/\bur\b/g, "you're")];
+  }
+  // typo rescue ("experiance", "whta should i know", "linkdin"): cheap edit distance against words the intents care about
+  const KEYWORDS = ["experience", "education", "hobbies", "linkedin", "contact", "email", "resume", "rutgers", "mccombs", "school",
+    "based", "where", "what", "should", "know", "music", "movies", "shows", "anime", "food", "sports", "karate", "saxophone",
+    "sneakers", "payments", "product", "hire", "location", "background", "career", "college", "favorite", "watching", "different",
+    "interesting", "surprise", "serious", "recruiter", "portfolio", "website", "professional"];
+  function dist(a, b) {
+    const d = Array.from({ length: a.length + 1 }, (_, i) => [i]);
+    for (let j = 1; j <= b.length; j++) d[0][j] = j;
+    for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++)
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    return d[a.length][b.length];
+  }
+  function matchTypos(t) {
+    let changed = false;
+    const fixed = t.replace(/[a-z]{4,}/g, w => {
+      if (KEYWORDS.includes(w)) return w;
+      const best = KEYWORDS.find(k => Math.abs(k.length - w.length) <= 2 && dist(w, k) <= (w.length < 6 ? 1 : 2));
+      if (best) { changed = true; return best; }
+      return w;
+    });
+    return changed ? INTENTS.find(([re]) => readings(fixed).some(x => re.test(x))) : undefined;
   }
   function send(text) {
     text = text.trim(); if (!text) return;
@@ -1259,7 +1321,7 @@
     const asked = readings(text);
     const kind = lastTopic && (asked.some(t => DOUBT.test(t)) ? "doubt" : asked.some(t => WHY.test(t)) ? "why" : asked.some(t => CLARIFY.test(t)) ? "clarify" : null);
     if (kind) { const reply = followUp(kind); setTimeout(() => { t.remove(); bot(reply); }, 420); return; }
-    const hit = INTENTS.find(([re]) => asked.some(t => re.test(t)));
+    const hit = INTENTS.find(([re]) => asked.some(t => re.test(t))) || matchTypos(asked[0]);
     if (hit && (hit[0] === RECRUITER || hit[0] === SERIOUS)) recruiterMode = true;
     if (hit && hit[0] === PLAYFUL) recruiterMode = false;
     if (!hit || !hit[3]) lastTopic = hit || null;   // acks like "cool" keep the previous topic alive
