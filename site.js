@@ -621,7 +621,7 @@
       "nope, no recruiting happening here. just my corner of the internet. I'm a product manager in payments: LINKEDIN",
       "not hiring anyone through a chatbot, sadly. but if you're building something cool, I'd love to hear about it: EMAIL",
     ], true],
-    [/freelanc|consult(ing|ant)?\b|side (gig|work|project for me)|(can|could|would) you (build|make|design) (me|us) (a |an )?(site|website|app|logo|one)|can you make me one|how much (do|would) you charge|(your|what are your) rates?\b|hire you (for|to build)/i, [
+    [/freelanc|consult(ing|ant)?\b|\bside (gig|work|project for me)|(can|could|would) you (build|make|design) (me|us) (a |an )?(site|website|app|logo|one)|can you make me one|how much (do|would) you charge|(your|what are your) rates?\b|hire you (for|to build)/i, [
       "I'm not running a web shop out of my chat 😄 but if you've got something interesting, tell me about it: EMAIL",
       "this one was a labor of love, not a service. that said, I'm always curious about cool projects: EMAIL",
     ], true],
@@ -629,7 +629,7 @@
       "honestly? the internet raised me 😄 these days I'm between NJ/NYC and Austin, TX.",
       "I'm a kid of the smartphone era, which is the real answer. location-wise, I'm between NJ/NYC and Austin these days.",
     ], true],
-    [/(are|r) you (indian|desi|south indian|brown|asian)|what'?s your (ethnicity|background|heritage|culture|nationality)|where (are|is) your (family|parents) from|what are you\??$/i, [
+    [/(are|r) you (indian|desi|south indian|brown|asian)|what'?s your (ethnicity|background|heritage|culture|nationality)|where (are|is) your (family|parents) from/i, [
       "South Indian, which is why I have strong opinions about dosa 🙂",
       "South Indian roots. ask me about dosa and you'll see how serious I am about it.",
     ], true],
@@ -741,6 +741,102 @@
     ], true],
     [/(do|did) you (drink|smoke|vape|get high|party)|\b(weed|alcohol|beer)\b/i, [
       "keeping this one PG and professional 🙂 ask me about my favorite shows instead.",
+    ], true],
+    [/(outside|after) (of )?work|off the clock|in (your|his) (free|spare) time|when (you'?re|you are) not working|on (the )?weekends?/i, [
+      () => `off the clock? probably ${and(sample(HOBBIES, 2))}. ask about either.`,
+      "music, anime, food and hoops cover most of it. the deep cuts you have to ask for 😄",
+    ], true],
+    // --- round 4: presence checks, the bot itself, reaching out, feedback, goodbyes, your story, career depth, tools, travel, sneakers ---
+    [/^(abhi|abhiram|ayo|ayy|ayyy|hii|heyy|helloo|hola abhi|oi)[\s!?.]*$/i, [
+      "yooooo, that's me 👋 what do you wanna know?",
+      "present. ask me anything.",
+    ], true],
+    [/^(anyone|anybody|is anyone|is anybody|are you|you|r you|is abhi) ?(there|here|home|online|around|awake)\??[\s!?.]*$|^(hello|helo|hi)\?{2,}$/i, [
+      "always here 👋 AI_NAME doesn't sleep. ask away.",
+      "right here. what's up?",
+    ], true],
+    [/what (are|r) you\??$|what is (abhi intelligence|this bot|this chat ?bot|this thing)|why (is it|are you) called abhi intelligence|what('s| is) abhi intelligence/i, [
+      "I'm AI_NAME: Abhi's answers, on autopilot. everything I say came from him. the real one is at EMAIL.",
+      "AI_NAME. it's a pun, and I'm very proud of it. same initials as the real thing, way more available.",
+    ], true],
+    [/(talk|speak|chat) (to|with) (the )?(real|actual) (abhi|you|him|person)|is (the real )?abhi (online|here|around|available)|when (will|does|can) (abhi|he|you) (reply|respond|answer|get back)|how (fast|quickly|soon) (do|will|does) (you|he|abhi) (reply|respond|answer|get back)/i, [
+      "the real me reads every email, and fast. that's a promise: EMAIL",
+      "AI_NAME is the warm-up act. the headliner is at EMAIL, and he replies quick.",
+    ], true],
+    [/calendly|book (a )?(time|call|meeting)|schedule (a )?(call|meeting|time)|set up a meeting/i, [
+      "no booking link here, but email me at EMAIL with a couple of times and we'll lock it in.",
+    ], true],
+    [/(can|could|should) i (call|text|phone|facetime|whatsapp) (you|him|abhi)/i, [
+      "my number stays off the internet 🙂 email's the move: EMAIL",
+    ], true],
+    [/(sent|send|sending) (you )?(a )?(request|connection|invite)|(i'?ll|i will|gonna|going to|just) (connect|add you|follow you)|(added|followed|connected with) you/i, [
+      "love it 🙌 I'll keep an eye out. talk soon.",
+      "perfect, consider it accepted in spirit. the real me will make it official.",
+    ], true],
+    [/(i|just) (emailed|e-?mailed|messaged|dmed|reached out to) (you|him|abhi)|did you get my (email|message|note)|(i'?ll|i will|gonna|going to) (email|reach out|message|write to)( you| him)?\b|ok i'?ll (email|reach out)/i, [
+      "love that. AI_NAME can't check the inbox, but the real me reads everything. talk soon 🙏",
+      "perfect. keep an eye out, I'm quick.",
+    ], true],
+    [/(this was|that was|you'?re|you are|very|super|so) (really )?(helpful|useful|informative)|^helpful[\s!.]*$|good bot|great bot|best bot|nice bot|thanks for the help/i, [
+      "glad it helped 🙏 the real conversation is even better: EMAIL",
+      "AI_NAME is blushing. well, as much as a chat can.",
+    ], true],
+    [/bad bot|(you|this bot|the bot|this chat) (suck|sucks|is bad|is dumb|is useless|is stupid)|^(boring|meh|whatever|lame|mid bot)[\s!.]*$|useless/i, [
+      "fair, AI_NAME is a lot less impressive than the real thing. that's kind of the point: EMAIL",
+      "noted. the real me is way more interesting in person. try me: EMAIL",
+    ], true],
+    [/^(ok |okay |alright |aight )?(bye|byee|bye bye|ttyl|talk (to you )?later|see (you|ya) (around|later|soon)|gotta go|i'?m out|good talk)[\s!.]*$/i, [
+      "later! the o's will be bouncing when you get back ✌️",
+      "peace ✌️ and if you want the real conversation: EMAIL",
+    ], true, "ack"],
+    [/nice (talking|chatting) (to|with) you|nice to meet you|great (meeting|talking to) you|(it was |a )?pleasure( meeting you)?[\s!.]*$/i, [
+      "pleasure's mine 🙏 let's keep it going off the website: LINKEDIN",
+      "likewise! the real me is even better to meet: EMAIL",
+    ], true],
+    [/what'?s your (story|journey|background story|path)|tell me (your|ur) (story|journey)|how did you get (here|where you are|into tech|into this|your start)|how did you end up (here|in payments|in product|in tech)/i, [
+      "the speed-run: Rutgers '21, found product, fell for payments, and now I'm doing my MBA at McCombs too. the in-between is the best part, and it's a coffee story: EMAIL",
+      "short version: I kept running toward the hardest problems in the room. that led to product, then payments. the long version is better live.",
+    ], true],
+    [/what('?s| is) your (title|level|role exactly|exact title)|(are you|is he) (a )?(senior|junior|associate|lead|principal|staff) (pm|product manager)|what team (are you|is he) on|how (many years|long) (of experience|have you been|has he been)|years of experience|what did you do before|(your )?first job|previous (jobs?|roles?|companies)|where (did|have) you work(ed)? before/i, [
+      "the exact titles and timeline live on LINKEDIN. the short version: product manager in payments, and I level up fast.",
+      "all the specifics are on LINKEDIN. what you won't find there: how quickly I ramp into anything new. ask me about that.",
+    ], true],
+    [/(are you|is he) (good|great|any good|the best) at (your|his) job|are you any good|what are you (best|great|really good) at|what('s| is) your (superpower|best skill|zone of genius)/i, [
+      "very. I learn anything fast, I get the right people pointed at the right problem, and I make the teams I'm on better. ask the people who've worked with me.",
+      "my superpower: walking into something brand new and being useful almost immediately. this website is exhibit A.",
+    ], true],
+    [/(is|was) (product( management)?|being a pm|pm) (hard|easy|stressful|fun|worth it)|do you (like|love|enjoy) (your|the) (job|work|role)|what do you (love|like) about (your|the) (job|work)|(hardest|best|worst|favorite) part (of|about) (your |the )?(job|work|being a pm|product)/i, [
+      "honestly? I love it. it's part detective, part translator, part coach. the hard part is that everything matters at once. the best part is when it ships and someone's day gets easier.",
+      "love it. it's hard in the best way: lots of moving pieces, lots of people, and you're always making calls without perfect info. I'm into that.",
+    ], true],
+    [/advice for (new grads?|graduates|students|young people|pms|product managers|someone starting|beginners|people starting out)|any advice\??$|career tips/i, [
+      "learn fast, ask the dumb question early, and get close to the people who actually use the product. that covers most of it.",
+      "say yes to the messy problems nobody wants. that's where you learn the most, fastest.",
+    ], true],
+    [/(any |got any )?side projects?|what are you (building|working on) (outside|on the side|for fun)|(what are you|what'?re you) learning|learning (anything|lately)|goals? (this|for the) year|what('s| is) next\??$|where do you want to be/i, [
+      "you're looking at one. otherwise it's the MBA, the work, and whatever new thing catches my eye that week.",
+      "always learning something. lately it's been leveling up on the business side through the MBA, and figuring out whatever I don't know yet.",
+    ], true],
+    [/(want to|would you ever|ever thought about|plan to|gonna) (start|build|launch) (a |your own )?(company|business|startup)|(are you|is he) (an )?entrepreneur|founder/i, [
+      "never say never. building things from zero is my favorite kind of fun. that's a great coffee conversation: EMAIL",
+    ], true],
+    [/(do|can) you (know|use|write|code in) (python|sql|javascript|java|excel|tableau|r\b)|python|\bsql\b|technical skills|hard skills/i, [
+      "I speak enough tech to hold my own in any engineering room, and whatever a problem needs, I pick up fast. specifics on LINKEDIN.",
+    ], true],
+    [/what tools (do|does) (you|he) use|^(jira|linear|notion|confluence|figma|asana|trello|slack|miro)( or (jira|linear|notion|confluence|figma|asana|trello|slack|miro))?\??$|do you use (jira|linear|notion|figma|confluence)/i, [
+      "whatever the team uses, I'll be fluent by Friday. tools are easy, problems are the fun part.",
+    ], true],
+    [/(do|can) you design|graphic design|(are you|is he) (creative|artistic|a designer)|design eye/i, [
+      "yep, graphic design is one of my things. it's a big part of why this site has a vibe.",
+      "creative, for sure. design is how I unwind, and it makes me a better PM.",
+    ], true],
+    [/travel(ed|led|ing)?\b.*(where|favorite|best|places?|countries|been)|(where|places) (have you|you'?ve) (been|traveled|travelled)|favorite (place|city|country|trip|vacation|destination)|where do you want to (go|travel|visit)|have you been to|bucket list/i, [
+      "travel is one of my favorite things, whenever the budget allows. the stories are better told over food though: EMAIL",
+      "I'll go anywhere with good food and a good story. where I've been is a conversation, not a chat bubble 🙂",
+    ], true],
+    [/sneakers?|kicks|shoes?|jordans|air jordans?|dunks|yeezys?|new balance|air max|sneakerhead/i, [
+      "big sneakers guy. more pairs than my budget would like, fewer than my wishlist wants.",
+      "sneakers are a whole thing for me. ask me about them in person and clear your schedule.",
     ], true],
     // --- small talk: greetings, how are you, wyd. these show the topic buttons after, to keep things moving ---
     [/^(hey |hi |yo |hello )?(what are you doing|what you doing|what are you up to|what you up to)( right now| today| tonight)?( abhi| bro| man| dude| fam)?[\s!?.]*$/i, [
@@ -940,7 +1036,7 @@
     ]],
     [/thank|thx|\bty\b|appreciate/i, [
       "anytime 🫡", "you got it.", "of course. come back soon, the o's get lonely.",
-    ]],
+    ], false, "ack"],
     [/^(bye|cya|see ya|later|peace|gn)\b|goodbye/i, [
       "later! ✌️", "peace. tell your friends about the o's.",
     ]],
@@ -996,7 +1092,7 @@
       "friendly and outgoing. I'm the person who talks to everyone in the room and remembers what they said.",
       "sharp, outgoing, and quick to adapt. I like making the work more fun for everyone around me.",
     ]],
-    [/who (built|made|coded|designed|wrote) (this|the site|you|it)|how did (he|you) (build|make)|how (was|is) (this|the site) (built|made)|can (he|you) code|do(es)? (he|you) code|(is he|are you) (technical|a developer|an engineer|a coder)|quick learner|learn(s)? fast|adapt/i, [
+    [/who (built|made|coded|designed|wrote|programmed) (this|the site|you|it)|how did (he|you) (build|make)|how (was|is) (this|the site) (built|made)|can (he|you) code|do(es)? (he|you) code|(is he|are you) (technical|a developer|an engineer|a coder)|quick learner|learn(s)? fast|adapt/i, [
       "I built this whole site myself. when I want to get something done, I make sure it happens.",
       "me, myself and a lot of determination. I'm a product manager, not an engineer, and it still got built. when I want something done, it happens.",
       "fun story: I'm a product manager, not an engineer, and I'd never really coded before this. it got built anyway. that's kind of my thing: drop me into something new and I make it happen.",
@@ -1066,7 +1162,7 @@
       "right now I'm a product manager in payments and getting my MBA at UT McCombs (class of 2028). details on LINKEDIN.",
       "building payments products, working through my MBA at UT McCombs, and making the o's on this website bounce in between. more on LINKEDIN.",
     ]],
-    [/experience|job|work|role|career|resume|résumé|\bcv\b|product|\bpm\b|for a living|does he do(?! for fun)|do you do(?! for fun)|what (he|you) do(?! for fun)|occupation|skill|background|company|employer|recruit|professional|industry|fintech|payments/i, [
+    [/experience|job|work|role|career|resume|résumé|\bcv\b|product|\bpm\b|for a living|does he do(?! (for fun|outside|after|on weekends|in (his|your) free))|do you do(?! (for fun|outside|after|on weekends|in (his|your) free))|what (he|you) do(?! (for fun|outside|after|on weekends|in (his|your) free))|occupation|skill|background|company|employer|recruit|professional|industry|fintech|payments/i, [
       "I'm a product manager working in payments. my full work history is on LINKEDIN.",
       "product manager in the payments world, basically making sure money gets where it's going. full story on LINKEDIN.",
       "product manager, payments. I'm the person asking 'but what problem are we solving' in every meeting. work history's on LINKEDIN.",
